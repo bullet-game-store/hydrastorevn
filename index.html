@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Cinzel:wght@700;800;900&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" referrerpolicy="no-referrer" />
+  <title>Hydra Store — Premium Game Store</title>
+  <style>
+    :root{
+      --bg:#040814;
+      --bg-2:#091226;
+      --panel:#0f1830;
+      --panel-2:#111f3f;
+      --soft:#18284d;
+      --text:#edf3ff;
+      --muted:#9eb0d3;
+      --primary:#67f0d4;
+      --primary-2:#47b8ff;
+      --gold:#f7c870;
+      --danger:#ff6d8a;
+      --success:#7cf0a8;
+      --violet:#b48cff;
+      --border:rgba(255,255,255,.08);
+      --border-strong:rgba(255,255,255,.16);
+      --shadow:0 22px 60px rgba(0,0,0,.38);
+      --shadow-soft:0 14px 40px rgba(0,0,0,.22);
+      --radius:24px;
+      --ease:cubic-bezier(.22,1,.36,1);
+      --max:1380px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:"Be Vietnam Pro",Inter,system-ui,sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(71,184,255,.14), transparent 26%),
+        radial-gradient(circle at 92% 12%, rgba(103,240,212,.12), transparent 28%),
+        radial-gradient(circle at 60% 70%, rgba(180,140,255,.10), transparent 30%),
+        linear-gradient(180deg,#030713 0%, #07101d 30%, #0a1224 65%, #08111f 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-2;
+      background:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,.8), transparent 80%);
+      opacity:.28;
+    }
+    .spotlight{
+      position:fixed;
+      width:560px;
+      height:560px;
+      border-radius:50%;
+      pointer-events:none;
+      z-index:-1;
+      background:radial-gradient(circle, rgba(103,240,212,.10), rgba(71,184,255,.07) 35%, transparent 70%);
+      transform:translate(-50%,-50%);
+      filter:blur(8px);
+      opacity:.9;
+    }
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    button,input,select{font:inherit}
+    .container{width:min(var(--max),calc(100% - 28px));margin:0 auto}
+    .glass{
+      background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius);
+      backdrop-filter:blur(14px);
+    }
+    .top-announce{
+      border-bottom:1px solid rgba(255,255,255,.06);
+      background:linear-gradient(90deg, rgba(247,200,112,.10), rgba(71,184,255,.08), rgba(103,240,212,.08));
+    }
+    .top-announce .container{
+      display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+      padding:10px 0;font-size:13px;color:#d8e5ff
+    }
+    .topbar{
+      position:sticky;top:0;z-index:120;
+      background:rgba(5,10,20,.66);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid transparent;
+      transition:.35s var(--ease);
+    }
+    .topbar.scrolled{
+      background:rgba(5,10,20,.92);
+      border-color:var(--border);
+      box-shadow:0 10px 35px rgba(0,0,0,.28);
+    }
+    .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0}
+    .brand{display:flex;align-items:center;gap:14px;min-width:0}
+    .logo{
+      width:72px;height:72px;border-radius:22px;display:grid;place-items:center;
+      background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));
+      border:1px solid var(--border);box-shadow:var(--shadow-soft);overflow:hidden;flex:0 0 auto;
+    }
+    .logo img{width:100%;height:100%;object-fit:contain;padding:6px;transform:scale(1.02)}
+    .brand h1{
+      margin:0;
+      font-size:29px;line-height:1;
+      font-family:"Cinzel","Times New Roman",serif;
+      letter-spacing:.08em;text-transform:uppercase;
+      background:linear-gradient(135deg,#fff 0%,#afeaff 40%,#7ff6d8 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .brand p{margin:6px 0 0;font-size:13px;color:var(--muted)}
+    .top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .search{
+      min-width:min(440px,100%);
+      display:flex;align-items:center;gap:10px;
+      border-radius:16px;padding:12px 14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      transition:.28s var(--ease);
+    }
+    .search:focus-within{border-color:rgba(103,240,212,.35); box-shadow:0 0 0 4px rgba(103,240,212,.08)}
+    .search input{all:unset;flex:1;color:var(--text)}
+    .btn,.select{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      border-radius:15px;
+      padding:12px 16px;
+      cursor:pointer;
+      font-weight:800;
+      transition:transform .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease), box-shadow .25s var(--ease);
+      box-shadow:0 10px 25px rgba(0,0,0,.15);
+    }
+    .btn:hover,.select:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.09)}
+    .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-2));border:none;color:#08111f}
+    .btn-gold{background:linear-gradient(135deg,var(--gold),#ffad63);border:none;color:#201406}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:9px 13px;border-radius:999px;font-size:13px;font-weight:800;
+      background:rgba(255,255,255,.06);border:1px solid var(--border)
+    }
+    .pill.cyan{background:rgba(103,240,212,.12);color:#cffff1}
+    .pill.gold{background:rgba(247,200,112,.14);color:#ffefbf}
+    .pill.violet{background:rgba(180,140,255,.14);color:#efe4ff}
+    .section{padding:22px 0}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:18px}
+    .section-head h2,.section-head h3{margin:8px 0 0;font-size:34px}
+    .muted{color:var(--muted)}
+    .hero{padding:24px 0 10px}
+    .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:20px}
+    .hero-main{
+      position:relative;
+      min-height:620px;
+      overflow:hidden;
+      border-radius:30px;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      isolation:isolate;
+    }
+    .hero-slides{position:absolute;inset:0}
+    .hero-slide{
+      position:absolute;inset:0;opacity:0;pointer-events:none;
+      transition:opacity .7s var(--ease), transform 7s linear;
+      transform:scale(1.05);
+      background-size:cover;background-position:center;
+    }
+    .hero-slide.active{opacity:1;pointer-events:auto;transform:scale(1.08)}
+    .hero-slide img{width:100%;height:100%;object-fit:cover;display:block}
+    .hero-overlay{
+      position:absolute;inset:0;
+      background:linear-gradient(110deg,rgba(4,8,20,.96) 14%,rgba(4,8,20,.84) 45%,rgba(4,8,20,.22) 100%);
+      z-index:1;
+    }
+    .hero-content{
+      position:relative;z-index:2;max-width:60%;
+      padding:38px 36px 30px;
+    }
+    .hero-content h2{font-size:clamp(36px,5.2vw,64px);line-height:1.04;margin:18px 0 14px;max-width:11ch}
+    .hero-content p{font-size:16px;color:#c2d2f1;max-width:720px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+    .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+    .stat{
+      padding:18px;border-radius:18px;background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.07)
+    }
+    .stat .n{font-size:29px;font-weight:900;margin-top:7px}
+    .hero-mini-rail{
+      position:absolute;right:18px;bottom:18px;z-index:3;
+      display:grid;gap:10px;width:360px;max-width:42%;
+    }
+    .hero-mini{
+      display:grid;grid-template-columns:110px 1fr;gap:12px;
+      padding:10px;border-radius:18px;
+      background:rgba(7,12,26,.78);
+      border:1px solid rgba(255,255,255,.10);
+      cursor:pointer;
+      transition:.25s var(--ease);
+      backdrop-filter:blur(12px);
+    }
+    .hero-mini.active{outline:2px solid rgba(103,240,212,.45)}
+    .hero-mini:hover{transform:translateY(-2px)}
+    .hero-mini img{width:110px;height:68px;border-radius:12px;object-fit:cover}
+    .hero-mini strong{font-size:14px}
+    .hero-mini span{display:block;color:var(--muted);font-size:12px;margin-top:5px}
+    .side-stack{display:grid;gap:18px}
+    .side-card{padding:24px}
+    .side-card h3{margin:0 0 12px}
+    .side-card ul{margin:0;padding-left:18px;display:grid;gap:10px;color:var(--muted)}
+    .premium-strip{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:14px
+    }
+    .premium-item{padding:18px}
+    .premium-item strong{display:block;margin-top:10px}
+    .filters{padding:20px}
+    .filters-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .chips{display:flex;gap:10px;flex-wrap:wrap}
+    .chip{
+      padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.05);
+      border:1px solid var(--border);cursor:pointer;font-weight:700;color:var(--muted);
+      transition:.25s var(--ease)
+    }
+    .chip:hover{transform:translateY(-2px);color:var(--text)}
+    .chip.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));border:none;color:#07111f}
+    
+    .spotlight-tabs{display:flex;gap:10px;flex-wrap:wrap}
+    .slider-tab{
+      padding:11px 16px;border-radius:999px;border:1px solid var(--border);
+      background:rgba(255,255,255,.05);color:var(--muted);font-weight:800;cursor:pointer;
+      transition:.25s var(--ease)
+    }
+    .slider-tab:hover{transform:translateY(-2px);color:var(--text)}
+    .slider-tab.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));border:none;color:#07111f}
+    .spotlight-showcase{padding:18px}
+    .spotlight-stage{
+      position:relative;min-height:440px;border-radius:26px;overflow:hidden;
+      background:#0b1327;border:1px solid rgba(255,255,255,.08)
+    }
+    .spotlight-stage::before{
+      content:"";position:absolute;inset:0;z-index:1;
+      background:linear-gradient(108deg,rgba(4,8,20,.96) 15%,rgba(4,8,20,.82) 44%,rgba(4,8,20,.30) 100%);
+    }
+    .spotlight-stage-bg{
+      position:absolute;inset:0;background-size:cover;background-position:center;
+      transform:scale(1.02);filter:saturate(1.02)
+    }
+    .spotlight-stage-content{
+      position:relative;z-index:2;display:flex;min-height:440px;align-items:flex-end;justify-content:space-between;
+      gap:18px;padding:30px
+    }
+    .spotlight-copy{max-width:min(620px,72%)}
+    .spotlight-copy h2{margin:12px 0 12px;font-size:clamp(34px,4.5vw,54px);line-height:1.03}
+    .spotlight-copy p{margin:0;color:#c8d8f3;line-height:1.68;font-size:15px}
+    .spotlight-badges,.spotlight-meta{display:flex;gap:10px;flex-wrap:wrap}
+    .spotlight-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+    .spotlight-price{
+      min-width:200px;padding:20px;border-radius:22px;background:rgba(8,14,29,.76);
+      border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(12px)
+    }
+    .spotlight-price .current{font-size:34px;font-weight:900;color:var(--primary);line-height:1.1}
+    .spotlight-price .old{font-size:15px;margin-top:6px}
+    .spotlight-control-row{
+      display:flex;align-items:center;gap:12px;justify-content:space-between;margin-top:14px
+    }
+    .spotlight-progress{
+      flex:1;height:8px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden
+    }
+    .spotlight-progress span{
+      display:block;height:100%;width:0%;
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));border-radius:999px;
+      transition:width .35s var(--ease)
+    }
+    .spotlight-thumb-row{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px
+    }
+    .spotlight-thumb{
+      position:relative;padding:0;border-radius:18px;overflow:hidden;cursor:pointer;
+      border:1px solid rgba(255,255,255,.08);background:#0f162f;color:var(--text);text-align:left;
+      transition:.22s var(--ease)
+    }
+    .spotlight-thumb:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.18)}
+    .spotlight-thumb.active{box-shadow:0 0 0 3px rgba(103,240,212,.10);border-color:rgba(103,240,212,.34)}
+    .spotlight-thumb img{width:100%;aspect-ratio:16/10;object-fit:cover}
+    .spotlight-thumb-body{padding:12px}
+    .spotlight-thumb-body strong{display:block;font-size:15px}
+    .spotlight-thumb-body span{display:block;color:var(--muted);font-size:13px;margin-top:6px}
+
+    .featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .featured-card{padding:16px}
+    .featured-card .cover{aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#0c1328}
+    .featured-card .cover img{width:100%;height:100%;object-fit:cover}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .product{
+      overflow:hidden;display:flex;flex-direction:column;
+      transition:transform .32s var(--ease), box-shadow .32s var(--ease), border-color .32s var(--ease);
+    }
+    .product:hover{transform:translateY(-6px);box-shadow:0 26px 60px rgba(0,0,0,.40);border-color:rgba(103,240,212,.18)}
+    .thumb{position:relative;aspect-ratio:4/5;background:#0f162f;overflow:hidden}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .badges{position:absolute;left:12px;top:12px;display:flex;gap:8px;flex-wrap:wrap;z-index:2}
+    .badge{padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800}
+    .badge-hot{background:#ff6d8a;color:#fff}
+    .badge-aaa{background:#f7c870;color:#3b2710}
+    .badge-denuvo{background:#b48cff;color:#1b1130}
+    .fav{
+      position:absolute;right:12px;top:12px;z-index:2;
+      width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+      border:1px solid rgba(255,255,255,.12);background:rgba(7,12,26,.76);cursor:pointer
+    }
+    .fav.active{color:#ff7b95}
+    .product-body{padding:16px;display:flex;flex-direction:column;gap:12px;flex:1}
+    .title-row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .title-row h4{margin:0;font-size:20px}
+    .price{font-size:24px;font-weight:900;color:var(--primary)}
+    .old{font-size:13px;color:var(--muted);text-decoration:line-through}
+    .save{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:rgba(124,240,168,.12);color:var(--success);font-size:12px;font-weight:800}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tiny{font-size:12px;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted)}
+    .tiny.denuvo{background:rgba(180,140,255,.12);color:#efe4ff}
+    .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .meta div{padding:10px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+    .meta span{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}
+    .desc{font-size:14px;line-height:1.6;color:var(--muted)}
+    .card-actions{display:flex;gap:10px;margin-top:auto}
+    .card-actions .btn{flex:1}
+    .guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .guide-step{padding:18px}
+    .guide-media{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#0d1326;border:1px solid var(--border);margin-bottom:14px}
+    .guide-media img{width:100%;height:100%;object-fit:cover}
+    .guide-placeholder{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted)}
+    .footer{padding:34px 0 44px}
+    .footer-card{padding:24px;text-align:center}
+    .drawer,.modal{
+      position:fixed;inset:0;z-index:150;
+      opacity:0;visibility:hidden;pointer-events:none;
+      transition:opacity .28s var(--ease), visibility .28s var(--ease);
+    }
+    .drawer.open,.modal.open{opacity:1;visibility:visible;pointer-events:auto}
+    .overlay{
+      position:absolute;inset:0;background:rgba(0,0,0,.64);backdrop-filter:blur(5px);
+    }
+    .drawer-panel{
+      position:absolute;right:0;top:0;height:100%;width:min(470px,100%);
+      background:linear-gradient(180deg,#0b1327,#0a1121);
+      border-left:1px solid rgba(255,255,255,.08);
+      padding:22px;overflow:auto;box-shadow:var(--shadow);
+      transform:translateX(100%);transition:transform .4s var(--ease);
+    }
+    .drawer.open .drawer-panel{transform:translateX(0)}
+    .modal-box{
+      position:relative;z-index:2;
+      width:min(1180px,calc(100% - 24px));max-height:calc(100vh - 36px);
+      margin:18px auto;background:linear-gradient(180deg,#0b1327,#0a1121);
+      border:1px solid rgba(255,255,255,.08);border-radius:28px;
+      padding:24px;overflow:auto;box-shadow:var(--shadow);
+      transform:translateY(20px) scale(.985);opacity:0;transition:.36s var(--ease);
+    }
+    .modal.open .modal-box{transform:translateY(0) scale(1);opacity:1}
+    .drawer-head,.modal-head{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}
+    .close{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--border);background:rgba(255,255,255,.05);cursor:pointer}
+    .cart-items{display:grid;gap:12px}
+    .cart-item{
+      display:grid;grid-template-columns:84px 1fr auto;gap:12px;
+      padding:12px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)
+    }
+    .cart-item img{width:84px;height:84px;border-radius:14px;object-fit:cover}
+    .qty{display:flex;align-items:center;gap:10px;margin-top:10px}
+    .qty button{width:32px;height:32px;border-radius:10px;border:none;background:rgba(255,255,255,.08);color:var(--text);cursor:pointer}
+    .sum{margin-top:18px;padding:18px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+    .sum-row{display:flex;justify-content:space-between;gap:10px;margin:10px 0;color:var(--muted)}
+    .sum-row.total{font-size:22px;font-weight:900;color:var(--text)}
+    .detail-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}
+    .detail-info h4{margin:0;font-size:36px}
+    .detail-desc{font-size:15px;line-height:1.72;color:var(--muted);margin:14px 0 18px}
+    .detail-meta{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}
+    .detail-meta .box{padding:14px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+    .pay-grid,.auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .pay-box{padding:16px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);margin-bottom:16px}
+    .field{display:grid;gap:8px;margin-bottom:12px}
+    .field input{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--text)}
+    .contact-toggle{position:relative}
+    .contact-popover{
+      position:absolute;top:calc(100% + 10px);right:0;min-width:290px;padding:14px;border-radius:18px;
+      background:#0c1428;border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);
+      opacity:0;visibility:hidden;pointer-events:none;transform:translateY(10px);
+      transition:.25s var(--ease);z-index:180;
+    }
+    .contact-popover.open{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
+    .contact-popover a,.contact-popover div{
+      display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04);margin-bottom:8px
+    }
+    .contact-popover a:last-child,.contact-popover div:last-child{margin-bottom:0}
+    .icon-img{width:18px;height:18px;object-fit:contain}
+    .user-avatar{width:22px;height:22px;border-radius:999px;object-fit:cover;border:1px solid rgba(255,255,255,.14);display:inline-block;vertical-align:middle}
+    .toast-wrap{position:fixed;right:18px;bottom:18px;display:grid;gap:10px;z-index:220}
+    .toast{
+      min-width:300px;max-width:380px;padding:14px 16px;border-radius:16px;
+      background:rgba(10,16,31,.94);border:1px solid rgba(255,255,255,.10);box-shadow:var(--shadow);
+      display:flex;gap:12px;align-items:flex-start;animation:toastIn .33s var(--ease)
+    }
+    .toast.out{animation:toastOut .25s var(--ease) forwards}
+    .toast i{margin-top:2px}
+    .toast.success i{color:var(--success)}
+    .toast.error i{color:var(--danger)}
+    .toast.info i{color:var(--primary-2)}
+    .empty{padding:24px;border-radius:18px;background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.12);text-align:center;color:var(--muted)}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .65s var(--ease), transform .65s var(--ease);transition-delay:var(--delay,0ms)}
+    .reveal.in-view{opacity:1;transform:translateY(0)}
+    .checkout-qr-frame{width:100%;padding:12px;background:#fff;border-radius:18px;border:1px solid rgba(255,255,255,.14)}
+    .checkout-qr-frame img{width:100%;border-radius:14px}
+    .game-slider{
+      position:relative;border-radius:24px;overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);background:#0b1327;box-shadow:var(--shadow)
+    }
+    .game-slider-main{position:relative;aspect-ratio:16/9;background:#09101e;overflow:hidden}
+    .game-slider-track{display:flex;height:100%;transition:transform .55s var(--ease);will-change:transform}
+    .game-slide{min-width:100%;height:100%;position:relative;background:#0c1328}
+    .game-slide img,.game-slide iframe,.game-slide video{width:100%;height:100%;display:block;border:0;object-fit:cover;background:#09101e}
+    .game-slide-badge{
+      position:absolute;left:16px;top:16px;z-index:3;padding:8px 12px;border-radius:999px;
+      font-size:12px;font-weight:800;background:rgba(6,10,20,.75);border:1px solid rgba(255,255,255,.12)
+    }
+    .game-slider-nav{
+      position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;
+      padding:0 14px;pointer-events:none;z-index:3
+    }
+    .game-slider-btn{
+      pointer-events:auto;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+      border:1px solid rgba(255,255,255,.14);background:rgba(6,10,20,.72);color:#fff;cursor:pointer
+    }
+    .game-slider-meta{
+      position:absolute;left:16px;bottom:16px;z-index:3;display:flex;gap:10px;align-items:center;flex-wrap:wrap
+    }
+    .game-slider-counter{
+      padding:7px 12px;border-radius:999px;font-size:12px;font-weight:800;
+      background:rgba(6,10,20,.72);border:1px solid rgba(255,255,255,.12)
+    }
+    .game-slider-thumbs{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:10px;padding:12px;background:rgba(255,255,255,.03)
+    }
+    .game-slider-thumb{
+      position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);
+      background:#0f162f;cursor:pointer;opacity:.84;transition:.22s var(--ease)
+    }
+    .game-slider-thumb.active{opacity:1;border-color:rgba(103,240,212,.38);box-shadow:0 0 0 3px rgba(103,240,212,.08)}
+    .game-slider-thumb img{width:100%;height:100%;object-fit:cover}
+    .game-slider-thumb-icon{
+      position:absolute;right:8px;bottom:8px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+      background:rgba(6,10,20,.76);border:1px solid rgba(255,255,255,.12);font-size:11px
+    }
+    .media-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .media-tab{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--border);cursor:pointer;font-weight:700;color:var(--muted)}
+    .media-tab.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));border:none;color:#08111f}
+    @keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes toastOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(14px)}}
+    @media (max-width:1180px){
+      .hero-grid,.detail-grid,.pay-grid,.auth-grid{grid-template-columns:1fr}
+      .hero-main{min-height:unset;padding-bottom:240px}
+      .hero-content{max-width:100%}
+      .hero-content h2{font-size:clamp(36px,6vw,48px);max-width:13ch}
+      .hero-mini-rail{position:relative;right:auto;bottom:auto;width:100%;max-width:none;margin-top:20px}
+      .spotlight-stage-content{flex-direction:column;align-items:flex-start}
+      .spotlight-copy{max-width:100%}
+      .spotlight-price{min-width:0;width:100%;max-width:360px}
+      .spotlight-thumb-row,.grid{grid-template-columns:repeat(3,1fr)}
+    }
+    @media (max-width:860px){
+      .topbar-inner{flex-direction:column;align-items:stretch}
+      .search{min-width:unset;width:100%}
+      .premium-strip,.featured-grid,.guide-grid,.hero-stats,.grid,.spotlight-thumb-row{grid-template-columns:repeat(2,1fr)}
+      .meta,.detail-meta{grid-template-columns:1fr}
+      .section-head h2,.section-head h3{font-size:28px}
+      .brand h1{font-size:24px}
+      .hero-content{padding:28px 22px 20px}
+      .hero-content p{font-size:15px}
+    }
+    @media (max-width:560px){
+      .premium-strip,.featured-grid,.guide-grid,.hero-stats,.grid,.spotlight-thumb-row{grid-template-columns:1fr}
+      .hero-content{padding:24px 18px 18px}
+      .hero-content h2{font-size:clamp(30px,10vw,40px);max-width:12ch}
+      .hero-content p{font-size:14px}
+      .hero-actions,.spotlight-actions{gap:10px}
+      .section-head{flex-direction:column;align-items:flex-start}
+      .spotlight-showcase{padding:14px}
+      .spotlight-stage{min-height:520px}
+      .spotlight-stage-content{min-height:520px;padding:22px 18px}
+      .spotlight-control-row{flex-wrap:wrap}
+      .toast-wrap{left:12px;right:12px}
+      .toast{min-width:0;max-width:none}
+      .top-announce .container{font-size:12px}
+    }
+  </style>
+</head>
+<body>
+  <div class="spotlight" id="spotlight"></div>
+
+  <div class="top-announce">
+    <div class="container">
+      <div><i class="fa-solid fa-shield-check"></i> Giao tài khoản qua email đã đăng nhập</div>
+      <div><i class="fa-solid fa-building-columns"></i> MB Bank • 0794527008</div>
+      <div><i class="fa-solid fa-envelope"></i> hydrastorevn944@gmail.com</div>
+      <div><i class="fa-solid fa-phone"></i> 0794527008</div>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="logo"><img src="./logo.png" alt="Hydra Store Logo" /></div>
+        <div>
+          <h1>Hydra Store</h1>
+          <p>Kho game offline cao cấp • giao tài khoản qua email • tối ưu tốt hơn trên mobile</p>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <label class="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input id="searchInput" placeholder="Tìm Elden Ring, Spider-Man 2, Hogwarts Legacy..." />
+        </label>
+
+        <div class="contact-toggle">
+          <button class="btn" id="contactToggleBtn"><i class="fa-solid fa-headset"></i> Liên hệ</button>
+          <div class="contact-popover" id="contactPopover">
+            <a href="tel:0794527008"><i class="fa-solid fa-phone-volume"></i> 0794527008</a>
+            <a href="https://zalo.me/0794527008" target="_blank" rel="noreferrer"><img class="icon-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/960px-Icon_of_Zalo.svg.png" alt="Zalo" /> Zalo</a>
+            <a href="https://www.facebook.com/chuong0610123?locale=vi_VN" target="_blank" rel="noreferrer"><img class="icon-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/960px-2023_Facebook_icon.svg.png" alt="Facebook" /> Facebook</a>
+            <div><i class="fa-solid fa-building-columns"></i> MB Bank • 0794527008</div>
+            <div><i class="fa-solid fa-envelope"></i> hydrastorevn944@gmail.com</div>
+          </div>
+        </div>
+
+        <button class="btn" id="authBtn"><i class="fa-solid fa-user"></i> Đăng nhập</button>
+        <button class="btn" id="favBtn"><i class="fa-solid fa-heart"></i> Yêu thích <span id="favCount">0</span></button>
+        <button class="btn btn-primary" id="cartBtn"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng <span id="cartCount">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="section">
+      <div class="section-head reveal">
+        <div>
+          <span class="pill gold"><i class="fa-solid fa-stars"></i> Nổi bật</span>
+          <h2>Game nổi bật & mới nhất</h2>
+          <p class="muted">Game hot và game mới được đưa lên đầu để khách xem nhanh.</p>
+        </div>
+        <div class="spotlight-tabs">
+          <button class="slider-tab active" id="sliderFeaturedTab">Nổi bật</button>
+          <button class="slider-tab" id="sliderLatestTab">Mới nhất</button>
+        </div>
+      </div>
+      <div class="glass spotlight-showcase reveal" style="--delay:40ms">
+        <div id="spotlightStage"></div>
+        <div class="spotlight-control-row">
+          <button class="btn" id="spotlightPrevBtn"><i class="fa-solid fa-chevron-left"></i> Trước</button>
+          <div class="spotlight-progress"><span id="spotlightProgress"></span></div>
+          <button class="btn" id="spotlightNextBtn">Sau <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="spotlight-thumb-row" id="spotlightThumbs"></div>
+      </div>
+    </section>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-main reveal">
+          <div class="hero-slides" id="heroSlides"></div>
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <span class="pill gold"><i class="fa-solid fa-crown"></i> Hydra Store</span>
+            <h2>Kho game bom tấn bản quyền với giá bằng một bát phở.</h2>
+            <p>Game hot, game mới và các bom tấn .</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#products"><i class="fa-solid fa-gamepad"></i> Xem kho game</a>
+              <button class="btn" id="heroAuthBtn"><i class="fa-solid fa-id-card"></i> Tài khoản</button>
+              <a class="btn" href="#guide"><i class="fa-solid fa-book-open"></i> Hướng dẫn</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat"><div class="muted">Tổng game</div><div class="n" id="statTotal">0+</div></div>
+              <div class="stat"><div class="muted">Game Denuvo</div><div class="n" id="statDenuvo">0+</div></div>
+              <div class="stat"><div class="muted">Bom tấn</div><div class="n" id="statAAA">0+</div></div>
+              <div class="stat"><div class="muted">Giá trần</div><div class="n">99K</div></div>
+            </div>
+          </div>
+          <div class="hero-mini-rail" id="heroSlider"></div>
+        </div>
+
+        <div class="side-stack">
+          <div class="glass side-card reveal" style="--delay:110ms">
+            <h3><i class="fa-solid fa-credit-card"></i> Thanh toán</h3>
+            <ul>
+              <li>Đăng nhập trước khi thanh toán.</li>
+              <li>Nội dung: <strong style="color:var(--text)">TÊN GAME VIẾT TẮT + MÃ ĐƠN</strong></li>
+              <li>QR thanh toán hiển thị đúng theo mẫu shop đã gửi.</li>
+            </ul>
+          </div>
+
+          <div class="glass side-card reveal" style="--delay:170ms">
+            <h3><i class="fa-solid fa-bolt"></i> Hỗ trợ nhanh</h3>
+            <ul>
+              <li>Denuvo được đánh dấu rõ trên từng game.</li>
+              <li>Nếu cần hỗ trợ thêm, liên hệ Zalo hoặc Facebook để shop xử lý nhanh nhất.</li>
+            </ul>
+          </div>
+
+          <div class="glass side-card reveal" style="--delay:230ms">
+            <h3><i class="fa-solid fa-headset"></i> Hỗ trợ</h3>
+            <ul>
+              <li>Đội ngũ hỗ trợ sẽ có mặt vào lúc <strong style="color:var(--text)">6:00 PM - 12:00 PM</strong>.</li>
+              <li>Nếu liên lạc nhưng không nhận được hồi âm, xin quý khách vui lòng kiên nhẫn.</li>
+              <li>Xin chân thành cảm ơn.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="premium-strip">
+        <div class="glass premium-item reveal"><i class="fa-solid fa-sparkles"></i><strong>Game mới</strong><div class="muted">Cập nhật thêm lựa chọn để khách dễ chọn.</div></div>
+        <div class="glass premium-item reveal" style="--delay:60ms"><i class="fa-solid fa-clapperboard"></i><strong>Xem trước</strong><div class="muted">Có trailer, gameplay và hình ảnh để xem nhanh.</div></div>
+        <div class="glass premium-item reveal" style="--delay:120ms"><i class="fa-solid fa-shield-halved"></i><strong>Denuvo rõ ràng</strong><div class="muted">Tránh nhầm lẫn khi chọn game.</div></div>
+        <div class="glass premium-item reveal" style="--delay:180ms"><i class="fa-solid fa-envelope-circle-check"></i><strong>Mua nhanh</strong><div class="muted">Thông tin thanh toán hiển thị rõ ràng.</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <div>
+          <span class="pill cyan"><i class="fa-solid fa-fire"></i> Nổi bật</span>
+          <h2>Game đề xuất</h2>
+          <p class="muted">Nhóm game nổi bật đang có sẵn trong kho.</p>
+        </div>
+      </div>
+      <div class="featured-grid" id="featuredGrid"></div>
+    </section>
+
+    <section class="section glass filters reveal" id="products">
+      <div class="section-head">
+        <div>
+          <span class="pill cyan"><i class="fa-solid fa-sliders"></i> Bộ lọc</span>
+          <h3>Kho game Hydra Store</h3>
+          <p class="muted">Lọc nhanh theo thể loại, mức giá, bom tấn hoặc Denuvo.</p>
+        </div>
+      </div>
+      <div class="filters-row" style="margin-bottom:12px">
+        <div class="chips" id="genreChips"></div>
+      </div>
+      <div class="filters-row">
+        <select class="select" id="priceFilter">
+          <option value="all">Tất cả mức giá</option>
+          <option value="under50">Dưới 50k</option>
+          <option value="50to80">50k - 80k</option>
+          <option value="80to100">80k - 100k</option>
+        </select>
+        <select class="select" id="sortBy">
+          <option value="featured">Ưu tiên nổi bật</option>
+          <option value="yearDesc">Mới nhất</option>
+          <option value="priceAsc">Giá tăng dần</option>
+          <option value="priceDesc">Giá giảm dần</option>
+        </select>
+        <button class="btn" id="toggleAAA"><i class="fa-solid fa-crown"></i> BOM TẤN</button>
+        <button class="btn" id="toggleDenuvo"><i class="fa-solid fa-shield-halved"></i> DENUVO</button>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <div>
+          <span class="pill violet"><i class="fa-solid fa-grid-2"></i> Danh mục</span>
+          <h3>Tất cả sản phẩm</h3>
+          <p class="muted" id="resultCount">Hiển thị 0 game.</p>
+        </div>
+      </div>
+      <div class="grid" id="productGrid"></div>
+    </section>
+
+    <section class="section" id="guide">
+      <div class="section-head reveal">
+        <div>
+          <span class="pill cyan"><i class="fa-solid fa-book-open"></i> Hướng dẫn</span>
+          <h3>Cách cài game</h3>
+          <p class="muted">Làm đúng các bước dưới đây để tránh lỗi khi vào game.</p>
+        </div>
+      </div>
+      <div class="guide-grid">
+        <div class="glass guide-step reveal">
+          <div class="guide-media">
+            
+            <img src="./b1.png" alt="Bước 1" onerror="this.style.display='none'" />
+          </div>
+          <h4>Bước 1</h4>
+          <p class="muted">Đăng nhập tài khoản Steam được giao, sau đó tải game như bình thường.</p>
+        </div>
+        <div class="glass guide-step reveal" style="--delay:70ms">
+          <div class="guide-media">
+            
+            <img src="./b2.png" alt="Bước 2" onerror="this.style.display='none'" />
+          </div>
+          <h4>Bước 2</h4>
+          <p class="muted">Sau khi tải xong, chuyển Steam sang chế độ offline rồi vào game. Nếu bị lỗi xác thực, nhắn shop để xử lý.</p>
+        </div>
+        <div class="glass guide-step reveal" style="--delay:140ms">
+          <div class="guide-media">
+            <img src="./logo.png" alt="Hỗ trợ Hydra Store" onerror="this.style.display='none'" />
+          </div>
+          <h4>Hỗ trợ thêm</h4>
+          <p class="muted">Nếu game cần xác thực thêm hoặc cần xử lý Denuvo, liên hệ ngay qua Zalo <strong style="color:var(--text)">0794527008</strong> để shop hỗ trợ nhanh.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <div class="glass footer-card reveal">
+      <strong style="font-size:22px">Hydra Store</strong>
+      <p class="muted">Kho game offline giá tốt, cập nhật đều và hỗ trợ nhanh khi cần.</p>
+    </div>
+  </footer>
+
+  <div class="drawer" id="cartDrawer">
+    <div class="overlay" data-close-drawer></div>
+    <div class="drawer-panel">
+      <div class="drawer-head">
+        <h3 style="margin:0">Giỏ hàng</h3>
+        <button class="close" data-close-drawer>✕</button>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="sum">
+        <div class="sum-row"><span>Tạm tính</span><strong id="subTotal">0đ</strong></div>
+        <div class="sum-row"><span>Phí xử lý</span><strong>0đ</strong></div>
+        <div class="sum-row total"><span>Tổng cộng</span><strong id="grandTotal">0đ</strong></div>
+        <div class="hero-actions" style="margin-top:16px">
+          <button class="btn btn-primary" id="checkoutBtn"><i class="fa-solid fa-credit-card"></i> Thanh toán</button>
+          <button class="btn" id="continueBtn"><i class="fa-solid fa-arrow-right"></i> Tiếp tục xem</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="detailModal">
+    <div class="overlay" data-close-modal></div>
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 style="margin:0">Chi tiết game</h3>
+        <button class="close" data-close-modal>✕</button>
+      </div>
+      <div class="detail-grid" id="detailContent"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="authModal">
+    <div class="overlay" data-close-auth></div>
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 style="margin:0">Tài khoản</h3>
+        <button class="close" data-close-auth>✕</button>
+      </div>
+      <div id="authContent"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="checkoutModal">
+    <div class="overlay" data-close-checkout></div>
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 style="margin:0">Thanh toán</h3>
+        <button class="close" data-close-checkout>✕</button>
+      </div>
+      <div class="pay-grid">
+        <div>
+          <div class="pay-box">
+            <div style="font-weight:800;margin-bottom:10px">QR thanh toán</div>
+            <div class="checkout-qr-frame">
+              <img id="checkoutQr" alt="QR thanh toán" src="./qr.png" />
+            </div>
+            <div style="margin-top:12px;font-size:14px;line-height:1.7;color:var(--muted)">
+              <div><strong style="color:var(--text)">Ngân hàng:</strong> MB Bank</div>
+              <div><strong style="color:var(--text)">Chủ tài khoản:</strong> TRAN NGUYEN CHUONG</div>
+              <div><strong style="color:var(--text)">Số tài khoản:</strong> 0794527008</div>
+              <div><strong style="color:var(--text)">Nội dung:</strong> tên game viết tắt + mã đơn</div>
+            </div>
+          </div>
+          <div class="pay-box">
+            <div style="font-weight:800;margin-bottom:10px">Thông tin thanh toán</div>
+            <div class="field"><label>Mã đơn</label><input id="orderCode" readonly /></div>
+            <div class="field"><label>Nội dung thanh toán</label><input id="transferMemo" readonly /></div>
+            <div class="field"><label>Số tiền</label><input id="checkoutAmount" readonly /></div>
+            <div class="hero-actions">
+              <button class="btn" id="copyMemoBtn">Copy nội dung</button>
+              <button class="btn" id="copyOrderBtn">Copy mã đơn</button>
+              <button class="btn btn-primary" id="checkPaymentBtn"><i class="fa-solid fa-shield-check"></i> Kiểm tra thanh toán</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="pay-box">
+            <div style="font-weight:800;margin-bottom:10px">Thông tin người mua</div>
+            <div class="field"><label>Họ tên người chuyển khoản</label><input id="checkoutName" placeholder="Nhập họ tên" /></div>
+            <div class="field"><label>Số điện thoại</label><input id="checkoutPhone" placeholder="Nhập số điện thoại" /></div>
+            <div class="field"><label>Địa chỉ email nhận tài khoản</label><input id="checkoutBuyerEmail" type="email" readonly /></div>
+            <div class="field"><label>Ghi chú</label><input id="checkoutNote" placeholder="Yêu cầu thêm nếu có" /></div>
+          </div>
+          <div class="pay-box" id="deliveryResult" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+
+  <script>
+    window.HYDRA_API_BASE_URL = window.HYDRA_API_BASE_URL || 'http://localhost:3000';
+    window.HYDRA_MEDIA_API_BASE_URL = window.HYDRA_MEDIA_API_BASE_URL || window.HYDRA_API_BASE_URL;
+
+    const AUTOPAY_CONFIG = {
+      enabled: true,
+      checkEndpoint: `${window.HYDRA_API_BASE_URL}/api/payments/check`,
+      pollIntervalMs: 12000
+    };
+
+    const QR_BANK_NAME = 'MB Bank';
+    const QR_BANK_BIN = '970422';
+    const QR_ACCOUNT_NO = '0794527008';
+    const QR_ACCOUNT_NAME = 'TRAN NGUYEN CHUONG';
+    const QR_TEMPLATE = 'compact2';
+    const QR_IMAGE_OVERRIDE = './qr.png';
+    const API_BASE_URL = window.HYDRA_API_BASE_URL || 'http://localhost:3000';
+    const MEDIA_API_BASE_URL = window.HYDRA_MEDIA_API_BASE_URL || API_BASE_URL;
+
+    const ytEmbed = id => `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&playsinline=1`;
+    const ytThumbMax = id => `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+    const extractSteamAppId = url => {
+      const m = String(url || '').match(/\/apps\/(\d+)\//);
+      return m ? m[1] : '';
+    };
+    const dedupe = arr => [...new Set((arr || []).filter(Boolean))];
+    const ytThumb = id => `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+
+    function steamAssetPack(game){
+      const appId = game.appId || extractSteamAppId(game.image);
+      if(!appId) return { header: game.image || '' };
+      const base = `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${appId}`;
+      return {
+        header: game.image || `${base}/header.jpg`,
+        hero: `${base}/library_hero.jpg`,
+        portrait: `${base}/library_600x900_2x.jpg`,
+        wide: `${base}/capsule_616x353.jpg`,
+        small: `${base}/capsule_231x87.jpg`,
+        capsule: `${base}/library_capsule.jpg`,
+        bg: `${base}/page_bg_generated_v6b.jpg`
+      };
+    }
+
+    function buildVisualProfile(game){
+      const lib = gameMediaLibrary[game.id] || { videos: [], images: [] };
+      const videoThumbs = dedupe((lib.videos || []).map(v => v?.thumb || v?.poster || '').filter(Boolean));
+      const steam = steamAssetPack(game);
+      return {
+        hero: dedupe([steam.hero, steam.wide, game.image, steam.bg]),
+        heroThumb: dedupe([steam.small, steam.capsule, steam.wide, game.image]),
+        featured: dedupe([steam.wide, steam.hero, game.image]),
+        card: dedupe([steam.portrait, steam.hero, steam.wide, game.image]),
+        cart: dedupe([steam.small, steam.capsule, steam.wide, game.image]),
+        detailImages: dedupe([...(lib.images || []), steam.portrait, steam.hero, steam.bg, steam.wide]),
+        videoThumbs
+      };
+    }
+
+    function buildImgTag(sources, alt, attrs = ''){
+      const list = dedupe((sources || []).filter(Boolean));
+      const primary = list[0] || '';
+      const fallbackJson = encodeURIComponent(JSON.stringify(list.slice(1)));
+      return `<img src="${primary}" alt="${alt}" data-fallbacks="${fallbackJson}" onerror="handleImageFallback(this)" ${attrs}>`;
+    }
+
+    window.handleImageFallback = function(img){
+      try{
+        const queue = JSON.parse(decodeURIComponent(img.dataset.fallbacks || '%5B%5D'));
+        if(queue.length){
+          const next = queue.shift();
+          img.dataset.fallbacks = encodeURIComponent(JSON.stringify(queue));
+          img.src = next;
+          return;
+        }
+      }catch(err){}
+      img.onerror = null;
+    };
+    const gameMediaLibrary = {
+      1:{videos:[{label:'Teaser',embed:ytEmbed('POz1-EmLsTY'),thumb:ytThumb('POz1-EmLsTY')},{label:'Gameplay',embed:ytEmbed('F3590UbDu2Q'),thumb:ytThumb('F3590UbDu2Q')}],images:['https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3764200/9422ad111dfd5fe1df34352946c6aa715c23f0f6/ss_9422ad111dfd5fe1df34352946c6aa715c23f0f6.1920x1080.jpg?t=1772587704','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3764200/a5ad021e191c2f3cfcb4fcdd7abe193c887b3500/ss_a5ad021e191c2f3cfcb4fcdd7abe193c887b3500.1920x1080.jpg?t=1772587704','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3764200/e4508c17151714d5d4f80cd31bdcacf0caf5559c/ss_e4508c17151714d5d4f80cd31bdcacf0caf5559c.1920x1080.jpg?t=1772587704','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3764200/b61e78a244aef7a12cf08f9dc7e7fc7ead6eeddb/ss_b61e78a244aef7a12cf08f9dc7e7fc7ead6eeddb.1920x1080.jpg?t=1772587704','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3764200/3f63fb0ce70f3e97799226b70ebea4d4794c53a1/ss_3f63fb0ce70f3e97799226b70ebea4d4794c53a1.1920x1080.jpg?t=1772587704','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3764200/9e35202b6c8262496e1c57275c51bcead7232249/ss_9e35202b6c8262496e1c57275c51bcead7232249.1920x1080.jpg?t=1772587704','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3764200/4921eb5fb45f6b7a3b62195e47c6d7b4175935a8/ss_4921eb5fb45f6b7a3b62195e47c6d7b4175935a8.116x65.jpg?t=1772587704','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3764200/e7b791b703759aebe774b813eb29a364008552b8/ss_e7b791b703759aebe774b813eb29a364008552b8.116x65.jpg?t=1772587704','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3764200/bbe5c4e0ba4fc551d9389cf2411c2cefe413af1d/ss_bbe5c4e0ba4fc551d9389cf2411c2cefe413af1d.116x65.jpg?t=1772587704']},
+      2:{videos:[{label:'Teaser',embed:ytEmbed('F63h3v9QV7w'),thumb:ytThumb('F63h3v9QV7w')},{label:'Gameplay',embed:ytEmbed('Dw_oH5oiUSE'),thumb:ytThumb('Dw_oH5oiUSE')}],images:['https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/ss_66b553f4c209476d3e4ce25fa4714002cc914c4f.1920x1080.jpg?t=1759502961','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/ss_bac60bacbf5da8945103648c08d27d5e202444ca.1920x1080.jpg?t=1759502961','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/ss_668dafe477743f8b50b818d5bbfcec669e9ba93e.1920x1080.jpg?t=1759502961','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/ss_4ce07ae360b166f0f650e9a895a3b4b7bf15e34f.1920x1080.jpg?t=1759502961','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/ss_d1a8f5a69155c3186c65d1da90491fcfd43663d9.1920x1080.jpg?t=1759502961']},
+      3:{videos:[{label:'Teaser',embed:ytEmbed('ejgW-upPMgk'),thumb:ytThumb('ejgW-upPMgk')},{label:'Gameplay',embed:ytEmbed('GByuD9VPa2I'),thumb:ytThumb('GByuD9VPa2I')}],images:['https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/ss_483a27df5072beb3a4650634a764bda750fbcb82.1920x1080.jpg?t=1773073059','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/ss_e49800e906e8a0f00707458c836567c933603bac.1920x1080.jpg?t=1773073059','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/ss_b8089016095e6a16e324a59c45b2f24a439bd0b3.1920x1080.jpg?t=1773073059','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/ss_8439c07d7b1f2fcfc6449db5f051f8d0867f4785.1920x1080.jpg?t=1773073059','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/ss_9e050e6a61a4d9f4fe54bc62c8c73da38e9a63b0.1920x1080.jpg?t=1773073059','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/ss_d3a10809f5cc2a8df7773f41acd1493f4fb900ec.1920x1080.jpg?t=1773073059','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/ss_ec16f873c7d14fc4a4f17966b25f9712dc486b4a.1920x1080.jpg?t=1773073059','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/ss_c130295c9e1169dc0c63eaae0618e64d06a88c92.1920x1080.jpg?t=1773073059','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/ss_0902af724ac45a9093dee022a7893dc50cbf555e.1920x1080.jpg?t=1773073059','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/ss_49ba857fef972f2584e41fa0b46cddbcda8aa30f.1920x1080.jpg?t=1773073059']},
+      4:{videos:[{label:'Teaser',embed:ytEmbed('AKXiKBnzpBQ'),thumb:ytThumb('AKXiKBnzpBQ')},{label:'Gameplay',embed:ytEmbed('E3Huy2cdih0'),thumb:ytThumb('E3Huy2cdih0')}],images:['https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/ss_943bf6fe62352757d9070c1d33e50b92fe8539f1.1920x1080.jpg?t=1767883716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/ss_dcdac9e4b26ac0ee5248bfd2967d764fd00cdb42.1920x1080.jpg?t=1767883716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/ss_3c41384a24d86dddd58a8f61db77f9dc0bfda8b5.1920x1080.jpg?t=1767883716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/ss_e0316c76f8197405c1312d072b84331dd735d60b.1920x1080.jpg?t=1767883716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/ss_b1b91299d7e4b94201ac840aa64de54d9f5cb7f3.1920x1080.jpg?t=1767883716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/ss_510a02cf3045e841e180f2b77fb87545e0c8b59d.1920x1080.jpg?t=1767883716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/ss_c494372930ca791bdc6221eca134f2270fb2cb9f.1920x1080.jpg?t=1767883716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/ss_fa6b881ef7c30522012ab2b2b83001e79baee093.1920x1080.jpg?t=1767883716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/ss_c2baf8aada6140beee79d701d14043899e91af47.1920x1080.jpg?t=1767883716']},
+      5:{videos:[{label:'Teaser',embed:ytEmbed('_Zj6zhpVFLM'),thumb:ytThumb('_Zj6zhpVFLM')},{label:'Gameplay',embed:ytEmbed('68pYm_KgptU'),thumb:ytThumb('68pYm_KgptU')}],images:['https://images.lifestyleasia.com/wp-content/uploads/sites/3/2022/11/23162627/FckhOrRagAIjHHG-1600x900.jpeg','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO38XPYzXKMzfKlTvKclLX-j2Bap7fsUTUDQ&s','https://cdn.sortiraparis.com/images/80/66131/676298-playstation-showcase-god-of-war-ragnarok-se-devoile-dans-une-bande-annonce.jpg']},
+      6:{videos:[{label:'Teaser',embed:ytEmbed('NXTlh31ZWZ4'),thumb:ytThumb('NXTlh31ZWZ4')},{label:'Gameplay',embed:ytEmbed('N-xHcvug3WI'),thumb:ytThumb('N-xHcvug3WI')}],images:['https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3240220/8340fd391012e12be7e4c02e65801a2648a6b60e/ss_8340fd391012e12be7e4c02e65801a2648a6b60e.1920x1080.jpg?t=1765479644','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3240220/f2e70b5823510daa062293ff0b03821e1dee2d37/ss_f2e70b5823510daa062293ff0b03821e1dee2d37.1920x1080.jpg?t=1765479644','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3240220/6959cc5d64cce82cb68a27457cfa46fb4d50f897/ss_6959cc5d64cce82cb68a27457cfa46fb4d50f897.1920x1080.jpg?t=1765479644','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3240220/0231bf16835cd4f6d83523d76aa8d91cb2dfef9b/ss_0231bf16835cd4f6d83523d76aa8d91cb2dfef9b.1920x1080.jpg?t=1765479644','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3240220/60690d0fdbd022ab1527ba6d080d42c1812a0f39/ss_60690d0fdbd022ab1527ba6d080d42c1812a0f39.1920x1080.jpg?t=1765479644','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3240220/cf15774bb38c9b74f9e98c985228510c97df80b6/ss_cf15774bb38c9b74f9e98c985228510c97df80b6.1920x1080.jpg?t=1765479644','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3240220/808b550269f898e227dae2c64b5e026f90da85f9/ss_808b550269f898e227dae2c64b5e026f90da85f9.1920x1080.jpg?t=1765479644','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3240220/85ff4a9fad2064c201c00c27d8d28c28fa03c481/ss_85ff4a9fad2064c201c00c27d8d28c28fa03c481.1920x1080.jpg?t=1765479644','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3240220/f4a6f63b4f7cb42262152449ba5e5c5837f20ff4/ss_f4a6f63b4f7cb42262152449ba5e5c5837f20ff4.1920x1080.jpg?t=1765479644','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3240220/7f432690bd6365e871a2463a5db9cc4e7ebe1151/ss_7f432690bd6365e871a2463a5db9cc4e7ebe1151.1920x1080.jpg?t=1765479644','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3240220/d61184a98c1cf2db2b08b2999c04b0519e3615bb/ss_d61184a98c1cf2db2b08b2999c04b0519e3615bb.116x65.jpg?t=1765479644']},
+      7:{videos:[{label:'Teaser',embed:ytEmbed('1O6Qstncpnc'),thumb:ytThumb('1O6Qstncpnc')},{label:'Gameplay',embed:ytEmbed('2AZmuZNu5LA'),thumb:ytThumb('2AZmuZNu5LA')}],images:['https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/ss_df93b5e8a183f7232d68be94ae78920a90de1443.1920x1080.jpg?t=1765473525','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/ss_94058497bf0f8fabdde17ee8d59bece609a60663.1920x1080.jpg?t=1765473525','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/ss_8e08976236d29b1897769257ac3c64e9264792a5.1920x1080.jpg?t=1765473525','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/ss_d4930d675af053dc1e61a876a34fc003e85e261f.1920x1080.jpg?t=1765473525']},
+      8:{videos:[{label:'Teaser',embed:ytEmbed('tNH0fkDKCaQ'),thumb:ytThumb('tNH0fkDKCaQ')},{label:'Gameplay',embed:ytEmbed('LETGyn8lHVA'),thumb:ytThumb('LETGyn8lHVA')}],images:['https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_11d4d44dcec7a17477c79cce407ad21bb698bb44.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_402c7ba6898d27f9d7dcd6ccd79fc6233a09e832.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_811c368004336a7d7ac222e5c29317f3c308b333.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_89cbf59cbe5ece78b9c8a5fbd0e8f911e15208f2.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_3d7179f612d6d608c40c185e8c3c2acf6d6a2c0b.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_5b5a50502a6832e6b3c51e4c2a2a3031c17dc823.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_ff45b762725e29b206fcf09ba4b04d113cbe3d48.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_682391ad60984846d57831130c84c7856df72a93.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_0bb0aaaf8622c66402787ae86e2a264e02e93382.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_5a388518fc4404db1ba01b79c466c9067139787f.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_7e812a4d9c4647080bfb000a3def1afef6572faa.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_25977c74df097624b118232a62c3fade0c1dd029.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_64f645e1b0276a7f8166fbc0e171da1cda1d4484.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_12eb0f8e4b74d3c3b17aaa363ad0c205ac386f16.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_b7c5b0378fd5ffb30322d97d3059f1d108444538.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_b2d53a05c8a1c75e865fcef7562eed28ab2f4315.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_f14679ce1f74288e2047501a52be63b873a4fc66.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_7be4024033bcc8fb34f57374501fc97ecd7db264.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_3caa7060a98f3315819d52874ddee69eb9dbc520.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_49dcf4cae457bdf4011f1d92e191dd96dd7617eb.1920x1080.jpg?t=1765255716','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/ss_2227c9135a357032d012cf3011d3386ff6556f9b.1920x1080.jpg?t=1765255716']},
+      9:{videos:[{label:'Teaser',embed:ytEmbed('ffsIyLvm8dQ'),thumb:ytThumb('ffsIyLvm8dQ')},{label:'Gameplay',embed:ytEmbed('XrPZSq5YXqc'),thumb:ytThumb('XrPZSq5YXqc')}],images:['https://lequangstore.com/wp-content/uploads/marvels-spiderman-2-7.webp','https://live-production.wcms.abc-cdn.net.au/0440a6fbf46ded8801e052a221b1223d?impolicy=wcms_crop_resize&cropH=1080&cropW=1920&xPos=0&yPos=0&width=862&height=485','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0qr7pqFGCSNJqxZNhiW54a4yaR-nkjUXovw&s','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPcOX-jQRo_ROlETdrxw6_IidbvobzwoLt3Q&s']},
+      10:{videos:[{label:'Teaser',embed:ytEmbed('8X2kIfS6fb8'),thumb:ytThumb('8X2kIfS6fb8')},{label:'Gameplay',embed:ytEmbed('Qyn8-dXpvX8'),thumb:ytThumb('Qyn8-dXpvX8')}],images:['https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_2f649b68d579bf87011487d29bc4ccbfdd97d34f.1920x1080.jpg?t=1769690377','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_0e64170751e1ae20ff8fdb7001a8892fd48260e7.1920x1080.jpg?t=1769690377','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_af2804aa4bf35d4251043744412ce3b359a125ef.1920x1080.jpg?t=1769690377','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_7924f64b6e5d586a80418c9896a1c92881a7905b.1920x1080.jpg?t=1769690377','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_4eb068b1cf52c91b57157b84bed18a186ed7714b.1920x1080.jpg?t=1769690377','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_b529b0abc43f55fc23fe8058eddb6e37c9629a6a.1920x1080.jpg?t=1769690377']},
+      11:{videos:[{label:'Teaser',embed:ytEmbed('TWohGBVZKc0'),thumb:ytThumb('TWohGBVZKc0')},{label:'Gameplay',embed:ytEmbed('YdHc3JZixRY'),thumb:ytThumb('YdHc3JZixRY')}],images:['https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/292030/ss_5710298af2318afd9aa72449ef29ac4a2ef64d8e.1920x1080.jpg?t=1768303991','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/292030/ss_0901e64e9d4b8ebaea8348c194e7a3644d2d832d.1920x1080.jpg?t=1768303991','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/292030/ss_112b1e176c1bd271d8a565eacb6feaf90f240bb2.1920x1080.jpg?t=1768303991','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/292030/ss_d1b73b18cbcd5e9e412c7a1dead3c5cd7303d2ad.1920x1080.jpg?t=1768303991']},
+      12:{videos:[{label:'Teaser',embed:ytEmbed('FYH9n37B7Yw'),thumb:ytThumb('FYH9n37B7Yw')},{label:'Gameplay',embed:ytEmbed('d_20X1YM28U'),thumb:ytThumb('d_20X1YM28U')}],images:['https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_cf56e25a0290556ba83229eb0ab370d10be0407c.1920x1080.jpg?t=1746471508','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_00f0090174380eeaf8753bd3d1028b6772c3aebf.1920x1080.jpg?t=1746471508','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_b65236b365315ebb6da6114ce42cd74b59cab3c8.1920x1080.jpg?t=1746471508','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_0a13a7ccd38e7c3e6a5f1720050732833b53b6a8.1920x1080.jpg?t=1746471508','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_3654a5988db68f9b47740f9f6a9299682c365599.1920x1080.jpg?t=1746471508','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_0bc32360d32b21abdf889422385cd753862dd73e.1920x1080.jpg?t=1746471508','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_1da0673f82eccc3c9d222237dec40e36bf10eef3.1920x1080.jpg?t=1746471508','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_78e4f63e05d50e59b9966ba8da9a53dbf84fd8f4.1920x1080.jpg?t=1746471508','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_c8390c1e88ba5e660a58e8e435ebc77dcda5c91d.1920x1080.jpg?t=1746471508','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_3c16188972c826942f47991d91b0f6dc17e01fc9.1920x1080.jpg?t=1746471508','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_49297af1ddef7779e644c2deb1df611a5f5cd344.1920x1080.jpg?t=1746471508','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_733100a0e305025cfea4797c14cb55a9e2673521.1920x1080.jpg?t=1746471508','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_4f2da231c28c5cb6a1ed4f62aaad6f51ca4a5c05.1920x1080.jpg?t=1746471508','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_af9712cbc5121307926cb3e7dfc7228d45940557.1920x1080.jpg?t=1746471508','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_d26239d188301bb6f2475c6d323ae007195b7542.1920x1080.jpg?t=1746471508','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_16be1ecc46e7c0a3aa68e646af904c66ea8e1c81.1920x1080.jpg?t=1746471508']},
+      13:{videos:[{label:'Teaser',embed:ytEmbed('g_2VZvi0fQ0'),thumb:ytThumb('g_2VZvi0fQ0')},{label:'Gameplay',embed:ytEmbed('Ym3W7_-7-rU'),thumb:ytThumb('Ym3W7_-7-rU')}],images:['https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/601150/ss_4410bada2565843dae693b03ac3a50256ff5dd66.1920x1080.jpg?t=1768869803','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/601150/ss_4ce180ed8979a51c72de51f985e9e9ba13500508.1920x1080.jpg?t=1768869803','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/601150/ss_e2be70565f94a7f6c392cccddce08c67f2f87612.1920x1080.jpg?t=1768869803','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/601150/ss_d1e0b403f593f17ad195c5382a7788d71c6f406a.1920x1080.jpg?t=1768869803','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/601150/ss_f669d4627db07e61b87728d94d72bc1eabfd0349.1920x1080.jpg?t=1768869803']},
+      14:{videos:[{label:'Teaser',embed:ytEmbed('5pL3joRyeGY'),thumb:ytThumb('5pL3joRyeGY')},{label:'Gameplay',embed:ytEmbed('O2nNljv0MOw'),thumb:ytThumb('O2nNljv0MOw')}],images:['https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2358720/ss_86c4b7462bba219a0d0b89931a35812b9f188976.1920x1080.jpg?t=1760601605','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2358720/ss_d9391ab31a4d15dddf7ba4949bfa44f5d9170580.1920x1080.jpg?t=1760601605','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2358720/ss_524a39da392ee83dde091033562bc719d46b5838.1920x1080.jpg?t=1760601605','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2358720/ss_968bbc9caceb7d798bd0c393e1e9b4c44ed6d835.1920x1080.jpg?t=1760601605','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2358720/ss_415397426d4c939ebb8a93ac66831f28ee7199be.1920x1080.jpg?t=1760601605','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2358720/ss_63477e8ce2c0582b81c6ed576377d78e692b5642.1920x1080.jpg?t=1760601605']},
+      15:{videos:[{label:'Teaser',embed:ytEmbed('UZ6eFEjFfJ0'),thumb:ytThumb('UZ6eFEjFfJ0')},{label:'Gameplay',embed:ytEmbed('RseCwyfQKHM'),thumb:ytThumb('RseCwyfQKHM')}],images:['https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1971870/ss_7eb14734a264570367c607698371e492415f48a4.1920x1080.jpg?t=1750176505','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1971870/ss_29b0a9e87d5a4981d7403994b661c43117a87d84.1920x1080.jpg?t=1750176505','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1971870/ss_18eadd6859ed15531d25cd67fe1d2402e9bf75b3.1920x1080.jpg?t=1750176505','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1971870/ss_02b8c4f08fbf4d1a5affb9e6e64716d63df16760.1920x1080.jpg?t=1750176505','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1971870/ss_2509da69bd12d209bd0ef9eed13f25cfa551f8e5.1920x1080.jpg?t=1750176505','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1971870/ss_fc0fd6c946a9f182bf8f0059bf4260ff07b0fec7.1920x1080.jpg?t=1750176505','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1971870/ss_535045ba6877519d2d95a3c89716a72c174eab7e.1920x1080.jpg?t=1750176505','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1971870/ss_1b8e7526d3f50e06c1283ee651dc7f868ef0474a.1920x1080.jpg?t=1750176505','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1971870/ss_224cb713d0e9dcc0028f5ad275cf6f4925d3dca5.1920x1080.jpg?t=1750176505','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1971870/ss_92b72baad7981e46d9717991510ff28b04186b23.1920x1080.jpg?t=1750176505','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1971870/ss_a991cfaf5752d48c1374b635deb041ab2d1332d2.1920x1080.jpg?t=1750176505','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1971870/ss_829f376e1954eab50fc366bbcbc5a1cee5777116.1920x1080.jpg?t=1750176505','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1971870/ss_015808ceccbf9006b92702bacb78d5ca0cc3ebe5.1920x1080.jpg?t=1750176505']},
+      16:{videos:[{label:'Teaser',embed:ytEmbed('URG75CDX_rg'),thumb:ytThumb('URG75CDX_rg')},{label:'Gameplay',embed:ytEmbed('-WwrJSTlBPk'),thumb:ytThumb('-WwrJSTlBPk')}],images:['https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2246340/ss_31b5597fecf2d9a2904bc9bbf8011aacb18143db.1920x1080.jpg?t=1771382452','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2246340/ss_9245c1ede8c3fc2cd65e4890a74a01ef50b726da.1920x1080.jpg?t=1771382452','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2246340/ss_c722e74607ffda9a1472093ccc934f1bdde10ab8.1920x1080.jpg?t=1771382452','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2246340/ss_d439e321350c004c4d866c248019aefdc6a50600.1920x1080.jpg?t=1771382452','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2246340/ss_fa2361b39da8e8bde3cbc282879de97f2f3e57af.1920x1080.jpg?t=1771382452','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2246340/ss_c1dd8c8af4e0fd3bb233888b4155d94f7988debd.1920x1080.jpg?t=1771382452','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2246340/ss_e78e739e1cd881de7a7c4cbec0b3ada2df155678.1920x1080.jpg?t=1771382452','https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2246340/ss_d17898c5f18d4e081fe185d28fd0eb8155fbf529.1920x1080.jpg?t=1771382452']},
+      17:{videos:[{label:'Teaser',embed:ytEmbed('AsOJ1JJJ4Zc'),thumb:ytThumb('AsOJ1JJJ4Zc')},{label:'Gameplay',embed:ytEmbed('btmN-bWwv0A'),thumb:ytThumb('btmN-bWwv0A')}],images:['https://i0.wp.com/cdn.vietgame.asia/wp-content/uploads/20200617105405/the-last-of-us-part-ii-danh-gia-game-5.jpg?resize=1280%2C720&ssl=1','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSPIHJH5lSa6K4dPlHmQBZ_7y-PkJxDaJBRA&s','https://media.gq.com.mx/photos/5eea79d68f739bf973bc8220/16:9/w_2560%2Cc_limit/the%2520last%2520of%2520us%2520part%2520ii%2520ellie.jpg','https://m.media-amazon.com/images/M/MV5BMjI4NGJhZDctODliZS00M2ZlLWIyYzAtNTE3OTY1Nzg3NTUyXkEyXkFqcGdeQVRoaXJkUGFydHlJbmdlc3Rpb25Xb3JrZmxvdw@@._V1_.jpg','https://cdn.sortiraparis.com/images/1001/66131/989657-the-last-of-us-part-ii-remastered-sur-ps5-decouvrez-les-nouveautes-et-ameliorations-graphiques.jpg']}
+    };
+
+    const heroOrder = [1,4,9];
+    const el = id => document.getElementById(id);
+    const money = n => new Intl.NumberFormat('vi-VN').format(n) + 'đ';
+    const percent = (p,o) => Math.max(0, Math.round((1 - p/o) * 100));
+    const safe = v => v || 'Đang cập nhật';
+
+    const baseGames = [
+      {id:1,appId:3764200,title:'Resident Evil Requiem Deluxe Edition',shortCode:'RER',price:99000,oldPrice:1849000,genre:'Kinh dị',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2026,status:'available',denuvo:true,image:'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3764200/ce5437442768e38eb575f205ab9397d0264017b0/header.jpg?t=1772587704',desc:'Bản Deluxe Edition gồm game gốc và gói Deluxe. Survival horror mới của Resident Evil với tông kinh dị nặng và thiên trải nghiệm chơi đơn.',tags:['2026','Horror','Offline']},
+      {id:2,appId:1174180,title:'Red Dead Redemption 2',shortCode:'RDR2',price:69000,oldPrice:1429000,genre:'Phiêu lưu',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2019,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg',desc:'Siêu phẩm thế giới mở cao bồi với cốt truyện mạnh, bầu không khí xuất sắc và trải nghiệm chơi đơn rất dài.',tags:['AAA','Story','Offline']},
+      {id:3,appId:1903340,title:'Clair Obscur: Expedition 33',shortCode:'E33',price:99000,oldPrice:1319000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1903340/header.jpg',desc:'RPG theo lượt pha thời gian thực, lấy cảm hứng từ Belle Époque Pháp, thuộc nhóm game chơi đơn nổi bật gần đây.',tags:['GOTY','RPG','Offline']},
+      {id:4,appId:1245620,title:'Elden Ring',shortCode:'ER',price:99000,oldPrice:1579000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2022,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg',desc:'Soulslike thế giới mở rất lớn, boss khó, khám phá dày đặc và là một trong những game chơi đơn mạnh nhất nhóm AAA.',tags:['AAA','Soulslike','Offline']},
+      {id:5,appId:2322010,title:'God of War Ragnarök',shortCode:'GOWR',price:99000,oldPrice:1319000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2024,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2322010/header.jpg',desc:'Hành động phiêu lưu đậm điện ảnh, tiếp nối hành trình của Kratos và Atreus qua Chín Cõi.',tags:['AAA','Story','Offline']},
+      {id:6,appId:3240220,title:'Grand Theft Auto V Enhanced',shortCode:'GTAVE',price:59000,oldPrice:789000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3240220/header.jpg',desc:'Bản Enhanced nâng cấp hình ảnh, hiệu năng và tốc độ tải cho GTA V trên PC, vẫn rất mạnh ở mảng chơi đơn.',tags:['AAA','Open World','Offline']},
+      {id:7,appId:990080,title:'Hogwarts Legacy',shortCode:'HL',price:99000,oldPrice:1579000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2023,status:'available',denuvo:true,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/990080/header.jpg',desc:'Action RPG thế giới mở trong vũ trụ Hogwarts, tập trung khám phá, phép thuật và hành trình chơi đơn.',tags:['Magic','Open World','Offline']},
+      {id:8,appId:2680010,title:'The First Berserker: Khazan',shortCode:'TFBK',price:99000,oldPrice:1319000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2680010/header.jpg',desc:'Hardcore action RPG với nhịp độ chiến đấu nặng tay, thiên một người chơi và phong cách rất máu lửa.',tags:['Action RPG','Hardcore','Offline']},
+      {id:9,appId:2651280,title:"Marvel's Spider-Man 2",shortCode:'MSM2',price:99000,oldPrice:1579000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2651280/header.jpg',desc:'Game hành động siêu anh hùng với Peter Parker và Miles Morales, đu tơ nhanh, cinematic và rất hợp bán shop.',tags:['AAA','Superhero','Offline']},
+      {id:10,appId:1091500,title:'Cyberpunk 2077',shortCode:'CP2077',price:99000,oldPrice:1579000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2020,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/header.jpg',desc:'RPG khoa học viễn tưởng thế giới mở với Night City rộng lớn và nhiều nhánh nhiệm vụ.',tags:['AAA','Sci-fi','Offline']},
+      {id:11,appId:292030,title:'The Witcher 3',shortCode:'TW3',price:49000,oldPrice:1059000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2015,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/292030/header.jpg',desc:'RPG kinh điển với thế giới, nhân vật và nhiệm vụ phụ thuộc hàng mạnh nhất dòng fantasy.',tags:['AAA','Fantasy','Offline']},
+      {id:12,appId:1551360,title:'Forza Horizon 5',shortCode:'FH5',price:99000,oldPrice:1579000,genre:'Đua xe',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2021,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1551360/header.jpg',desc:'Đua xe thế giới mở với bản đồ Mexico rộng, đồ họa nổi bật và cảm giác lái rất cuốn.',tags:['Racing','AAA','Offline']},
+      {id:13,appId:601150,title:'Devil May Cry 5',shortCode:'DMC5',price:59000,oldPrice:789000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2019,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/601150/header.jpg',desc:'Chặt chém combo đẹp mắt, nhịp nhanh và rất hợp nhóm khách thích combat đã tay.',tags:['Hack & Slash','AAA','Offline']},
+      {id:14,appId:2358720,title:'Black Myth: Wukong',shortCode:'BMW',price:99000,oldPrice:1579000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2024,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2358720/header.jpg',desc:'Action RPG thần thoại Trung Hoa, boss dày đặc và hình ảnh rất mạnh.',tags:['RPG','AAA','Offline']},
+      {id:15,appId:1971870,title:'Mortal Kombat 1',shortCode:'MK1',price:99000,oldPrice:1579000,genre:'Đối kháng',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2023,status:'available',denuvo:true,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1971870/header.jpg',desc:'Đối kháng bom tấn với campaign, Invasions và nhiều nội dung chơi đơn.',tags:['Fighting','AAA','Offline']},
+      {id:16,appId:2246340,title:'Monster Hunter Wilds',shortCode:'MHW',price:99000,oldPrice:1849000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2026,status:'available',denuvo:true,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2246340/header.jpg',desc:'Monster Hunter mới với thế giới rộng, săn quái và chiến đấu quy mô lớn.',tags:['Action','AAA','Offline']},
+      {id:17,appId:2531310,title:'The Last of Us Part II Remastered',shortCode:'TLOU2R',price:99000,oldPrice:1319000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2531310/header.jpg',desc:'Bản remastered đưa phần II lên PC với nhiều nâng cấp kỹ thuật và nội dung phụ trợ.',tags:['Story','AAA','Offline']}
+    ];
+
+    const gameSpecs = {
+      1:{minCpu:'Đang cập nhật',minGpu:'Đang cập nhật',minRam:'16GB',minStorage:'90GB SSD',recCpu:'Đang cập nhật',recGpu:'Đang cập nhật',recRam:'32GB',recStorage:'90GB NVMe SSD',os:'Windows 11 64-bit',directx:'DX12'},
+      2:{minCpu:'Intel Core i5-2500K / AMD FX-6300',minGpu:'GTX 770 2GB / R9 280 3GB',minRam:'8GB',minStorage:'150GB',recCpu:'Intel Core i7-4770K / Ryzen 5 1500X',recGpu:'GTX 1060 6GB / RX 480 4GB',recRam:'12GB',recStorage:'150GB SSD',os:'Windows 10 64-bit',directx:'DX12'},
+      3:{minCpu:'Intel Core i7-8700K / AMD Ryzen 5 1600X',minGpu:'Đang cập nhật',minRam:'8GB',minStorage:'55GB SSD',recCpu:'Đang cập nhật',recGpu:'Đang cập nhật',recRam:'16GB',recStorage:'55GB SSD',os:'Windows 10 64-bit',directx:'DX12'},
+      4:{minCpu:'Intel Core i5-8400 / Ryzen 3 3300X',minGpu:'GTX 1060 3GB / RX 580 4GB',minRam:'12GB',minStorage:'70GB',recCpu:'Intel Core i7-8700K / Ryzen 5 3600X',recGpu:'GTX 1070 8GB / RX Vega 56',recRam:'16GB',recStorage:'70GB SSD',os:'Windows 10/11 64-bit',directx:'DX12'},
+      5:{minCpu:'Intel i5-4670K or AMD Ryzen 3 1200',minGpu:'NVIDIA GTX 1060 6GB / AMD RX 5500 XT 8GB / Intel Arc A750',minRam:'8GB',minStorage:'190GB SSD',recCpu:'Intel i5-8600 or AMD Ryzen 5 3600',recGpu:'NVIDIA RTX 2060 Super / AMD RX 5700 / Intel Arc A770',recRam:'16GB',recStorage:'190GB SSD',os:'Windows 10 20H1',directx:'DX12'},
+      6:{minCpu:'Intel Core i7-4770 / AMD FX-9590',minGpu:'NVIDIA GeForce GTX 1630 4GB / AMD Radeon RX 6400 4GB',minRam:'8GB',minStorage:'105GB',recCpu:'Đang cập nhật',recGpu:'Đang cập nhật',recRam:'8GB',recStorage:'105GB SSD',os:'Windows 10 64-bit',directx:'DX10'},
+      7:{minCpu:'Intel Core i5-6600 / AMD Ryzen 5 1400',minGpu:'NVIDIA GeForce GTX 960 4GB / AMD Radeon RX 470 4GB',minRam:'16GB',minStorage:'85GB',recCpu:'Intel Core i7-8700 / AMD Ryzen 5 3600',recGpu:'NVIDIA GeForce 1080 Ti / AMD Radeon RX 5700 XT / Intel Arc A770',recRam:'16GB',recStorage:'85GB SSD',os:'Windows 10 64-bit',directx:'DX12'},
+      8:{minCpu:'Intel Core i3-6300 or AMD Ryzen 3 1200',minGpu:'GeForce GTX 970 or Radeon RX 580 or Arc A580',minRam:'12GB',minStorage:'70GB SSD',recCpu:'Intel Core i7-6700K or AMD Ryzen 5 3600',recGpu:'GeForce RTX 2070 or Radeon RX 5700XT or Arc A750',recRam:'16GB',recStorage:'70GB SSD',os:'Windows 10 64-bit 22H2',directx:'DX12'},
+      9:{minCpu:'Intel Core i3-8100 or AMD Ryzen 3 3100',minGpu:'NVIDIA GeForce GTX 1650 / AMD Radeon RX 5500 XT',minRam:'16GB',minStorage:'140GB',recCpu:'Intel Core i5-8400 or AMD Ryzen 5 3600',recGpu:'NVIDIA GeForce RTX 3060 / AMD Radeon RX 5700',recRam:'16GB',recStorage:'140GB SSD',os:'Windows 10/11',directx:'DX12'},
+      10:{minCpu:'Intel Core i7-6700 / Ryzen 5 1600',minGpu:'GTX 1060 6GB / RX 580 8GB',minRam:'12GB',minStorage:'100GB SSD',recCpu:'Intel Core i7-12700 / Ryzen 7 7800X3D',recGpu:'RTX 2060 Super / RX 5700 XT',recRam:'16GB',recStorage:'100GB SSD',os:'Windows 10/11 64-bit',directx:'DX12'},
+      11:{minCpu:'Intel i5-2500K / FX-8350',minGpu:'GTX 770 / R9 290',minRam:'6GB',minStorage:'55GB',recCpu:'Intel i7-3770 / Ryzen 5 1500X',recGpu:'GTX 970 / RX 480',recRam:'8GB',recStorage:'55GB SSD',os:'Windows 10 64-bit',directx:'DX11'},
+      12:{minCpu:'Intel i5-4460 / Ryzen 3 1200',minGpu:'GTX 970 / RX 470',minRam:'8GB',minStorage:'130GB',recCpu:'Intel i5-8400 / Ryzen 5 1500X',recGpu:'GTX 1070 / RX 590',recRam:'16GB',recStorage:'130GB SSD',os:'Windows 10 64-bit',directx:'DX12'},
+      13:{minCpu:'Intel i5-4460 / FX-6300',minGpu:'GTX 760 / R9 280',minRam:'8GB',minStorage:'40GB',recCpu:'Intel i7-3770 / Ryzen 5 1500X',recGpu:'GTX 1060 / RX 480',recRam:'8GB',recStorage:'40GB SSD',os:'Windows 10 64-bit',directx:'DX11'},
+      14:{minCpu:'Intel Core i5-8400 / Ryzen 5 1600',minGpu:'GeForce GTX 1060 6GB / Radeon RX 580 8GB',minRam:'16GB',minStorage:'130GB',recCpu:'Intel Core i7-9700 / Ryzen 5 5500',recGpu:'GeForce RTX 2060 / Radeon RX 5700 XT / Intel Arc A750',recRam:'16GB',recStorage:'130GB SSD',os:'Windows 10 64-bit',directx:'DX12'},
+      15:{minCpu:'Intel Core i5-6600 / Ryzen 3 3100 hoặc Ryzen 5 2600',minGpu:'GeForce GTX 1660 / Radeon RX 590 / Intel Arc A750',minRam:'8GB',minStorage:'Đang cập nhật',recCpu:'Đang cập nhật',recGpu:'Đang cập nhật',recRam:'8GB',recStorage:'Đang cập nhật',os:'Windows 10 64-bit',directx:'DX12'},
+      16:{minCpu:'Intel Core i5-10400 / Intel Core i3-12100 / AMD Ryzen 5 3600',minGpu:'GeForce RTX 2060 Super / Radeon RX 6600',minRam:'16GB',minStorage:'75GB SSD',recCpu:'Intel Core i5-10400 / Intel Core i3-12100 / AMD Ryzen 5 3600',recGpu:'GeForce RTX 4060 Ti / Radeon RX 6700 XT',recRam:'16GB',recStorage:'75GB SSD',os:'Windows 10/11 64-bit',directx:'DX12'},
+      17:{minCpu:'Intel Core i3-8100 or AMD Ryzen 3 1300X',minGpu:'GeForce GTX 1650 or Radeon RX 5500XT',minRam:'16GB',minStorage:'150GB SSD',recCpu:'Intel Core i5-8600 or AMD Ryzen 5 3600',recGpu:'GeForce RTX 3060 or Radeon RX 5700',recRam:'16GB',recStorage:'150GB SSD',os:'Windows 10/11 64-bit',directx:'DX12'}
+    };
+
+
+    const steamAsset = (game, file) => game && game.appId ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.appId}/${file}` : '';
+    const pickImage = (fallback, ...candidates) => dedupe(candidates).find(Boolean) || fallback;
+    const games = baseGames.map(g => {
+      const enriched = {...g, ...(gameSpecs[g.id] || {})};
+      enriched.heroImage = pickImage(enriched.image, steamAsset(enriched, 'library_hero.jpg'), steamAsset(enriched, 'page_bg_generated_v6b.jpg'), enriched.image);
+      enriched.featuredImage = pickImage(enriched.image, steamAsset(enriched, 'capsule_616x353.jpg'), steamAsset(enriched, 'library_hero.jpg'), enriched.image);
+      enriched.cardImage = pickImage(enriched.image, steamAsset(enriched, 'library_600x900_2x.jpg'), steamAsset(enriched, 'capsule_616x353.jpg'), enriched.image);
+      enriched.thumbImage = pickImage(enriched.image, steamAsset(enriched, 'capsule_467x181.jpg'), steamAsset(enriched, 'header.jpg'), enriched.image);
+      enriched.visuals = buildVisualProfile(enriched);
+      return enriched;
+    });
+    const genres = ['Tất cả', ...new Set(games.map(g => g.genre))];
+    const heroGames = heroOrder.map(id => games.find(g => g.id === id)).filter(Boolean);
+
+    const state = {
+      search:'',
+      genre:'Tất cả',
+      price:'all',
+      onlyAAA:false,
+      onlyDenuvo:false,
+      sort:'featured',
+      heroIndex:0,
+      spotlightMode:'featured',
+      spotlightIndex:0,
+      favorites: JSON.parse(localStorage.getItem('hydra_favorites') || '[]'),
+      cart: JSON.parse(localStorage.getItem('hydra_cart') || '[]'),
+      currentUser: JSON.parse(localStorage.getItem('hydra_user') || 'null'),
+      paymentPoller:null,
+      heroTimer:null,
+      spotlightTimer:null,
+      detailGameId:null,
+      detailMediaIndex:0,
+      detailMediaTab:'all',
+      steamMediaCache:{}
+    };
+
+    let revealObserver = null;
+
+    function persist(){
+      localStorage.setItem('hydra_favorites', JSON.stringify(state.favorites));
+      localStorage.setItem('hydra_cart', JSON.stringify(state.cart));
+      localStorage.setItem('hydra_user', JSON.stringify(state.currentUser));
+    }
+
+    function apiUrl(path){ return `${API_BASE_URL}${path}`; }
+    function mediaApiUrl(path){ return `${MEDIA_API_BASE_URL}${path}`; }
+
+    function buildTransferMemo(game, orderCode = ''){
+      const shortCode = game.shortCode || 'GAME';
+      return orderCode ? `${shortCode} + ${orderCode}` : `${shortCode}`;
+    }
+
+    function buildQrUrl(game, amount, orderCode = ''){
+      const memo = buildTransferMemo(game, orderCode);
+      return `https://img.vietqr.io/image/${QR_BANK_BIN}-${QR_ACCOUNT_NO}-${QR_TEMPLATE}.png?amount=${encodeURIComponent(amount)}&addInfo=${encodeURIComponent(memo)}&accountName=${encodeURIComponent(QR_ACCOUNT_NAME)}`;
+    }
+
+    function resolveCheckoutQrSrc(game, amount, orderCode = ''){
+      const override = (QR_IMAGE_OVERRIDE || '').trim();
+      if(override && !override.startsWith('blob:')) return override;
+      return buildQrUrl(game, amount, orderCode);
+    }
+
+    function inPrice(price){
+      switch(state.price){
+        case 'under50': return price < 50000;
+        case '50to80': return price >= 50000 && price <= 80000;
+        case '80to100': return price > 80000 && price <= 100000;
+        default: return true;
+      }
+    }
+
+    function filteredGames(){
+      const q = state.search.trim().toLowerCase();
+      let list = games.filter(g => {
+        const text = [g.title,g.shortCode,g.genre,g.tags.join(' '),g.desc,String(g.year),g.denuvo ? 'denuvo' : ''].join(' ').toLowerCase();
+        const hit = !q || text.includes(q);
+        const genreOk = state.genre === 'Tất cả' || g.genre === state.genre;
+        const priceOk = inPrice(g.price);
+        const aaaOk = !state.onlyAAA || g.blockbuster;
+        const denuvoOk = !state.onlyDenuvo || g.denuvo;
+        return hit && genreOk && priceOk && aaaOk && denuvoOk;
+      });
+      if(state.sort === 'priceAsc') list.sort((a,b)=>a.price-b.price);
+      if(state.sort === 'priceDesc') list.sort((a,b)=>b.price-a.price);
+      if(state.sort === 'yearDesc') list.sort((a,b)=>b.year-a.year);
+      if(state.sort === 'featured') list.sort((a,b)=>(Number(b.featured)-Number(a.featured)) || (Number(b.denuvo)-Number(a.denuvo)) || (b.year-a.year));
+      return list;
+    }
+
+    function showToast(message, type='info', title='Thông báo'){
+      const wrap = el('toastWrap');
+      const item = document.createElement('div');
+      item.className = `toast ${type}`;
+      const icon = type === 'success' ? 'fa-circle-check' : type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-info';
+      item.innerHTML = `<i class="fa-solid ${icon}"></i><div><strong>${title}</strong><div>${message}</div></div>`;
+      wrap.appendChild(item);
+      setTimeout(()=>item.classList.add('out'), 2600);
+      setTimeout(()=>item.remove(), 3000);
+    }
+
+    function registerRevealTargets(){
+      if(!revealObserver){
+        revealObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if(entry.isIntersecting){
+              entry.target.classList.add('in-view');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, {threshold:0.12});
+      }
+      document.querySelectorAll('.reveal:not([data-reveal-bound])').forEach(node => {
+        node.setAttribute('data-reveal-bound','true');
+        revealObserver.observe(node);
+      });
+    }
+
+    function setGenre(genre){ state.genre = genre; renderAll(); }
+    window.setGenre = setGenre;
+
+
+    function getSpotlightGames(){
+      const list = state.spotlightMode === 'latest'
+        ? [...games].sort((a,b)=>(b.year-a.year) || Number(b.denuvo)-Number(a.denuvo) || (b.price-a.price))
+        : [...games].sort((a,b)=>Number(b.blockbuster)-Number(a.blockbuster) || Number(b.featured)-Number(a.featured) || (b.year-a.year));
+      return list.slice(0, 6);
+    }
+
+    function setSpotlightMode(mode){
+      state.spotlightMode = mode;
+      state.spotlightIndex = 0;
+      renderSpotlightSlider();
+    }
+    window.setSpotlightMode = setSpotlightMode;
+
+    function changeSpotlight(index){
+      const list = getSpotlightGames();
+      if(!list.length) return;
+      state.spotlightIndex = (index + list.length) % list.length;
+      renderSpotlightSlider();
+    }
+    window.changeSpotlight = changeSpotlight;
+
+    function stepSpotlight(step){
+      const list = getSpotlightGames();
+      if(!list.length) return;
+      changeSpotlight(state.spotlightIndex + step);
+    }
+    window.stepSpotlight = stepSpotlight;
+
+    function renderSpotlightSlider(){
+      const list = getSpotlightGames();
+      if(!list.length) return;
+      if(state.spotlightIndex > list.length - 1) state.spotlightIndex = 0;
+      const g = list[state.spotlightIndex];
+      el('sliderFeaturedTab').classList.toggle('active', state.spotlightMode === 'featured');
+      el('sliderLatestTab').classList.toggle('active', state.spotlightMode === 'latest');
+      el('spotlightProgress').style.width = `${((state.spotlightIndex + 1) / list.length) * 100}%`;
+      el('spotlightStage').innerHTML = `
+        <div class="spotlight-stage">
+          <div class="spotlight-stage-bg" style="background-image:url('${g.heroImage}')"></div>
+          <div class="spotlight-stage-content">
+            <div class="spotlight-copy">
+              <div class="spotlight-badges">
+                <span class="pill gold"><i class="fa-solid fa-fire"></i> ${state.spotlightMode === 'latest' ? 'Game mới nhất' : 'Game nổi bật'}</span>
+                <span class="pill ${g.denuvo ? 'violet' : 'cyan'}"><i class="fa-solid fa-shield-halved"></i> ${g.denuvo ? 'Có Denuvo' : 'Không Denuvo'}</span>
+              </div>
+              <h2>${g.title}</h2>
+              <p>${g.desc}</p>
+              <div class="spotlight-meta" style="margin-top:16px">
+                <span class="tiny">${g.genre}</span>
+                <span class="tiny">${g.year}</span>
+                <span class="tiny">${g.platform}</span>
+                <span class="tiny">${g.shortCode} + mã đơn</span>
+              </div>
+              <div class="spotlight-actions">
+                <button class="btn btn-primary" onclick="openDetail(${g.id})"><i class="fa-solid fa-eye"></i> Xem chi tiết</button>
+                <button class="btn" onclick="addToCart(${g.id})"><i class="fa-solid fa-cart-shopping"></i> Thêm giỏ</button>
+              </div>
+            </div>
+            <div class="spotlight-price">
+              <div class="muted">Giá hiện tại</div>
+              <div class="current">${money(g.price)}</div>
+              <div class="old">${money(g.oldPrice)}</div>
+              <div class="save" style="margin-top:12px;display:inline-flex">Tiết kiệm ${percent(g.price,g.oldPrice)}%</div>
+            </div>
+          </div>
+        </div>
+      `;
+      el('spotlightThumbs').innerHTML = list.map((item, index) => `
+        <button class="spotlight-thumb ${index === state.spotlightIndex ? 'active' : ''}" onclick="changeSpotlight(${index})">
+          <img src="${item.featuredImage}" alt="${item.title}" onerror="this.onerror=null;this.src='${item.image}'" />
+          <div class="spotlight-thumb-body">
+            <strong>${item.title}</strong>
+            <span>${money(item.price)} • ${item.year}</span>
+          </div>
+        </button>
+      `).join('');
+      registerRevealTargets();
+    }
+
+    function startSpotlightAuto(){
+      if(state.spotlightTimer) clearInterval(state.spotlightTimer);
+      state.spotlightTimer = setInterval(() => stepSpotlight(1), 5200);
+    }
+
+    function renderGenres(){
+      el('genreChips').innerHTML = genres.map((genre, index) => `
+        <button class="chip reveal ${state.genre===genre ? 'active' : ''}" style="--delay:${index * 30}ms" onclick="setGenre('${genre.replace(/'/g,"\\'")}')">${genre}</button>
+      `).join('');
+    }
+
+    function toggleFavorite(id){
+      state.favorites = state.favorites.includes(id) ? state.favorites.filter(x => x !== id) : [...state.favorites, id];
+      persist();
+      renderAll();
+      showToast('Đã cập nhật danh sách yêu thích.', 'success', 'Yêu thích');
+    }
+    window.toggleFavorite = toggleFavorite;
+
+    function addToCart(id){
+      const game = games.find(g => g.id === id);
+      if(!game) return;
+      const found = state.cart.find(i => i.id === id);
+      if(found) found.qty = 1;
+      else state.cart = [{id, qty:1}];
+      persist();
+      renderCart();
+      openCart();
+      showToast(`Đã thêm ${game.title} vào giỏ hàng.`, 'success', 'Giỏ hàng');
+    }
+    window.addToCart = addToCart;
+
+    function removeCart(id){
+      state.cart = state.cart.filter(i => i.id !== id);
+      persist();
+      renderCart();
+      showToast('Đã xóa game khỏi giỏ hàng.', 'info', 'Giỏ hàng');
+    }
+    function updateQty(id, delta){
+      const item = state.cart.find(i => i.id === id);
+      if(!item) return;
+      item.qty = Math.max(1, Math.min(1, item.qty + delta));
+      persist();
+      renderCart();
+    }
+    window.removeCart = removeCart;
+    window.updateQty = updateQty;
+
+    function changeHero(index){
+      state.heroIndex = index;
+      el('heroSlides').innerHTML = heroGames.map((g, i) => `
+        <div class="hero-slide ${i===index ? 'active' : ''}" style="background-image:url('${g.heroImage}')"></div>
+      `).join('');
+
+      el('heroSlider').innerHTML = heroGames.map((g, i) => `
+        <div class="hero-mini reveal ${i===index ? 'active' : ''}" style="--delay:${i * 70}ms" onclick="changeHero(${i})">
+          ${buildImgTag(g.visuals?.heroThumb || [g.thumbImage, g.image], g.title)}
+          <div>
+            <strong>${g.title}</strong>
+            <span>${money(g.price)} • ${g.denuvo ? 'Có Denuvo' : 'Không gắn tag Denuvo'}</span>
+          </div>
+        </div>
+      `).join('');
+      registerRevealTargets();
+    }
+    window.changeHero = changeHero;
+
+    function startHeroAuto(){
+      if(state.heroTimer) clearInterval(state.heroTimer);
+      state.heroTimer = setInterval(() => {
+        state.heroIndex = (state.heroIndex + 1) % heroGames.length;
+        changeHero(state.heroIndex);
+      }, 5600);
+    }
+
+    function openCart(){ el('cartDrawer').classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeCart(){ el('cartDrawer').classList.remove('open'); if(!document.querySelector('.modal.open')) document.body.style.overflow=''; }
+    function closeDetail(){ el('detailModal').classList.remove('open'); if(!document.querySelector('.drawer.open, .modal.open')) document.body.style.overflow=''; }
+    function closeAuth(){ el('authModal').classList.remove('open'); if(!document.querySelector('.drawer.open, .modal.open')) document.body.style.overflow=''; }
+    function closeCheckout(){ el('checkoutModal').classList.remove('open'); stopPaymentPolling(); if(!document.querySelector('.drawer.open, .modal.open')) document.body.style.overflow=''; }
+
+    function productCard(g, index){
+      const fav = state.favorites.includes(g.id);
+      const tags = g.tags.concat(g.denuvo ? ['Denuvo'] : []);
+      return `
+        <article class="glass product reveal" style="--delay:${(index % 8) * 45}ms">
+          <div class="thumb">
+            <img src="${g.cardImage}" alt="${g.title}" onerror="this.onerror=null;this.src='${g.image}'">
+            <div class="badges">
+              ${g.hot ? '<span class="badge badge-hot">Hot</span>' : ''}
+              ${g.blockbuster ? '<span class="badge badge-aaa">Bom tấn</span>' : ''}
+              ${g.denuvo ? '<span class="badge badge-denuvo">Denuvo</span>' : ''}
+            </div>
+            <button class="fav ${fav ? 'active' : ''}" onclick="toggleFavorite(${g.id})">❤</button>
+          </div>
+          <div class="product-body">
+            <div class="title-row">
+              <div>
+                <h4>${g.title}</h4>
+                <div class="tags">${tags.map(t=>`<span class="tiny ${t==='Denuvo' ? 'denuvo' : ''}">${t}</span>`).join('')}</div>
+              </div>
+              <div style="text-align:right;min-width:108px">
+                <div class="price">${money(g.price)}</div>
+                <div class="old">${money(g.oldPrice)}</div>
+              </div>
+            </div>
+            <div class="save">${g.year} • Tiết kiệm ${percent(g.price,g.oldPrice)}%</div>
+            <div class="desc">${g.desc}</div>
+            <div class="meta">
+              <div><span>RAM</span><strong>${safe(g.recRam || g.minRam)}</strong></div>
+              <div><span>Lưu trữ</span><strong>${safe(g.recStorage || g.minStorage)}</strong></div>
+              <div><span>Denuvo</span><strong>${g.denuvo ? 'Có' : 'Không gắn tag'}</strong></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;color:var(--gold);font-weight:800"><span>${g.year}</span><span class="muted" style="font-weight:700">${g.genre}</span></div>
+            <div class="card-actions">
+              <button class="btn" onclick="openDetail(${g.id})">Chi tiết</button>
+              <button class="btn btn-primary" onclick="addToCart(${g.id})">Thêm giỏ</button>
+            </div>
+          </div>
+        </article>`;
+    }
+
+    function renderFeatured(){
+      const list = games.filter(g => g.featured).slice(0,6);
+      el('featuredGrid').innerHTML = list.map((g, index) => `
+        <div class="glass featured-card reveal" style="--delay:${index * 60}ms">
+          <div class="cover"><img src="${g.featuredImage}" alt="${g.title}" onerror="this.onerror=null;this.src='${g.image}'" /></div>
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:start;margin-top:12px">
+            <div>
+              <strong style="font-size:18px">${g.title}</strong>
+              <p class="muted" style="margin:8px 0 0;font-size:14px">${g.desc}</p>
+            </div>
+            <div class="tiny ${g.denuvo ? 'denuvo' : ''}">${g.denuvo ? 'Denuvo' : g.year}</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:14px">
+            <div>
+              <strong style="color:var(--primary);font-size:20px">${money(g.price)}</strong>
+              <div class="old">${money(g.oldPrice)}</div>
+            </div>
+            <button class="btn btn-primary" onclick="openDetail(${g.id})">Xem</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function fetchSteamMedia(game){
+      if(!game) return [];
+      if(state.steamMediaCache[game.id]) return state.steamMediaCache[game.id];
+
+      const lib = gameMediaLibrary[game.id] || { videos: [], images: [] };
+      const media = [];
+      const visuals = game.visuals || buildVisualProfile(game);
+
+      (lib.videos || []).slice(0, 2).forEach((video, idx) => {
+        if(!video) return;
+        media.push({
+          type:'video',
+          label: video.label || (idx === 0 ? 'Trailer' : 'Gameplay'),
+          embed: video.embed || '',
+          src: video.src || '',
+          poster: video.poster || video.thumb || visuals.featured?.[0] || game.image,
+          thumb: video.thumb || video.poster || visuals.heroThumb?.[0] || game.image,
+          fallback: game.image
+        });
+      });
+
+      const gallery = dedupe(visuals.detailImages || []).slice(0, 10);
+      gallery.forEach((src, idx) => {
+        if(src){
+          media.push({
+            type:'image',
+            label:`Ảnh ${idx + 1}`,
+            src,
+            thumb:src,
+            fallback:game.image
+          });
+        }
+      });
+
+      if(!media.length){
+        media.push({
+          type:'image',
+          label:'Cover',
+          src:(visuals.featured || [game.image])[0],
+          thumb:(visuals.heroThumb || [game.image])[0],
+          fallback:game.image
+        });
+      }
+
+      state.steamMediaCache[game.id] = media;
+      return media;
+    }
+
+    function filterMediaByTab(media, tab){
+      if(tab === 'all') return media;
+      if(tab === 'video') return media.filter(item => item.type === 'video');
+      if(tab === 'image') return media.filter(item => item.type === 'image');
+      return media;
+    }
+
+    function renderMediaItem(item, gameTitle){
+      if(item.type === 'video'){
+        if(item.embed){
+          return `<iframe src="${item.embed}" title="${gameTitle}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+        }
+        return `<video controls playsinline preload="metadata" poster="${item.poster || ''}" src="${item.src || ''}"></video>`;
+      }
+      return buildImgTag(dedupe([item.src, item.fallback, item.thumb]), gameTitle);
+    }
+
+    function buildGameSlider(game, media, activeIndex = 0){
+      const safeIndex = Math.max(0, Math.min(activeIndex, media.length - 1));
+      return `
+        <div class="game-slider">
+          <div class="game-slider-main">
+            <div class="game-slider-track" style="transform:translateX(-${safeIndex * 100}%);">
+              ${media.map(item => `
+                <div class="game-slide">
+                  <div class="game-slide-badge">${item.label || 'Media'}</div>
+                  ${renderMediaItem(item, game.title)}
+                </div>
+              `).join('')}
+            </div>
+
+            ${media.length > 1 ? `
+              <div class="game-slider-nav">
+                <button class="game-slider-btn" onclick="stepDetailSlide(-1)" aria-label="Trước"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="game-slider-btn" onclick="stepDetailSlide(1)" aria-label="Sau"><i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+            ` : ''}
+
+            <div class="game-slider-meta">
+              <div class="game-slider-counter">${safeIndex + 1} / ${media.length}</div>
+              ${game.denuvo ? '<span class="pill violet"><i class="fa-solid fa-shield-halved"></i> Denuvo</span>' : ''}
+            </div>
+          </div>
+
+          <div class="game-slider-thumbs">
+            ${media.map((item, index) => `
+              <button class="game-slider-thumb ${index === safeIndex ? 'active' : ''}" onclick="changeDetailSlide(${index})">
+                ${buildImgTag(dedupe([item.thumb, ...(game.visuals?.heroThumb || []), game.image]), game.title)}
+                ${item.type === 'video' ? '<span class="game-slider-thumb-icon"><i class="fa-solid fa-play"></i></span>' : ''}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    window.changeDetailSlide = function(index){
+      state.detailMediaIndex = index;
+      const game = games.find(g => g.id === state.detailGameId);
+      if(game) openDetail(game.id, true);
+    };
+
+    window.stepDetailSlide = function(step){
+      const game = games.find(g => g.id === state.detailGameId);
+      if(!game) return;
+      const media = filterMediaByTab(state.steamMediaCache[game.id] || [{type:'image',src:(game.visuals?.featured || [game.image])[0],thumb:(game.visuals?.heroThumb || [game.image])[0],label:'Cover',fallback:game.image}], state.detailMediaTab);
+      const next = (state.detailMediaIndex + step + media.length) % media.length;
+      state.detailMediaIndex = next;
+      openDetail(game.id, true);
+    };
+
+    window.setMediaTab = function(tab){
+      state.detailMediaTab = tab;
+      state.detailMediaIndex = 0;
+      const game = games.find(g => g.id === state.detailGameId);
+      if(game) openDetail(game.id, true);
+    };
+
+    async function openDetail(id, keepIndex = false){
+      const g = games.find(x => x.id === id);
+      if(!g) return;
+      state.detailGameId = id;
+      if(!keepIndex) state.detailMediaIndex = 0;
+
+      const mediaAll = await fetchSteamMedia(g);
+      const media = filterMediaByTab(mediaAll, state.detailMediaTab);
+      const finalMedia = media.length ? media : [{type:'image', label:'Cover', src:(g.visuals?.featured || [g.image])[0], thumb:(g.visuals?.heroThumb || [g.image])[0], fallback:g.image}];
+      if(state.detailMediaIndex > finalMedia.length - 1) state.detailMediaIndex = 0;
+
+      const tags = g.tags.concat(g.denuvo ? ['Denuvo'] : []);
+      el('detailContent').innerHTML = `
+        <div class="reveal in-view">
+          <div class="media-tabs">
+            <button class="media-tab ${state.detailMediaTab === 'all' ? 'active' : ''}" onclick="setMediaTab('all')">Tất cả</button>
+            <button class="media-tab ${state.detailMediaTab === 'video' ? 'active' : ''}" onclick="setMediaTab('video')">Trailer & Gameplay</button>
+            <button class="media-tab ${state.detailMediaTab === 'image' ? 'active' : ''}" onclick="setMediaTab('image')">Gallery</button>
+          </div>
+          ${buildGameSlider(g, finalMedia, state.detailMediaIndex)}
+        </div>
+
+        <div class="detail-info reveal in-view" style="--delay:80ms">
+          <div class="tags" style="margin-bottom:12px">${tags.map(t=>`<span class="tiny ${t==='Denuvo' ? 'denuvo' : ''}">${t}</span>`).join('')}</div>
+          <h4>${g.title}</h4>
+          <div style="display:flex;gap:16px;align-items:center;margin:10px 0 4px;flex-wrap:wrap">
+            <div class="price">${money(g.price)}</div>
+            <div class="old">${money(g.oldPrice)}</div>
+            <div class="save">Tiết kiệm ${percent(g.price,g.oldPrice)}%</div>
+          </div>
+          <p class="detail-desc">${g.desc}</p>
+
+          <div class="detail-meta">
+            <div class="box"><strong>Nền tảng</strong><div class="muted" style="margin-top:6px">${safe(g.platform)}</div></div>
+            <div class="box"><strong>Thể loại</strong><div class="muted" style="margin-top:6px">${safe(g.genre)}</div></div>
+            <div class="box"><strong>Năm</strong><div class="muted" style="margin-top:6px">${safe(g.year)}</div></div>
+            <div class="box"><strong>Mã chuyển khoản</strong><div class="muted" style="margin-top:6px">${buildTransferMemo(g)}</div></div>
+            <div class="box"><strong>OS</strong><div class="muted" style="margin-top:6px">${safe(g.os)}</div></div>
+            <div class="box"><strong>DirectX</strong><div class="muted" style="margin-top:6px">${safe(g.directx)}</div></div>
+            <div class="box"><strong>Tối thiểu CPU</strong><div class="muted" style="margin-top:6px">${safe(g.minCpu)}</div></div>
+            <div class="box"><strong>Tối thiểu GPU</strong><div class="muted" style="margin-top:6px">${safe(g.minGpu)}</div></div>
+            <div class="box"><strong>Tối thiểu RAM</strong><div class="muted" style="margin-top:6px">${safe(g.minRam)}</div></div>
+            <div class="box"><strong>Tối thiểu lưu trữ</strong><div class="muted" style="margin-top:6px">${safe(g.minStorage)}</div></div>
+            <div class="box"><strong>Đề nghị CPU</strong><div class="muted" style="margin-top:6px">${safe(g.recCpu)}</div></div>
+            <div class="box"><strong>Đề nghị GPU</strong><div class="muted" style="margin-top:6px">${safe(g.recGpu)}</div></div>
+            <div class="box"><strong>Đề nghị RAM</strong><div class="muted" style="margin-top:6px">${safe(g.recRam)}</div></div>
+            <div class="box"><strong>Đề nghị lưu trữ</strong><div class="muted" style="margin-top:6px">${safe(g.recStorage)}</div></div>
+          </div>
+
+          <div class="pay-box">
+            <div class="muted" style="font-size:14px;line-height:1.6">${g.denuvo ? 'Game này được đánh dấu Denuvo. Nếu gặp xác thực thêm, vui lòng liên hệ shop để được hỗ trợ nhanh.' : 'Game này hiện không được gắn tag Denuvo trong bản web này.'}</div>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn btn-primary" onclick="addToCart(${g.id})"><i class="fa-solid fa-cart-shopping"></i> Thêm giỏ hàng</button>
+            <button class="btn" onclick="toggleFavorite(${g.id})"><i class="fa-solid fa-heart"></i> Yêu thích</button>
+          </div>
+        </div>
+      `;
+
+      el('detailModal').classList.add('open');
+      document.body.style.overflow='hidden';
+      registerRevealTargets();
+    }
+    window.openDetail = openDetail;
+
+    function renderProducts(){
+      const list = filteredGames();
+      el('resultCount').textContent = `Hiển thị ${list.length} game.`;
+      el('productGrid').innerHTML = list.length ? list.map((g,index) => productCard(g,index)).join('') : `<div class="empty reveal in-view" style="grid-column:1/-1">Không tìm thấy game phù hợp.</div>`;
+      registerRevealTargets();
+    }
+
+    function renderCart(){
+      const detailed = state.cart.map(item => ({...item, game: games.find(g => g.id === item.id)})).filter(x => x.game);
+      const count = state.cart.reduce((sum,i) => sum + i.qty, 0);
+      el('cartCount').textContent = count;
+      el('favCount').textContent = state.favorites.length;
+      const subtotal = detailed.reduce((sum,i) => sum + i.game.price * i.qty, 0);
+      el('subTotal').textContent = money(subtotal);
+      el('grandTotal').textContent = money(subtotal);
+      if(!detailed.length){
+        el('cartItems').innerHTML = `<div class="empty">Giỏ hàng đang trống.</div>`;
+        return;
+      }
+      el('cartItems').innerHTML = detailed.map(({game,qty}, index) => `
+        <div class="cart-item">
+          <img src="${game.thumbImage}" alt="${game.title}" onerror="this.onerror=null;this.src='${game.image}'">
+          <div>
+            <strong>${game.title}</strong>
+            <div class="muted" style="margin-top:6px">${money(game.price)} • ${game.denuvo ? 'Denuvo' : 'Không gắn tag Denuvo'}</div>
+            <div class="qty">
+              <button onclick="updateQty(${game.id},-1)">−</button>
+              <strong>${qty}</strong>
+              <button onclick="updateQty(${game.id},1)">+</button>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;gap:8px">
+            <button class="close" style="width:34px;height:34px" onclick="removeCart(${game.id})">✕</button>
+            <strong style="color:var(--primary)">${money(game.price * qty)}</strong>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function animateNumber(node, target){
+      const startValue = Number((node.textContent || '0').replace(/\D/g,'')) || 0;
+      const endValue = Number(target);
+      const duration = 900;
+      const start = performance.now();
+      function step(now){
+        const progress = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = Math.round(startValue + (endValue - startValue) * eased);
+        node.textContent = value + '+';
+        if(progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    function renderStats(){
+      animateNumber(el('statTotal'), games.length);
+      animateNumber(el('statDenuvo'), games.filter(g => g.denuvo).length);
+      animateNumber(el('statAAA'), games.filter(g => g.blockbuster).length);
+    }
+
+    function paymentStatusLabel(status){
+      const map = { pending:'Chờ thanh toán', checking:'Đang kiểm tra', paid:'Đã thanh toán', delivered:'Đã giao tài khoản', failed:'Chưa xác minh' };
+      return map[status] || 'Chờ xử lý';
+    }
+
+    function getOrders(){ return JSON.parse(localStorage.getItem('hydra_orders') || '[]'); }
+    function saveOrder(order){
+      const orders = getOrders().filter(o => o.code !== order.code);
+      orders.unshift(order);
+      localStorage.setItem('hydra_orders', JSON.stringify(orders));
+    }
+
+    function renderOrdersForUser(email){
+      const orders = getOrders().filter(o => o.buyerEmail === email);
+      if(!orders.length) return '<div class="muted">Chưa có đơn hàng nào được lưu trên trình duyệt.</div>';
+      return orders.map(o => `<div class="pay-box"><strong>${o.code}</strong><div class="muted" style="margin-top:8px">${o.items.map(i => i.title).join(', ')}</div><div class="muted" style="margin-top:4px">${o.totalText || money(o.total || 0)}</div><div class="muted" style="margin-top:4px">${paymentStatusLabel(o.status)}</div></div>`).join('');
+    }
+
+    function renderAuthButton(){
+      if(state.currentUser){
+        const avatar = state.currentUser.avatar || './logo.png';
+        const label = state.currentUser.name.split(' ')[0];
+        el('authBtn').innerHTML = `<img class="user-avatar" src="${avatar}" alt="Avatar" /> ${label}`;
+      } else {
+        el('authBtn').innerHTML = '<i class="fa-solid fa-user"></i> Đăng nhập';
+      }
+    }
+
+    function renderAuth(){
+      const target = el('authContent');
+      const user = state.currentUser;
+      if(user){
+        target.innerHTML = `
+          <div class="pay-box">
+            <div style="font-weight:800;font-size:20px">Xin chào, ${user.name}</div>
+            <div class="muted" style="margin-top:8px">Email đăng nhập: ${user.email}</div>
+            <div class="hero-actions" style="margin-top:12px"><button class="btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</button></div>
+          </div>
+          <div class="pay-box"><div style="font-weight:800;margin-bottom:8px">Đơn hàng của bạn</div>${renderOrdersForUser(user.email)}</div>
+        `;
+        setTimeout(() => {
+          const btn = el('logoutBtn');
+          if(btn) btn.onclick = () => {
+            state.currentUser = null;
+            persist();
+            renderAuthButton();
+            renderAuth();
+            showToast('Bạn đã đăng xuất.', 'info', 'Tài khoản');
+          };
+        }, 0);
+        return;
+      }
+
+      target.innerHTML = `
+        <div class="auth-grid">
+          <div class="pay-box">
+            <div style="font-weight:800;margin-bottom:12px">Đăng nhập</div>
+            <div class="field"><label>Email</label><input id="loginEmail" type="email" placeholder="Nhập email" /></div>
+            <div class="field"><label>Mật khẩu</label><input id="loginPassword" type="password" placeholder="Nhập mật khẩu" /></div>
+            <button class="btn btn-primary" id="loginSubmit"><i class="fa-solid fa-right-to-bracket"></i> Đăng nhập</button>
+          </div>
+          <div class="pay-box">
+            <div style="font-weight:800;margin-bottom:12px">Đăng ký</div>
+            <div class="field"><label>Họ tên</label><input id="registerName" placeholder="Nhập họ tên" /></div>
+            <div class="field"><label>Email</label><input id="registerEmail" type="email" placeholder="Nhập email" /></div>
+            <div class="field"><label>Mật khẩu</label><input id="registerPassword" type="password" placeholder="Tạo mật khẩu" /></div>
+            <button class="btn btn-gold" id="registerSubmit"><i class="fa-solid fa-user-plus"></i> Tạo tài khoản</button>
+          </div>
+        </div>
+      `;
+      setTimeout(() => {
+        const users = JSON.parse(localStorage.getItem('hydra_users') || '[]');
+        el('loginSubmit').onclick = () => {
+          const email = el('loginEmail').value.trim().toLowerCase();
+          const password = el('loginPassword').value.trim();
+          const found = users.find(u => u.email === email && u.password === password);
+          if(!found) return showToast('Thông tin đăng nhập chưa đúng.', 'error', 'Đăng nhập');
+          state.currentUser = {name: found.name, email: found.email, avatar: found.avatar || ''};
+          persist(); renderAuthButton(); renderAuth();
+          showToast('Đăng nhập thành công.', 'success', 'Tài khoản');
+        };
+        el('registerSubmit').onclick = () => {
+          const name = el('registerName').value.trim();
+          const email = el('registerEmail').value.trim().toLowerCase();
+          const password = el('registerPassword').value.trim();
+          if(!name || !email || !password) return showToast('Vui lòng nhập đủ thông tin.', 'error', 'Đăng ký');
+          if(users.some(u => u.email === email)) return showToast('Email đã tồn tại.', 'error', 'Đăng ký');
+          users.push({name,email,password,avatar:''});
+          localStorage.setItem('hydra_users', JSON.stringify(users));
+          state.currentUser = {name,email,avatar:''};
+          persist(); renderAuthButton(); renderAuth();
+          showToast('Tạo tài khoản thành công.', 'success', 'Đăng ký');
+        };
+      }, 0);
+    }
+
+    function openAuth(){ renderAuth(); el('authModal').classList.add('open'); document.body.style.overflow='hidden'; }
+
+    async function registerPendingOrder(payload){
+      const res = await fetch(apiUrl('/api/payments/check'), {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      });
+      if(!res.ok) throw new Error('REGISTER_ORDER_FAILED');
+      return res.json();
+    }
+
+    function getCurrentCheckoutPayload(){
+      const detailed = state.cart.map(item => ({...item, game: games.find(g => g.id === item.id)})).filter(x => x.game);
+      if(!detailed.length) return null;
+      const game = detailed[0].game;
+      return {
+        code: el('orderCode').value,
+        memo: el('transferMemo').value,
+        total: game.price,
+        totalText: el('checkoutAmount').value,
+        name: el('checkoutName').value.trim(),
+        phone: el('checkoutPhone').value.trim(),
+        buyerEmail: el('checkoutBuyerEmail').value.trim(),
+        note: el('checkoutNote').value.trim(),
+        items: detailed.map(x => ({id:x.game.id,title:x.game.title,qty:x.qty})),
+        status:'pending',
+        createdAt: new Date().toISOString()
+      };
+    }
+
+    function showDeliveryMessage(html){
+      const box = el('deliveryResult');
+      box.style.display='block';
+      box.innerHTML = html;
+    }
+    function clearDeliveryMessage(){
+      const box = el('deliveryResult');
+      box.style.display='none';
+      box.innerHTML = '';
+    }
+
+    function startPaymentPolling(){
+      stopPaymentPolling();
+      if(!AUTOPAY_CONFIG.enabled) return;
+      state.paymentPoller = setInterval(() => {
+        if(el('checkoutModal').classList.contains('open')) checkAutoPayment(true);
+      }, AUTOPAY_CONFIG.pollIntervalMs);
+    }
+
+    function stopPaymentPolling(){
+      if(state.paymentPoller){
+        clearInterval(state.paymentPoller);
+        state.paymentPoller = null;
+      }
+    }
+
+    async function fetchJsonSafe(url, options){
+      const res = await fetch(url, options);
+      if(!res.ok) throw new Error('REQUEST_FAILED');
+      return res.json();
+    }
+
+    async function checkAutoPayment(isSilent=false){
+      const payload = getCurrentCheckoutPayload();
+      if(!payload) return;
+      if(!payload.name){
+        if(!isSilent) showToast('Vui lòng nhập họ tên người chuyển khoản.', 'error', 'Thanh toán');
+        return;
+      }
+      if(!payload.phone){
+        if(!isSilent) showToast('Vui lòng nhập số điện thoại.', 'error', 'Thanh toán');
+        return;
+      }
+      payload.status = 'checking';
+      saveOrder(payload);
+
+      try{
+        const data = await fetchJsonSafe(apiUrl('/api/payments/check'), {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify(payload)
+        });
+
+        if(!data.paid){
+          if(!isSilent) showDeliveryMessage('<div style="font-weight:800;margin-bottom:8px">Chưa tìm thấy giao dịch</div><div class="muted">Hãy kiểm tra lại nội dung thanh toán hoặc thử lại sau ít phút.</div>');
+          return;
+        }
+
+        if(data.delivered || (data.order && data.order.status === 'delivered')){
+          const order = data.order || {};
+          showDeliveryMessage(`
+            <div style="font-weight:800;margin-bottom:8px">Đã giao tài khoản</div>
+            <div class="field"><label>Tài khoản</label><input readonly value="${order.account || ''}" /></div>
+            <div class="field"><label>Mật khẩu</label><input readonly value="${order.password || ''}" /></div>
+            <div class="field"><label>Lưu ý</label><input readonly value="${order.deliveredNote || ''}" /></div>
+          `);
+          state.cart = [];
+          persist();
+          renderCart();
+          stopPaymentPolling();
+          showToast('Đơn hàng đã được xác nhận.', 'success', 'Thanh toán');
+        }
+      }catch(error){
+        if(!isSilent){
+          showDeliveryMessage('<div style="font-weight:800;margin-bottom:8px">Autopay chưa kết nối</div><div class="muted">Kiểm tra backend tại URL công khai của bạn hoặc localhost:3000.</div>');
+        }
+      }
+    }
+
+    async function openCheckout(){
+      if(!state.currentUser || !state.currentUser.email){
+        showToast('Vui lòng đăng nhập trước khi thanh toán.', 'error', 'Thanh toán');
+        openAuth();
+        return;
+      }
+
+      const detailed = state.cart.map(item => ({...item, game: games.find(g => g.id === item.id)})).filter(x => x.game);
+      if(!detailed.length) return showToast('Giỏ hàng đang trống.', 'error', 'Thanh toán');
+      if(detailed.length !== 1 || detailed[0].qty !== 1) return showToast('Hiện tại mỗi lần thanh toán chỉ áp dụng cho 1 game.', 'error', 'Thanh toán');
+
+      const game = detailed[0].game;
+      const code = 'HD' + Math.random().toString(36).slice(2,8).toUpperCase();
+      const total = game.price;
+      const memo = buildTransferMemo(game, code);
+
+      const orderPayload = {
+        code,
+        memo,
+        total,
+        totalText: money(total),
+        name: state.currentUser.name || '',
+        phone: '',
+        buyerEmail: state.currentUser.email,
+        note: '',
+        items: [{ id: game.id, title: game.title, qty: 1 }],
+        status: 'pending',
+        createdAt: new Date().toISOString()
+      };
+
+      try{
+        await registerPendingOrder(orderPayload);
+      }catch(error){
+        showToast('Không tạo được đơn trên backend. Hãy kiểm tra backend trước khi thanh toán.', 'error', 'Backend');
+        return;
+      }
+
+      el('orderCode').value = code;
+      el('transferMemo').value = memo;
+      el('checkoutAmount').value = money(total);
+      el('checkoutName').value = state.currentUser.name || '';
+      el('checkoutPhone').value = '';
+      el('checkoutBuyerEmail').value = state.currentUser.email || '';
+      el('checkoutNote').value = '';
+      el('checkoutQr').src = resolveCheckoutQrSrc(game, total, code);
+      clearDeliveryMessage();
+      saveOrder(orderPayload);
+
+      el('checkoutModal').classList.add('open');
+      document.body.style.overflow='hidden';
+      startPaymentPolling();
+      showToast(`Nội dung chuyển khoản: ${memo}`, 'info', 'Thanh toán');
+    }
+
+    function copyText(value, message){
+      navigator.clipboard.writeText(value)
+        .then(() => showToast(message, 'success', 'Đã copy'))
+        .catch(() => showToast('Không thể copy tự động. Hãy copy thủ công.', 'error', 'Clipboard'));
+    }
+
+    function renderAll(){
+      renderGenres();
+      renderSpotlightSlider();
+      renderFeatured();
+      renderProducts();
+      renderCart();
+      renderStats();
+      renderAuthButton();
+      changeHero(state.heroIndex);
+      el('toggleAAA').classList.toggle('btn-gold', state.onlyAAA);
+      el('toggleDenuvo').classList.toggle('btn-gold', state.onlyDenuvo);
+      el('priceFilter').value = state.price;
+      el('sortBy').value = state.sort;
+      registerRevealTargets();
+    }
+
+    function bindContactToggle(btnId,popId){
+      const btn = el(btnId), pop = el(popId);
+      if(!btn || !pop) return;
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.querySelectorAll('.contact-popover').forEach(p => { if(p !== pop) p.classList.remove('open'); });
+        pop.classList.toggle('open');
+      });
+    }
+
+    function handleTopbarShadow(){
+      const bar = document.querySelector('.topbar');
+      if(window.scrollY > 10) bar.classList.add('scrolled');
+      else bar.classList.remove('scrolled');
+    }
+
+    document.addEventListener('mousemove', e => {
+      const s = el('spotlight');
+      s.style.left = e.clientX + 'px';
+      s.style.top = e.clientY + 'px';
+    });
+
+    el('searchInput').addEventListener('input', e => { state.search = e.target.value; renderProducts(); });
+    el('sliderFeaturedTab').addEventListener('click', () => setSpotlightMode('featured'));
+    el('sliderLatestTab').addEventListener('click', () => setSpotlightMode('latest'));
+    el('spotlightPrevBtn').addEventListener('click', () => stepSpotlight(-1));
+    el('spotlightNextBtn').addEventListener('click', () => stepSpotlight(1));
+    el('priceFilter').addEventListener('change', e => { state.price = e.target.value; renderProducts(); });
+    el('sortBy').addEventListener('change', e => { state.sort = e.target.value; renderProducts(); });
+    el('toggleAAA').addEventListener('click', () => { state.onlyAAA = !state.onlyAAA; renderAll(); });
+    el('toggleDenuvo').addEventListener('click', () => { state.onlyDenuvo = !state.onlyDenuvo; renderAll(); });
+    el('cartBtn').addEventListener('click', openCart);
+    el('continueBtn').addEventListener('click', closeCart);
+    el('checkoutBtn').addEventListener('click', openCheckout);
+    el('authBtn').addEventListener('click', openAuth);
+    el('heroAuthBtn').addEventListener('click', openAuth);
+    el('copyMemoBtn').addEventListener('click', () => copyText(el('transferMemo').value, 'Đã copy nội dung thanh toán.'));
+    el('copyOrderBtn').addEventListener('click', () => copyText(el('orderCode').value, 'Đã copy mã đơn.'));
+    el('checkPaymentBtn').addEventListener('click', () => checkAutoPayment(false));
+    document.querySelectorAll('[data-close-drawer]').forEach(n => n.addEventListener('click', closeCart));
+    document.querySelectorAll('[data-close-modal]').forEach(n => n.addEventListener('click', closeDetail));
+    document.querySelectorAll('[data-close-auth]').forEach(n => n.addEventListener('click', closeAuth));
+    document.querySelectorAll('[data-close-checkout]').forEach(n => n.addEventListener('click', closeCheckout));
+    bindContactToggle('contactToggleBtn','contactPopover');
+
+    document.addEventListener('click', e => {
+      if(!e.target.closest('.contact-toggle')) document.querySelectorAll('.contact-popover').forEach(p => p.classList.remove('open'));
+    });
+
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape'){
+        closeCart(); closeDetail(); closeAuth(); closeCheckout();
+      }
+    });
+
+    window.addEventListener('scroll', handleTopbarShadow, {passive:true});
+
+    renderAll();
+    startHeroAuto();
+    startSpotlightAuto();
+    handleTopbarShadow();
+  </script>
+</body>
+</html>
