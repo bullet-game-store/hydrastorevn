@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Cinzel:wght@700;800;900&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" referrerpolicy="no-referrer" />
-  <title>Hydra Store — Premium Game Store</title>
+  <title>Hydra Store — Ultra Luxury</title>
   <style>
     :root{
       --bg:#040814;
@@ -104,11 +104,11 @@
     .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0}
     .brand{display:flex;align-items:center;gap:14px;min-width:0}
     .logo{
-      width:72px;height:72px;border-radius:22px;display:grid;place-items:center;
-      background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));
-      border:1px solid var(--border);box-shadow:var(--shadow-soft);overflow:hidden;flex:0 0 auto;
+      width:58px;height:58px;border-radius:18px;display:grid;place-items:center;
+      background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
+      border:1px solid var(--border);box-shadow:var(--shadow-soft);overflow:hidden;
     }
-    .logo img{width:100%;height:100%;object-fit:contain;padding:6px;transform:scale(1.02)}
+    .logo img{width:100%;height:100%;object-fit:contain;padding:8px}
     .brand h1{
       margin:0;
       font-size:29px;line-height:1;
@@ -159,7 +159,7 @@
     .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:20px}
     .hero-main{
       position:relative;
-      min-height:620px;
+      min-height:650px;
       overflow:hidden;
       border-radius:30px;
       border:1px solid rgba(255,255,255,.08);
@@ -174,18 +174,17 @@
       background-size:cover;background-position:center;
     }
     .hero-slide.active{opacity:1;pointer-events:auto;transform:scale(1.08)}
-    .hero-slide img{width:100%;height:100%;object-fit:cover;display:block}
     .hero-overlay{
       position:absolute;inset:0;
       background:linear-gradient(110deg,rgba(4,8,20,.96) 14%,rgba(4,8,20,.84) 45%,rgba(4,8,20,.22) 100%);
       z-index:1;
     }
     .hero-content{
-      position:relative;z-index:2;max-width:60%;
-      padding:38px 36px 30px;
+      position:relative;z-index:2;max-width:58%;
+      padding:36px 34px 28px;
     }
-    .hero-content h2{font-size:clamp(36px,5.2vw,64px);line-height:1.04;margin:18px 0 14px;max-width:11ch}
-    .hero-content p{font-size:16px;color:#c2d2f1;max-width:720px}
+    .hero-content h2{font-size:58px;line-height:1.02;margin:18px 0 14px}
+    .hero-content p{font-size:17px;color:#c2d2f1;max-width:760px}
     .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
     .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
     .stat{
@@ -230,69 +229,6 @@
     }
     .chip:hover{transform:translateY(-2px);color:var(--text)}
     .chip.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));border:none;color:#07111f}
-    
-    .spotlight-tabs{display:flex;gap:10px;flex-wrap:wrap}
-    .slider-tab{
-      padding:11px 16px;border-radius:999px;border:1px solid var(--border);
-      background:rgba(255,255,255,.05);color:var(--muted);font-weight:800;cursor:pointer;
-      transition:.25s var(--ease)
-    }
-    .slider-tab:hover{transform:translateY(-2px);color:var(--text)}
-    .slider-tab.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));border:none;color:#07111f}
-    .spotlight-showcase{padding:18px}
-    .spotlight-stage{
-      position:relative;min-height:440px;border-radius:26px;overflow:hidden;
-      background:#0b1327;border:1px solid rgba(255,255,255,.08)
-    }
-    .spotlight-stage::before{
-      content:"";position:absolute;inset:0;z-index:1;
-      background:linear-gradient(108deg,rgba(4,8,20,.96) 15%,rgba(4,8,20,.82) 44%,rgba(4,8,20,.30) 100%);
-    }
-    .spotlight-stage-bg{
-      position:absolute;inset:0;background-size:cover;background-position:center;
-      transform:scale(1.02);filter:saturate(1.02)
-    }
-    .spotlight-stage-content{
-      position:relative;z-index:2;display:flex;min-height:440px;align-items:flex-end;justify-content:space-between;
-      gap:18px;padding:30px
-    }
-    .spotlight-copy{max-width:min(620px,72%)}
-    .spotlight-copy h2{margin:12px 0 12px;font-size:clamp(34px,4.5vw,54px);line-height:1.03}
-    .spotlight-copy p{margin:0;color:#c8d8f3;line-height:1.68;font-size:15px}
-    .spotlight-badges,.spotlight-meta{display:flex;gap:10px;flex-wrap:wrap}
-    .spotlight-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
-    .spotlight-price{
-      min-width:200px;padding:20px;border-radius:22px;background:rgba(8,14,29,.76);
-      border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(12px)
-    }
-    .spotlight-price .current{font-size:34px;font-weight:900;color:var(--primary);line-height:1.1}
-    .spotlight-price .old{font-size:15px;margin-top:6px}
-    .spotlight-control-row{
-      display:flex;align-items:center;gap:12px;justify-content:space-between;margin-top:14px
-    }
-    .spotlight-progress{
-      flex:1;height:8px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden
-    }
-    .spotlight-progress span{
-      display:block;height:100%;width:0%;
-      background:linear-gradient(135deg,var(--primary),var(--primary-2));border-radius:999px;
-      transition:width .35s var(--ease)
-    }
-    .spotlight-thumb-row{
-      display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px
-    }
-    .spotlight-thumb{
-      position:relative;padding:0;border-radius:18px;overflow:hidden;cursor:pointer;
-      border:1px solid rgba(255,255,255,.08);background:#0f162f;color:var(--text);text-align:left;
-      transition:.22s var(--ease)
-    }
-    .spotlight-thumb:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.18)}
-    .spotlight-thumb.active{box-shadow:0 0 0 3px rgba(103,240,212,.10);border-color:rgba(103,240,212,.34)}
-    .spotlight-thumb img{width:100%;aspect-ratio:16/10;object-fit:cover}
-    .spotlight-thumb-body{padding:12px}
-    .spotlight-thumb-body strong{display:block;font-size:15px}
-    .spotlight-thumb-body span{display:block;color:var(--muted);font-size:13px;margin-top:6px}
-
     .featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     .featured-card{padding:16px}
     .featured-card .cover{aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#0c1328}
@@ -465,34 +401,21 @@
       .hero-grid,.detail-grid,.pay-grid,.auth-grid{grid-template-columns:1fr}
       .hero-main{min-height:unset;padding-bottom:240px}
       .hero-content{max-width:100%}
-      .hero-content h2{font-size:clamp(36px,6vw,48px);max-width:13ch}
+      .hero-content h2{font-size:44px}
       .hero-mini-rail{position:relative;right:auto;bottom:auto;width:100%;max-width:none;margin-top:20px}
-      .spotlight-stage-content{flex-direction:column;align-items:flex-start}
-      .spotlight-copy{max-width:100%}
-      .spotlight-price{min-width:0;width:100%;max-width:360px}
-      .spotlight-thumb-row,.grid{grid-template-columns:repeat(3,1fr)}
+      .grid{grid-template-columns:repeat(3,1fr)}
     }
     @media (max-width:860px){
       .topbar-inner{flex-direction:column;align-items:stretch}
       .search{min-width:unset;width:100%}
-      .premium-strip,.featured-grid,.guide-grid,.hero-stats,.grid,.spotlight-thumb-row{grid-template-columns:repeat(2,1fr)}
+      .premium-strip,.featured-grid,.guide-grid,.hero-stats,.grid{grid-template-columns:repeat(2,1fr)}
       .meta,.detail-meta{grid-template-columns:1fr}
       .section-head h2,.section-head h3{font-size:28px}
-      .brand h1{font-size:24px}
-      .hero-content{padding:28px 22px 20px}
-      .hero-content p{font-size:15px}
     }
     @media (max-width:560px){
-      .premium-strip,.featured-grid,.guide-grid,.hero-stats,.grid,.spotlight-thumb-row{grid-template-columns:1fr}
-      .hero-content{padding:24px 18px 18px}
-      .hero-content h2{font-size:clamp(30px,10vw,40px);max-width:12ch}
-      .hero-content p{font-size:14px}
-      .hero-actions,.spotlight-actions{gap:10px}
+      .premium-strip,.featured-grid,.guide-grid,.hero-stats,.grid{grid-template-columns:1fr}
+      .hero-content h2{font-size:34px}
       .section-head{flex-direction:column;align-items:flex-start}
-      .spotlight-showcase{padding:14px}
-      .spotlight-stage{min-height:520px}
-      .spotlight-stage-content{min-height:520px;padding:22px 18px}
-      .spotlight-control-row{flex-wrap:wrap}
       .toast-wrap{left:12px;right:12px}
       .toast{min-width:0;max-width:none}
       .top-announce .container{font-size:12px}
@@ -506,7 +429,7 @@
     <div class="container">
       <div><i class="fa-solid fa-shield-check"></i> Giao tài khoản qua email đã đăng nhập</div>
       <div><i class="fa-solid fa-building-columns"></i> MB Bank • 0794527008</div>
-      <div><i class="fa-solid fa-envelope"></i> hydrastorevn944@gmail.com</div>
+      <div><i class="fa-solid fa-envelope"></i> storehydra944@gmail.com</div>
       <div><i class="fa-solid fa-phone"></i> 0794527008</div>
     </div>
   </div>
@@ -514,10 +437,10 @@
   <header class="topbar">
     <div class="container topbar-inner">
       <div class="brand">
-        <div class="logo"><img src="./logo.png" alt="Hydra Store Logo" /></div>
+        <div class="logo"><img src="logo.png" alt="Hydra Store Logo"></div>
         <div>
           <h1>Hydra Store</h1>
-          <p>Kho game offline cao cấp • giao tài khoản qua email • tối ưu tốt hơn trên mobile</p>
+          <p>Tài khoản game offline • shop premium • giao tự động qua email khi xác nhận đơn</p>
         </div>
       </div>
 
@@ -532,9 +455,9 @@
           <div class="contact-popover" id="contactPopover">
             <a href="tel:0794527008"><i class="fa-solid fa-phone-volume"></i> 0794527008</a>
             <a href="https://zalo.me/0794527008" target="_blank" rel="noreferrer"><img class="icon-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/960px-Icon_of_Zalo.svg.png" alt="Zalo" /> Zalo</a>
-            <a href="https://www.facebook.com/chuong0610123?locale=vi_VN" target="_blank" rel="noreferrer"><img class="icon-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/960px-2023_Facebook_icon.svg.png" alt="Facebook" /> Facebook</a>
+            <a href="https://www.facebook.com/profile.php?id=61579444491049&locale=vi_VN" target="_blank" rel="noreferrer"><img class="icon-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/960px-2023_Facebook_icon.svg.png" alt="Facebook" /> Facebook</a>
             <div><i class="fa-solid fa-building-columns"></i> MB Bank • 0794527008</div>
-            <div><i class="fa-solid fa-envelope"></i> hydrastorevn944@gmail.com</div>
+            <div><i class="fa-solid fa-envelope"></i> storehydra944@gmail.com</div>
           </div>
         </div>
 
@@ -546,39 +469,15 @@
   </header>
 
   <main class="container">
-
-    <section class="section">
-      <div class="section-head reveal">
-        <div>
-          <span class="pill gold"><i class="fa-solid fa-stars"></i> Nổi bật</span>
-          <h2>Game nổi bật & mới nhất</h2>
-          <p class="muted">Game hot và game mới được đưa lên đầu để khách xem nhanh.</p>
-        </div>
-        <div class="spotlight-tabs">
-          <button class="slider-tab active" id="sliderFeaturedTab">Nổi bật</button>
-          <button class="slider-tab" id="sliderLatestTab">Mới nhất</button>
-        </div>
-      </div>
-      <div class="glass spotlight-showcase reveal" style="--delay:40ms">
-        <div id="spotlightStage"></div>
-        <div class="spotlight-control-row">
-          <button class="btn" id="spotlightPrevBtn"><i class="fa-solid fa-chevron-left"></i> Trước</button>
-          <div class="spotlight-progress"><span id="spotlightProgress"></span></div>
-          <button class="btn" id="spotlightNextBtn">Sau <i class="fa-solid fa-chevron-right"></i></button>
-        </div>
-        <div class="spotlight-thumb-row" id="spotlightThumbs"></div>
-      </div>
-    </section>
-
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-main reveal">
           <div class="hero-slides" id="heroSlides"></div>
           <div class="hero-overlay"></div>
           <div class="hero-content">
-            <span class="pill gold"><i class="fa-solid fa-crown"></i> Hydra Store</span>
-            <h2>Kho game bom tấn bản quyền với giá bằng một bát phở.</h2>
-            <p>Game hot, game mới và các bom tấn .</p>
+            <span class="pill gold"><i class="fa-solid fa-crown"></i> Ultra Luxury Game Storefront</span>
+            <h2>Kho game offline được trình bày như một flagship store thực thụ.</h2>
+            <p>Thiết kế cinematic, media slider riêng cho từng game, popup mua hàng cao cấp và vẫn giữ nguyên mọi thông tin quan trọng của shop: số điện thoại, Facebook, email, MB Bank, số tài khoản và nội dung chuyển khoản.</p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="#products"><i class="fa-solid fa-gamepad"></i> Xem kho game</a>
               <button class="btn" id="heroAuthBtn"><i class="fa-solid fa-id-card"></i> Tài khoản</button>
@@ -594,19 +493,29 @@
           <div class="hero-mini-rail" id="heroSlider"></div>
         </div>
 
+        <div class="side-stack">
+          <div class="glass side-card reveal" style="--delay:50ms">
+            <h3><i class="fa-solid fa-film"></i> Media riêng từng game</h3>
+            <ul>
+              <li>Mỗi game có slider media riêng với trailer, gameplay và gallery.</li>
+              <li>Ưu tiên lấy media chính thức qua backend khi có, fallback an toàn khi thiếu dữ liệu.</li>
+              <li>Popup game được làm lại theo kiểu premium storefront để hút khách hơn.</li>
+            </ul>
+          </div>
+
           <div class="glass side-card reveal" style="--delay:110ms">
             <h3><i class="fa-solid fa-credit-card"></i> Thanh toán</h3>
             <ul>
               <li>Đăng nhập trước khi thanh toán.</li>
-              <li>Nội dung: <strong style="color:var(--text)">TÊN GAME VIẾT TẮT + MÃ ĐƠN</strong></li>
-              <li>QR thanh toán tự tạo đúng số tiền và mã đơn của từng đơn hàng.</li>
+              <li>Nội dung: <strong style="color:var(--text)">HYDRA + TÊN GAME VIẾT TẮT + MÃ ĐƠN</strong></li>
+              <li>Giữ nguyên thông tin quan trọng của shop và logic giao acc qua backend.</li>
             </ul>
           </div>
 
           <div class="glass side-card reveal" style="--delay:170ms">
             <h3><i class="fa-solid fa-bolt"></i> Hỗ trợ nhanh</h3>
             <ul>
-              <li>Denuvo được đánh dấu rõ trên từng game.</li>
+              <li>Denuvo được đánh dấu rõ trên card game và trong popup.</li>
               <li>Nếu cần hỗ trợ thêm, liên hệ Zalo hoặc Facebook để shop xử lý nhanh nhất.</li>
             </ul>
           </div>
@@ -616,10 +525,10 @@
 
     <section class="section">
       <div class="premium-strip">
-        <div class="glass premium-item reveal"><i class="fa-solid fa-sparkles"></i><strong>Game mới</strong><div class="muted">Cập nhật thêm lựa chọn để khách dễ chọn.</div></div>
-        <div class="glass premium-item reveal" style="--delay:60ms"><i class="fa-solid fa-clapperboard"></i><strong>Xem trước</strong><div class="muted">Có trailer, gameplay và hình ảnh để xem nhanh.</div></div>
+        <div class="glass premium-item reveal"><i class="fa-solid fa-sparkles"></i><strong>Thiết kế flagship</strong><div class="muted">Đậm chất cinematic và cao cấp.</div></div>
+        <div class="glass premium-item reveal" style="--delay:60ms"><i class="fa-solid fa-clapperboard"></i><strong>Trailer + gameplay</strong><div class="muted">Media từng game xem ngay trước khi mua.</div></div>
         <div class="glass premium-item reveal" style="--delay:120ms"><i class="fa-solid fa-shield-halved"></i><strong>Denuvo rõ ràng</strong><div class="muted">Tránh nhầm lẫn khi chọn game.</div></div>
-        <div class="glass premium-item reveal" style="--delay:180ms"><i class="fa-solid fa-envelope-circle-check"></i><strong>Mua nhanh</strong><div class="muted">Thông tin thanh toán hiển thị rõ ràng.</div></div>
+        <div class="glass premium-item reveal" style="--delay:180ms"><i class="fa-solid fa-envelope-circle-check"></i><strong>Flow mua hàng giữ nguyên</strong><div class="muted">Không thay đổi logic quan trọng.</div></div>
       </div>
     </section>
 
@@ -685,26 +594,26 @@
       <div class="guide-grid">
         <div class="glass guide-step reveal">
           <div class="guide-media">
-            
-            <img src="./b1.png" alt="Bước 1" onerror="this.style.display='none'" />
+            <span class="guide-placeholder">Ảnh bước 1</span>
+            <img src="b1.png" alt="Bước 1" onerror="this.style.display='none'" />
           </div>
           <h4>Bước 1</h4>
-          <p class="muted">Đăng nhập tài khoản Steam được giao, sau đó tải game như bình thường.</p>
+          <p class="muted">Đăng nhập vào acc, tải game.</p>
         </div>
         <div class="glass guide-step reveal" style="--delay:70ms">
           <div class="guide-media">
-            
-            <img src="./b2.png" alt="Bước 2" onerror="this.style.display='none'" />
+            <span class="guide-placeholder">Ảnh bước 2</span>
+            <img src="b2.png" alt="Bước 2" onerror="this.style.display='none'" />
           </div>
           <h4>Bước 2</h4>
-          <p class="muted">Sau khi tải xong, chuyển Steam sang chế độ offline rồi vào game. Nếu bị lỗi xác thực, nhắn shop để xử lý.</p>
+          <p class="muted">Sau khi tải game xong, hãy bật chế độ offline Steam để vào game. Nếu lỗi xác thực, liên hệ shop để được hỗ trợ.</p>
         </div>
         <div class="glass guide-step reveal" style="--delay:140ms">
           <div class="guide-media">
-            <img src="./logo.png" alt="Hỗ trợ Hydra Store" onerror="this.style.display='none'" />
+            <img src="https://kamikey.com/wp-content/uploads/2025/01/ooMsI4Q.jpeg" alt="Ảnh lỗi tham khảo" />
           </div>
           <h4>Hỗ trợ thêm</h4>
-          <p class="muted">Nếu game cần xác thực thêm hoặc cần xử lý Denuvo, liên hệ ngay qua Zalo <strong style="color:var(--text)">0794527008</strong> để shop hỗ trợ nhanh.</p>
+          <p class="muted">Trong trường hợp game cần Denuvo hoặc gặp tình huống xác thực khó, liên hệ ngay qua Zalo <strong style="color:var(--text)">0794527008</strong>.</p>
         </div>
       </div>
     </section>
@@ -713,7 +622,7 @@
   <footer class="footer container">
     <div class="glass footer-card reveal">
       <strong style="font-size:22px">Hydra Store</strong>
-      <p class="muted">Kho game offline giá tốt, cập nhật đều và hỗ trợ nhanh khi cần.</p>
+      <p class="muted">Bản ultra luxury này tập trung nâng cấp giao diện, media slider từng game và trải nghiệm mua hàng — không thay đổi thông tin quan trọng của shop.</p>
     </div>
   </footer>
 
@@ -777,7 +686,7 @@
               <div><strong style="color:var(--text)">Ngân hàng:</strong> MB Bank</div>
               <div><strong style="color:var(--text)">Chủ tài khoản:</strong> TRAN NGUYEN CHUONG</div>
               <div><strong style="color:var(--text)">Số tài khoản:</strong> 0794527008</div>
-              <div><strong style="color:var(--text)">Nội dung:</strong> tên game viết tắt + mã đơn</div>
+              <div><strong style="color:var(--text)">Nội dung:</strong> HYDRA + tên game viết tắt + mã đơn</div>
             </div>
           </div>
           <div class="pay-box">
@@ -809,7 +718,7 @@
   <div class="toast-wrap" id="toastWrap"></div>
 
   <script>
-    window.HYDRA_API_BASE_URL = window.HYDRA_API_BASE_URL || 'http://localhost:3000';
+    window.HYDRA_API_BASE_URL = window.HYDRA_API_BASE_URL || 'https://backendhydra.onrender.com';
     window.HYDRA_MEDIA_API_BASE_URL = window.HYDRA_MEDIA_API_BASE_URL || window.HYDRA_API_BASE_URL;
 
     const AUTOPAY_CONFIG = {
@@ -824,7 +733,7 @@
     const QR_ACCOUNT_NAME = 'TRAN NGUYEN CHUONG';
     const QR_TEMPLATE = 'compact2';
     const QR_IMAGE_OVERRIDE = '';
-    const API_BASE_URL = window.HYDRA_API_BASE_URL || 'http://localhost:3000';
+    const API_BASE_URL = window.HYDRA_API_BASE_URL || 'https://backendhydra.onrender.com';
     const MEDIA_API_BASE_URL = window.HYDRA_MEDIA_API_BASE_URL || API_BASE_URL;
 
     const ytEmbed = id => `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&playsinline=1`;
@@ -834,57 +743,25 @@
       return m ? m[1] : '';
     };
     const dedupe = arr => [...new Set((arr || []).filter(Boolean))];
+    function buildExtraGallery(game, lib = {}){
+      const appId = extractSteamAppId(game.image);
+      const videoIds = (lib.videos || []).map(v => {
+        const embed = (v && v.embed) || '';
+        const m = embed.match(/embed\/([^?&]+)/);
+        return m ? m[1] : '';
+      }).filter(Boolean);
+      const steamBase = appId ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${appId}` : '';
+      return dedupe([
+        game.image,
+        steamBase ? `${steamBase}/library_hero.jpg` : '',
+        steamBase ? `${steamBase}/library_600x900_2x.jpg` : '',
+        steamBase ? `${steamBase}/capsule_616x353.jpg` : '',
+        steamBase ? `${steamBase}/capsule_467x181.jpg` : '',
+        steamBase ? `${steamBase}/page_bg_generated_v6b.jpg` : '',
+        ...videoIds.flatMap(id => [ytThumb(id), ytThumbMax(id)])
+      ]);
+    }
     const ytThumb = id => `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-
-    function steamAssetPack(game){
-      const appId = game.appId || extractSteamAppId(game.image);
-      if(!appId) return { header: game.image || '' };
-      const base = `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${appId}`;
-      return {
-        header: game.image || `${base}/header.jpg`,
-        hero: `${base}/library_hero.jpg`,
-        portrait: `${base}/library_600x900_2x.jpg`,
-        wide: `${base}/capsule_616x353.jpg`,
-        small: `${base}/capsule_231x87.jpg`,
-        capsule: `${base}/library_capsule.jpg`,
-        bg: `${base}/page_bg_generated_v6b.jpg`
-      };
-    }
-
-    function buildVisualProfile(game){
-      const lib = gameMediaLibrary[game.id] || { videos: [], images: [] };
-      const videoThumbs = dedupe((lib.videos || []).map(v => v?.thumb || v?.poster || '').filter(Boolean));
-      const steam = steamAssetPack(game);
-      return {
-        hero: dedupe([steam.hero, steam.wide, game.image, steam.bg]),
-        heroThumb: dedupe([steam.small, steam.capsule, steam.wide, game.image]),
-        featured: dedupe([steam.wide, steam.hero, game.image]),
-        card: dedupe([steam.portrait, steam.hero, steam.wide, game.image]),
-        cart: dedupe([steam.small, steam.capsule, steam.wide, game.image]),
-        detailImages: dedupe([steam.portrait, steam.hero, steam.bg, steam.wide]).slice(0, 3),
-        videoThumbs
-      };
-    }
-
-    function buildImgTag(sources, alt, attrs = ''){
-      const list = dedupe((sources || []).filter(Boolean));
-      const primary = list[0] || '';
-      const fallbackJson = encodeURIComponent(JSON.stringify(list.slice(1)));
-      return `<img src="${primary}" alt="${alt}" data-fallbacks="${fallbackJson}" onerror="handleImageFallback(this)" ${attrs}>`;
-    }
-
-    window.handleImageFallback = function(img){
-      try{
-        const queue = JSON.parse(decodeURIComponent(img.dataset.fallbacks || '%5B%5D'));
-        if(queue.length){
-          const next = queue.shift();
-          img.dataset.fallbacks = encodeURIComponent(JSON.stringify(queue));
-          img.src = next;
-          return;
-        }
-      }catch(err){}
-      img.onerror = null;
-    };
     const gameMediaLibrary = {
       1:{videos:[{label:'Teaser',embed:ytEmbed('POz1-EmLsTY'),thumb:ytThumb('POz1-EmLsTY')},{label:'Gameplay',embed:ytEmbed('F3590UbDu2Q'),thumb:ytThumb('F3590UbDu2Q')}],images:[ytThumb('POz1-EmLsTY'),ytThumb('F3590UbDu2Q')]},
       2:{videos:[{label:'Teaser',embed:ytEmbed('F63h3v9QV7w'),thumb:ytThumb('F63h3v9QV7w')},{label:'Gameplay',embed:ytEmbed('Dw_oH5oiUSE'),thumb:ytThumb('Dw_oH5oiUSE')}],images:[ytThumb('F63h3v9QV7w'),ytThumb('Dw_oH5oiUSE')]},
@@ -951,18 +828,7 @@
       17:{minCpu:'Intel Core i3-8100 or AMD Ryzen 3 1300X',minGpu:'GeForce GTX 1650 or Radeon RX 5500XT',minRam:'16GB',minStorage:'150GB SSD',recCpu:'Intel Core i5-8600 or AMD Ryzen 5 3600',recGpu:'GeForce RTX 3060 or Radeon RX 5700',recRam:'16GB',recStorage:'150GB SSD',os:'Windows 10/11 64-bit',directx:'DX12'}
     };
 
-
-    const steamAsset = (game, file) => game && game.appId ? `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.appId}/${file}` : '';
-    const pickImage = (fallback, ...candidates) => dedupe(candidates).find(Boolean) || fallback;
-    const games = baseGames.map(g => {
-      const enriched = {...g, ...(gameSpecs[g.id] || {})};
-      enriched.heroImage = pickImage(enriched.image, steamAsset(enriched, 'library_hero.jpg'), steamAsset(enriched, 'page_bg_generated_v6b.jpg'), enriched.image);
-      enriched.featuredImage = pickImage(enriched.image, steamAsset(enriched, 'capsule_616x353.jpg'), steamAsset(enriched, 'library_hero.jpg'), enriched.image);
-      enriched.cardImage = pickImage(enriched.image, steamAsset(enriched, 'library_600x900_2x.jpg'), steamAsset(enriched, 'capsule_616x353.jpg'), enriched.image);
-      enriched.thumbImage = pickImage(enriched.image, steamAsset(enriched, 'capsule_467x181.jpg'), steamAsset(enriched, 'header.jpg'), enriched.image);
-      enriched.visuals = buildVisualProfile(enriched);
-      return enriched;
-    });
+    const games = baseGames.map(g => ({...g, ...(gameSpecs[g.id] || {})}));
     const genres = ['Tất cả', ...new Set(games.map(g => g.genre))];
     const heroGames = heroOrder.map(id => games.find(g => g.id === id)).filter(Boolean);
 
@@ -974,14 +840,11 @@
       onlyDenuvo:false,
       sort:'featured',
       heroIndex:0,
-      spotlightMode:'featured',
-      spotlightIndex:0,
       favorites: JSON.parse(localStorage.getItem('hydra_favorites') || '[]'),
       cart: JSON.parse(localStorage.getItem('hydra_cart') || '[]'),
       currentUser: JSON.parse(localStorage.getItem('hydra_user') || 'null'),
       paymentPoller:null,
       heroTimer:null,
-      spotlightTimer:null,
       detailGameId:null,
       detailMediaIndex:0,
       detailMediaTab:'all',
@@ -1001,7 +864,7 @@
 
     function buildTransferMemo(game, orderCode = ''){
       const shortCode = game.shortCode || 'GAME';
-      return orderCode ? `${shortCode} + ${orderCode}` : `${shortCode}`;
+      return orderCode ? `HYDRA + ${shortCode} + ${orderCode}` : `HYDRA + ${shortCode}`;
     }
 
     function buildQrUrl(game, amount, orderCode = ''){
@@ -1073,92 +936,6 @@
     function setGenre(genre){ state.genre = genre; renderAll(); }
     window.setGenre = setGenre;
 
-
-    function getSpotlightGames(){
-      const list = state.spotlightMode === 'latest'
-        ? [...games].sort((a,b)=>(b.year-a.year) || Number(b.denuvo)-Number(a.denuvo) || (b.price-a.price))
-        : [...games].sort((a,b)=>Number(b.blockbuster)-Number(a.blockbuster) || Number(b.featured)-Number(a.featured) || (b.year-a.year));
-      return list.slice(0, 6);
-    }
-
-    function setSpotlightMode(mode){
-      state.spotlightMode = mode;
-      state.spotlightIndex = 0;
-      renderSpotlightSlider();
-    }
-    window.setSpotlightMode = setSpotlightMode;
-
-    function changeSpotlight(index){
-      const list = getSpotlightGames();
-      if(!list.length) return;
-      state.spotlightIndex = (index + list.length) % list.length;
-      renderSpotlightSlider();
-    }
-    window.changeSpotlight = changeSpotlight;
-
-    function stepSpotlight(step){
-      const list = getSpotlightGames();
-      if(!list.length) return;
-      changeSpotlight(state.spotlightIndex + step);
-    }
-    window.stepSpotlight = stepSpotlight;
-
-    function renderSpotlightSlider(){
-      const list = getSpotlightGames();
-      if(!list.length) return;
-      if(state.spotlightIndex > list.length - 1) state.spotlightIndex = 0;
-      const g = list[state.spotlightIndex];
-      el('sliderFeaturedTab').classList.toggle('active', state.spotlightMode === 'featured');
-      el('sliderLatestTab').classList.toggle('active', state.spotlightMode === 'latest');
-      el('spotlightProgress').style.width = `${((state.spotlightIndex + 1) / list.length) * 100}%`;
-      el('spotlightStage').innerHTML = `
-        <div class="spotlight-stage">
-          <div class="spotlight-stage-bg" style="background-image:url('${g.heroImage}')"></div>
-          <div class="spotlight-stage-content">
-            <div class="spotlight-copy">
-              <div class="spotlight-badges">
-                <span class="pill gold"><i class="fa-solid fa-fire"></i> ${state.spotlightMode === 'latest' ? 'Game mới nhất' : 'Game nổi bật'}</span>
-                <span class="pill ${g.denuvo ? 'violet' : 'cyan'}"><i class="fa-solid fa-shield-halved"></i> ${g.denuvo ? 'Có Denuvo' : 'Không Denuvo'}</span>
-              </div>
-              <h2>${g.title}</h2>
-              <p>${g.desc}</p>
-              <div class="spotlight-meta" style="margin-top:16px">
-                <span class="tiny">${g.genre}</span>
-                <span class="tiny">${g.year}</span>
-                <span class="tiny">${g.platform}</span>
-                <span class="tiny">${g.shortCode} + mã đơn</span>
-              </div>
-              <div class="spotlight-actions">
-                <button class="btn btn-primary" onclick="openDetail(${g.id})"><i class="fa-solid fa-eye"></i> Xem chi tiết</button>
-                <button class="btn" onclick="addToCart(${g.id})"><i class="fa-solid fa-cart-shopping"></i> Thêm giỏ</button>
-              </div>
-            </div>
-            <div class="spotlight-price">
-              <div class="muted">Giá hiện tại</div>
-              <div class="current">${money(g.price)}</div>
-              <div class="old">${money(g.oldPrice)}</div>
-              <div class="save" style="margin-top:12px;display:inline-flex">Tiết kiệm ${percent(g.price,g.oldPrice)}%</div>
-            </div>
-          </div>
-        </div>
-      `;
-      el('spotlightThumbs').innerHTML = list.map((item, index) => `
-        <button class="spotlight-thumb ${index === state.spotlightIndex ? 'active' : ''}" onclick="changeSpotlight(${index})">
-          <img src="${item.featuredImage}" alt="${item.title}" onerror="this.onerror=null;this.src='${item.image}'" />
-          <div class="spotlight-thumb-body">
-            <strong>${item.title}</strong>
-            <span>${money(item.price)} • ${item.year}</span>
-          </div>
-        </button>
-      `).join('');
-      registerRevealTargets();
-    }
-
-    function startSpotlightAuto(){
-      if(state.spotlightTimer) clearInterval(state.spotlightTimer);
-      state.spotlightTimer = setInterval(() => stepSpotlight(1), 5200);
-    }
-
     function renderGenres(){
       el('genreChips').innerHTML = genres.map((genre, index) => `
         <button class="chip reveal ${state.genre===genre ? 'active' : ''}" style="--delay:${index * 30}ms" onclick="setGenre('${genre.replace(/'/g,"\\'")}')">${genre}</button>
@@ -1205,12 +982,12 @@
     function changeHero(index){
       state.heroIndex = index;
       el('heroSlides').innerHTML = heroGames.map((g, i) => `
-        <div class="hero-slide ${i===index ? 'active' : ''}" style="background-image:url('${g.heroImage}')"></div>
+        <div class="hero-slide ${i===index ? 'active' : ''}" style="background-image:url('${g.image}')"></div>
       `).join('');
 
       el('heroSlider').innerHTML = heroGames.map((g, i) => `
         <div class="hero-mini reveal ${i===index ? 'active' : ''}" style="--delay:${i * 70}ms" onclick="changeHero(${i})">
-          ${buildImgTag(g.visuals?.heroThumb || [g.thumbImage, g.image], g.title)}
+          <img src="${g.image}" alt="${g.title}">
           <div>
             <strong>${g.title}</strong>
             <span>${money(g.price)} • ${g.denuvo ? 'Có Denuvo' : 'Không gắn tag Denuvo'}</span>
@@ -1241,7 +1018,7 @@
       return `
         <article class="glass product reveal" style="--delay:${(index % 8) * 45}ms">
           <div class="thumb">
-            <img src="${g.cardImage}" alt="${g.title}" onerror="this.onerror=null;this.src='${g.image}'">
+            <img src="${g.image}" alt="${g.title}">
             <div class="badges">
               ${g.hot ? '<span class="badge badge-hot">Hot</span>' : ''}
               ${g.blockbuster ? '<span class="badge badge-aaa">Bom tấn</span>' : ''}
@@ -1280,7 +1057,7 @@
       const list = games.filter(g => g.featured).slice(0,6);
       el('featuredGrid').innerHTML = list.map((g, index) => `
         <div class="glass featured-card reveal" style="--delay:${index * 60}ms">
-          <div class="cover"><img src="${g.featuredImage}" alt="${g.title}" onerror="this.onerror=null;this.src='${g.image}'" /></div>
+          <div class="cover"><img src="${g.image}" alt="${g.title}" /></div>
           <div style="display:flex;justify-content:space-between;gap:10px;align-items:start;margin-top:12px">
             <div>
               <strong style="font-size:18px">${g.title}</strong>
@@ -1305,42 +1082,28 @@
 
       const lib = gameMediaLibrary[game.id] || { videos: [], images: [] };
       const media = [];
-      const visuals = game.visuals || buildVisualProfile(game);
 
-      (lib.videos || []).slice(0, 2).forEach((video, idx) => {
+      (lib.videos || []).forEach((video, idx) => {
         if(!video) return;
         media.push({
           type:'video',
-          label: video.label || (idx === 0 ? 'Trailer' : 'Gameplay'),
+          label: video.label || (idx === 0 ? 'Teaser' : 'Gameplay'),
           embed: video.embed || '',
           src: video.src || '',
-          poster: video.poster || video.thumb || visuals.featured?.[0] || game.image,
-          thumb: video.thumb || video.poster || visuals.heroThumb?.[0] || game.image,
-          fallback: game.image
+          poster: video.poster || video.thumb || game.image,
+          thumb: video.thumb || video.poster || game.image
         });
       });
 
-      const gallery = dedupe(visuals.detailImages || []).slice(0, 4);
+      const gallery = dedupe([...(lib.images || []), ...buildExtraGallery(game, lib)]);
       gallery.forEach((src, idx) => {
         if(src){
-          media.push({
-            type:'image',
-            label:`Ảnh ${idx + 1}`,
-            src,
-            thumb:src,
-            fallback:game.image
-          });
+          media.push({ type:'image', label:`Ảnh ${idx + 1}`, src, thumb:src, fallback:game.image });
         }
       });
 
       if(!media.length){
-        media.push({
-          type:'image',
-          label:'Cover',
-          src:(visuals.featured || [game.image])[0],
-          thumb:(visuals.heroThumb || [game.image])[0],
-          fallback:game.image
-        });
+        media.push({ type:'image', label:'Cover', src:game.image, thumb:game.image });
       }
 
       state.steamMediaCache[game.id] = media;
@@ -1361,7 +1124,7 @@
         }
         return `<video controls playsinline preload="metadata" poster="${item.poster || ''}" src="${item.src || ''}"></video>`;
       }
-      return buildImgTag(dedupe([item.src, item.fallback, item.thumb]), gameTitle);
+      return `<img src="${item.src}" alt="${gameTitle}" onerror="this.onerror=null;this.src='${item.fallback || item.thumb || item.src}'">`;
     }
 
     function buildGameSlider(game, media, activeIndex = 0){
@@ -1394,7 +1157,7 @@
           <div class="game-slider-thumbs">
             ${media.map((item, index) => `
               <button class="game-slider-thumb ${index === safeIndex ? 'active' : ''}" onclick="changeDetailSlide(${index})">
-                ${buildImgTag(dedupe([item.thumb, ...(game.visuals?.heroThumb || []), game.image]), game.title)}
+                <img src="${item.thumb || game.image}" alt="${game.title}" onerror="this.onerror=null;this.src='${game.image}'">
                 ${item.type === 'video' ? '<span class="game-slider-thumb-icon"><i class="fa-solid fa-play"></i></span>' : ''}
               </button>
             `).join('')}
@@ -1412,7 +1175,7 @@
     window.stepDetailSlide = function(step){
       const game = games.find(g => g.id === state.detailGameId);
       if(!game) return;
-      const media = filterMediaByTab(state.steamMediaCache[game.id] || [{type:'image',src:(game.visuals?.featured || [game.image])[0],thumb:(game.visuals?.heroThumb || [game.image])[0],label:'Cover',fallback:game.image}], state.detailMediaTab);
+      const media = filterMediaByTab(state.steamMediaCache[game.id] || [{type:'image',src:game.image,thumb:game.image,label:'Cover'}], state.detailMediaTab);
       const next = (state.detailMediaIndex + step + media.length) % media.length;
       state.detailMediaIndex = next;
       openDetail(game.id, true);
@@ -1433,7 +1196,7 @@
 
       const mediaAll = await fetchSteamMedia(g);
       const media = filterMediaByTab(mediaAll, state.detailMediaTab);
-      const finalMedia = media.length ? media : [{type:'image', label:'Cover', src:(g.visuals?.featured || [g.image])[0], thumb:(g.visuals?.heroThumb || [g.image])[0], fallback:g.image}];
+      const finalMedia = media.length ? media : [{type:'image', label:'Cover', src:g.image, thumb:g.image}];
       if(state.detailMediaIndex > finalMedia.length - 1) state.detailMediaIndex = 0;
 
       const tags = g.tags.concat(g.denuvo ? ['Denuvo'] : []);
@@ -1512,7 +1275,7 @@
       }
       el('cartItems').innerHTML = detailed.map(({game,qty}, index) => `
         <div class="cart-item">
-          <img src="${game.thumbImage}" alt="${game.title}" onerror="this.onerror=null;this.src='${game.image}'">
+          <img src="${game.image}" alt="${game.title}">
           <div>
             <strong>${game.title}</strong>
             <div class="muted" style="margin-top:6px">${money(game.price)} • ${game.denuvo ? 'Denuvo' : 'Không gắn tag Denuvo'}</div>
@@ -1571,7 +1334,7 @@
 
     function renderAuthButton(){
       if(state.currentUser){
-        const avatar = state.currentUser.avatar || './logo.png';
+        const avatar = state.currentUser.avatar || 'logo.png';
         const label = state.currentUser.name.split(' ')[0];
         el('authBtn').innerHTML = `<img class="user-avatar" src="${avatar}" alt="Avatar" /> ${label}`;
       } else {
@@ -1737,22 +1500,33 @@
         }
 
         if(data.delivered || (data.order && data.order.status === 'delivered')){
-          const order = data.order || {};
+          const order = data.order || {
+            account: data.account || '',
+            password: data.password || '',
+            deliveredNote: data.note || '',
+            buyerEmail: data.deliveredTo || ''
+          };
           showDeliveryMessage(`
             <div style="font-weight:800;margin-bottom:8px">Đã giao tài khoản</div>
             <div class="field"><label>Tài khoản</label><input readonly value="${order.account || ''}" /></div>
             <div class="field"><label>Mật khẩu</label><input readonly value="${order.password || ''}" /></div>
             <div class="field"><label>Lưu ý</label><input readonly value="${order.deliveredNote || ''}" /></div>
+            <div class="muted" style="margin-top:10px">${data.emailSent ? `Email đã gửi tới <strong style="color:var(--text)">${order.buyerEmail || data.deliveredTo || ''}</strong>.` : 'Nếu email chưa tới ngay, hãy chờ thêm một chút rồi kiểm tra lại.'}</div>
           `);
           state.cart = [];
           persist();
           renderCart();
           stopPaymentPolling();
           showToast('Đơn hàng đã được xác nhận.', 'success', 'Thanh toán');
+          return;
+        }
+
+        if(data.paid && !data.delivered && !isSilent){
+          showDeliveryMessage('<div style="font-weight:800;margin-bottom:8px">Đã nhận thanh toán</div><div class="muted">Shop đang tự giao tài khoản và gửi email. Hãy bấm kiểm tra lại sau vài giây.</div>');
         }
       }catch(error){
         if(!isSilent){
-          showDeliveryMessage('<div style="font-weight:800;margin-bottom:8px">Autopay chưa kết nối</div><div class="muted">Kiểm tra backend tại URL công khai của bạn hoặc localhost:3000.</div>');
+          showDeliveryMessage(`<div style="font-weight:800;margin-bottom:8px">Autopay chưa kết nối</div><div class="muted">Kiểm tra backend tại URL: <strong style="color:var(--text)">${API_BASE_URL}</strong>.</div>`);
         }
       }
     }
@@ -1819,7 +1593,6 @@
 
     function renderAll(){
       renderGenres();
-      renderSpotlightSlider();
       renderFeatured();
       renderProducts();
       renderCart();
@@ -1856,10 +1629,6 @@
     });
 
     el('searchInput').addEventListener('input', e => { state.search = e.target.value; renderProducts(); });
-    el('sliderFeaturedTab').addEventListener('click', () => setSpotlightMode('featured'));
-    el('sliderLatestTab').addEventListener('click', () => setSpotlightMode('latest'));
-    el('spotlightPrevBtn').addEventListener('click', () => stepSpotlight(-1));
-    el('spotlightNextBtn').addEventListener('click', () => stepSpotlight(1));
     el('priceFilter').addEventListener('change', e => { state.price = e.target.value; renderProducts(); });
     el('sortBy').addEventListener('change', e => { state.sort = e.target.value; renderProducts(); });
     el('toggleAAA').addEventListener('click', () => { state.onlyAAA = !state.onlyAAA; renderAll(); });
@@ -1892,7 +1661,6 @@
 
     renderAll();
     startHeroAuto();
-    startSpotlightAuto();
     handleTopbarShadow();
   </script>
 </body>
