@@ -459,6 +459,33 @@
     .media-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
     .media-tab{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--border);cursor:pointer;font-weight:700;color:var(--muted)}
     .media-tab.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));border:none;color:#08111f}
+
+    .badge-combo{background:linear-gradient(135deg,#ffd86b,#ff9f43);color:#2d1b00}
+    .product.combo-highlight,.featured-card.combo-highlight{
+      border:1px solid rgba(247,200,112,.38);
+      box-shadow:0 28px 70px rgba(247,200,112,.16), 0 18px 50px rgba(0,0,0,.36);
+      position:relative;
+      overflow:hidden;
+    }
+    .product.combo-highlight::before,.featured-card.combo-highlight::before{
+      content:'';position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(135deg,rgba(247,200,112,.14),transparent 36%,rgba(103,240,212,.08) 100%);
+    }
+    .combo-ribbon{
+      position:absolute;right:-36px;top:20px;z-index:3;
+      transform:rotate(38deg);
+      background:linear-gradient(135deg,#ffd86b,#ff9f43);
+      color:#2d1b00;font-weight:900;font-size:12px;letter-spacing:.04em;
+      padding:8px 44px;box-shadow:0 14px 24px rgba(0,0,0,.22)
+    }
+    .faq-list{display:grid;gap:14px}
+    .faq-item{padding:18px 20px}
+    .faq-item summary{cursor:pointer;font-weight:800;list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:center}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary i{transition:transform .22s var(--ease)}
+    .faq-item[open] summary i{transform:rotate(180deg)}
+    .faq-answer{color:var(--muted);line-height:1.7;padding-top:12px}
+
     @keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
     @keyframes toastOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(14px)}}
     @media (max-width:1180px){
@@ -582,13 +609,14 @@
             <div class="hero-actions">
               <a class="btn btn-primary" href="#products"><i class="fa-solid fa-gamepad"></i> Xem kho game</a>
               <button class="btn" id="heroAuthBtn"><i class="fa-solid fa-id-card"></i> Tài khoản</button>
+              <button class="btn" id="infoBtn"><i class="fa-solid fa-circle-info"></i> Thông tin cần biết</button>
               <a class="btn" href="#guide"><i class="fa-solid fa-book-open"></i> Hướng dẫn</a>
             </div>
             <div class="hero-stats">
               <div class="stat"><div class="muted">Tổng game</div><div class="n" id="statTotal">0+</div></div>
               <div class="stat"><div class="muted">Game Denuvo</div><div class="n" id="statDenuvo">0+</div></div>
               <div class="stat"><div class="muted">Bom tấn</div><div class="n" id="statAAA">0+</div></div>
-              <div class="stat"><div class="muted">Giá trần</div><div class="n">40K</div></div>
+              <div class="stat"><div class="muted">Giá trần</div><div class="n">80K</div></div>
             </div>
           </div>
           <div class="hero-mini-rail" id="heroSlider"></div>
@@ -624,6 +652,7 @@
       </div>
     </section>
 
+
     <section class="section">
       <div class="premium-strip">
         <div class="glass premium-item reveal"><i class="fa-solid fa-sparkles"></i><strong>Game mới</strong><div class="muted">Cập nhật thêm lựa chọn để khách dễ chọn.</div></div>
@@ -658,9 +687,9 @@
       <div class="filters-row">
         <select class="select" id="priceFilter">
           <option value="all">Tất cả mức giá</option>
-          <option value="under30">Dưới 30k</option>
-          <option value="30to40">30k - 40k</option>
-          <option value="40plus">Trên 40k</option>
+          <option value="under40">Dưới 40k</option>
+          <option value="40to60">40k - 60k</option>
+          <option value="60to80">60k - 80k</option>
         </select>
         <select class="select" id="sortBy">
           <option value="featured">Ưu tiên nổi bật</option>
@@ -733,6 +762,8 @@
         </a>
       </div>
     </section>
+
+
   </main>
 
   <footer class="footer container">
@@ -828,6 +859,39 @@
           </div>
           <div class="pay-box" id="deliveryResult" style="display:none"></div>
         </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal" id="infoModal">
+    <div class="overlay" data-close-info></div>
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 style="margin:0">Thông tin cần biết</h3>
+        <button class="close" data-close-info>✕</button>
+      </div>
+      <div class="faq-list">
+        <details class="glass faq-item" open>
+          <summary>Mua xong shop giao tài khoản như thế nào? <i class="fa-solid fa-chevron-down"></i></summary>
+          <div class="faq-answer">Sau khi thanh toán và kiểm tra thành công, shop giao tài khoản qua email đã đăng nhập trên website. Khách nên nhập email chính xác trước khi thanh toán.</div>
+        </details>
+        <details class="glass faq-item">
+          <summary>Tài khoản offline dùng ra sao? <i class="fa-solid fa-chevron-down"></i></summary>
+          <div class="faq-answer">Khách đăng nhập Steam bằng tài khoản shop cung cấp, tải game, sau đó chuyển sang chế độ Offline rồi mới vào game. Trong trang đã có phần hướng dẫn chi tiết và file PDF để xem lại.</div>
+        </details>
+        <details class="glass faq-item">
+          <summary>Game có Denuvo thì cần làm gì? <i class="fa-solid fa-chevron-down"></i></summary>
+          <div class="faq-answer">Nếu game có gắn tag Denuvo, khách nên liên hệ Zalo hoặc Facebook của shop để được hỗ trợ xác thực nhanh trước khi vào game, tránh lỗi kích hoạt.</div>
+        </details>
+        <details class="glass faq-item">
+          <summary>Có đổi thông tin tài khoản được không? <i class="fa-solid fa-chevron-down"></i></summary>
+          <div class="faq-answer">Không nên tự đổi email, mật khẩu hay thông tin bảo mật của tài khoản shop cung cấp. Đây là tài khoản dùng để tải và chơi offline theo hướng dẫn.</div>
+        </details>
+        <details class="glass faq-item">
+          <summary>Acc combo 130k có gì nổi bật? <i class="fa-solid fa-chevron-down"></i></summary>
+          <div class="faq-answer">Acc combo 130k là lựa chọn nổi bật dành cho khách muốn nhận một tài khoản có nhiều game bom tấn trong cùng một acc, tiết kiệm hơn so với mua lẻ từng game và phù hợp khách thích trải nghiệm nhiều tựa game.</div>
+        </details>
       </div>
     </div>
   </div>
@@ -939,45 +1003,38 @@
       19:{videos:[],images:['./combo_account_130k.png']},
       20:{videos:[{label:'Gameplay Trailer',embed:ytEmbed('okFSR8CCOPY'),thumb:ytThumb('okFSR8CCOPY')},{label:'Launch Trailer',embed:ytEmbed('XuCfkgaaa08'),thumb:ytThumb('XuCfkgaaa08')}],images:["https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_c73bc54415178c07fef85f54ee26621728c77504.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_73d93bea842b93914d966622104dcb8c0f42972b.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_cf936d31061b58e98e0c646aee00e6030c410cda.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_b6a6ee6e046426d08ceea7a4506a1b5f44181543.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_6b8faba0f6831a406ce015648958da9612d14dbb.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_8fc5eba770b4a1639b31666908bdd2bbc1aa2ae4.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_31c13d137706fb4d9a4210513274a3ed9c3c7c96.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_0efa1a469a37beeb4fd0cb8e16dc99bd36357dc4.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_387896248b42a15239a9256844b3e4bff72fbc2a.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_44d30da9c3e4622b46f2978e89bda0515856eaf4.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_f8c7fcdeccbfe77e3fad33330a464fed30f781f0.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_332cd26db210d4b10df744485ecf0a9b3f2e9024.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_b9f6f2d2ac2b7b2fe63d776e8e13c24b481a7b19.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_2c576a8e563e3338826268f172c9032c84366d16.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_d0b50351676da10c5403ec904cf7582636e65346.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_74d11c230ebb44ff9a69b4533a7333551d5bfc6c.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_1c3ff278ac430948dc31efeb1f7d2bb0466a1493.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_49168eeefdfb6e6030a5aed3fd7c1a83da870a9f.1920x1080.jpg?t=1773079016", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_3cc4e8cfcfb8a91d19d96f631f076d252ba2c0c4.1920x1080.jpg?t=1773079016"]},
       21:{videos:[{label:'Official Gameplay',embed:ytEmbed('ZdmoGYg8tB0'),thumb:ytThumb('ZdmoGYg8tB0')},{label:'Launch Gameplay',embed:ytEmbed('R6_9U6yTfAc'),thumb:ytThumb('R6_9U6yTfAc')}],images:["https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3321460/a07b0108d37edd373b123fa03c0cf50853800959/ss_a07b0108d37edd373b123fa03c0cf50853800959.1920x1080.jpg?t=1773980522", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3321460/322285fcb1937f1acbe1fb349c019d7e68d91017/ss_322285fcb1937f1acbe1fb349c019d7e68d91017.1920x1080.jpg?t=1773980522", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3321460/cacf315d93ad9a6431b8d08da1e9800a70d15d57/ss_cacf315d93ad9a6431b8d08da1e9800a70d15d57.1920x1080.jpg?t=1773980522", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3321460/653759c43cbc7900686a917d4b165f33b8cd334f/ss_653759c43cbc7900686a917d4b165f33b8cd334f.1920x1080.jpg?t=1773980522", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3321460/6606e67406b5dc6d43c34b3c82149e09db515346/ss_6606e67406b5dc6d43c34b3c82149e09db515346.1920x1080.jpg?t=1773980522", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3321460/8494431c271f78eba9d8c0d3352f5f26704eba04/ss_8494431c271f78eba9d8c0d3352f5f26704eba04.1920x1080.jpg?t=1773980522", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3321460/4adcf3eb0e9955c1179d414981e9882456304bcc/ss_4adcf3eb0e9955c1179d414981e9882456304bcc.1920x1080.jpg?t=1773980522", "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3321460/5de52275c30401e6b166b2194e75bb5b994ca357/ss_5de52275c30401e6b166b2194e75bb5b994ca357.1920x1080.jpg?t=1773980522"]},
-      22:{videos:[],images:['https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2277560/ss_478326f2315a9568c3f01a945cc047b163ad237c.1920x1080.jpg?t=1770741955','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2277560/ss_181ddb23db2768c9b59b0a445a691215df43ccd2.1920x1080.jpg?t=1770741955','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2277560/ss_290c13f61436b3d81a9d81fd941a54ab1e42a023.1920x1080.jpg?t=1770741955','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2277560/ss_8f4c2fbc16e9314b96d5da1061fdc7a71032acef.1920x1080.jpg?t=1770741955','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2277560/ss_7bdcdca58a06c4bfdcf53c4eca64480be99e558c.1920x1080.jpg?t=1770741955','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2277560/ss_ccea970ca48e8e43bc3f7fb9b76c9a744daaaded.1920x1080.jpg?t=1770741955','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2277560/ss_fba15d254ba576149c9835e5e968286d57af31c3.1920x1080.jpg?t=1770741955','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2277560/ss_208899b545671513cb0bb7dad9ca2e803d44d0ef.1920x1080.jpg?t=1770741955']},
-      23:{videos:[],images:['https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/349040/ss_61a26c1cd4f6ec0fe8635156d8239b9903f7da4f.1920x1080.jpg?t=1703080866','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/349040/ss_053f86d775e5b4ebfc0eb1d8ae42754c66d25130.1920x1080.jpg?t=1703080866','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/349040/ss_4f91876c2dbcc95cd32fdf3d9cf68895737b33ef.1920x1080.jpg?t=1703080866','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/349040/ss_1167f11ce3f8a6a6a333856052d109d1ae3deb26.1920x1080.jpg?t=1703080866','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/349040/ss_192d0984ea11ebcb191659b699a041cbf07b0fba.1920x1080.jpg?t=1703080866','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/349040/ss_5704ce4ef591ee128fc246960a3e11f79977118c.1920x1080.jpg?t=1703080866','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/349040/ss_b1d66236ad6ab2d95f7c5e0bf6f519c4b91a107d.1920x1080.jpg?t=1703080866','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/349040/ss_cf8537985031453140560702941f6fe626edeeae.1920x1080.jpg?t=1703080866','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/349040/ss_dde9d346945e87023f89f0fc2001f05ef52a7a13.1920x1080.jpg?t=1703080866','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/349040/ss_8e0e6b3efb93d23909c7d451d481aeef5287dc37.1920x1080.jpg?t=1703080866']},
-      24:{videos:[],images:['https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3164500/ss_74961b6f52d7694b12c272c37d69551fc08a1ccb.1920x1080.jpg?t=1773974661','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3164500/cf6f4630aec1f9065da3352532e5094613b35975/ss_cf6f4630aec1f9065da3352532e5094613b35975.1920x1080.jpg?t=1773974661','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3164500/b63fe62bed217f2852a2e712b4c57faef67f6b19/ss_b63fe62bed217f2852a2e712b4c57faef67f6b19.1920x1080.jpg?t=1773974661','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3164500/c5d4057a82c0a72092494e0e7ba3188e22dfe477/ss_c5d4057a82c0a72092494e0e7ba3188e22dfe477.1920x1080.jpg?t=1773974661','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3164500/ss_a9b00612e3e3bbc111a6dc53a5a861d38b77c9df.1920x1080.jpg?t=1773974661','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3164500/c792894199193adc8b04cf16b2fec45c5701b0f2/ss_c792894199193adc8b04cf16b2fec45c5701b0f2.1920x1080.jpg?t=1773974661','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3164500/550e3601d7d6515670e82e474bb2a8375a54b361/ss_550e3601d7d6515670e82e474bb2a8375a54b361.1920x1080.jpg?t=1773974661']},
-      25:{videos:[],images:['https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/360430/ss_5b51d533d6e270d41ccb65d4bed3d5126944d56c.1920x1080.jpg?t=1756420682','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/360430/ss_9dfb17389a586cb03b807f38fd294d7e3745c332.1920x1080.jpg?t=1756420682','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/360430/ss_046b35d126a60fb6d0277e35c3c28012a0367930.1920x1080.jpg?t=1756420682','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/360430/ss_dd7a3c7db5c3329f1626855ed7c67f30ea337025.1920x1080.jpg?t=1756420682','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/360430/ss_0e69751604b920c1cb3e75b1835c428086eb3b5b.1920x1080.jpg?t=1756420682','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/360430/ss_46e353b74657a90375e889012bc8eeb35801fccb.1920x1080.jpg?t=1756420682','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/360430/ss_ae1ac0511afdf8c3fa43e1139273a073a5f631df.1920x1080.jpg?t=1756420682']}
+      22:{videos:[],images:['https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2456350/7c87879eb9415f5cd4b35677d379a39a8eb2c168/ss_7c87879eb9415f5cd4b35677d379a39a8eb2c168.1920x1080.jpg?t=1774840910','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2456350/fd8a59c6f9864e23105eef8609abb076f526a97d/ss_fd8a59c6f9864e23105eef8609abb076f526a97d.1920x1080.jpg?t=1774840910','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2456350/52a1c421f4ebf570448e1fd72e4597edced757ed/ss_52a1c421f4ebf570448e1fd72e4597edced757ed.1920x1080.jpg?t=1774840910','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2456350/753685eb3920d4726768824b8f4334bd58942451/ss_753685eb3920d4726768824b8f4334bd58942451.1920x1080.jpg?t=1774840910','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2456350/47c1f4ac509fefb600d11d8ae901a75476eb5e44/ss_47c1f4ac509fefb600d11d8ae901a75476eb5e44.1920x1080.jpg?t=1774840910','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2456350/1d730487af98326bb99d5ca04681087ede9d6929/ss_1d730487af98326bb99d5ca04681087ede9d6929.1920x1080.jpg?t=1774840910','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2456350/532e0166e425953cadeff6bb067f7f531c7e05f0/ss_532e0166e425953cadeff6bb067f7f531c7e05f0.1920x1080.jpg?t=1774840910','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2456350/2efd637bc97a4ce99dd4ac7ab39e108171191ad7/ss_2efd637bc97a4ce99dd4ac7ab39e108171191ad7.1920x1080.jpg?t=1774840910','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2456350/58a9bf62cf1aed1357a26ff51ed9ea93da17a631/ss_58a9bf62cf1aed1357a26ff51ed9ea93da17a631.1920x1080.jpg?t=1774840910','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2456350/865db2fef33261d6d37e6e73867139f5c9180d45/ss_865db2fef33261d6d37e6e73867139f5c9180d45.1920x1080.jpg?t=1774840910']}
     };
 
-    const heroOrder = [22,24,21];
+    const heroOrder = [21,20,1];
     const el = id => document.getElementById(id);
     const money = n => new Intl.NumberFormat('vi-VN').format(n) + 'đ';
     const percent = (p,o) => Math.max(0, Math.round((1 - p/o) * 100));
     const safe = v => v || 'Đang cập nhật';
 
     const baseGames = [
-      {id:1,appId:3764200,title:'Resident Evil Requiem Deluxe Edition',shortCode:'RER',price:40000,oldPrice:1849000,genre:'Kinh dị',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2026,status:'available',denuvo:true,image:'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3764200/ce5437442768e38eb575f205ab9397d0264017b0/header.jpg?t=1772587704',desc:'Bản Deluxe Edition gồm game gốc và gói Deluxe. Survival horror mới của Resident Evil với tông kinh dị nặng và thiên trải nghiệm chơi đơn.',tags:['2026','Horror','Offline']},
-      {id:2,appId:1174180,title:'Red Dead Redemption 2',shortCode:'RDR2',price:30000,oldPrice:1429000,genre:'Phiêu lưu',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2019,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg',desc:'Siêu phẩm thế giới mở cao bồi với cốt truyện mạnh, bầu không khí xuất sắc và trải nghiệm chơi đơn rất dài.',tags:['AAA','Story','Offline']},
-      {id:3,appId:1903340,title:'Clair Obscur: Expedition 33',shortCode:'E33',price:40000,oldPrice:1319000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1903340/header.jpg',desc:'RPG theo lượt pha thời gian thực, lấy cảm hứng từ Belle Époque Pháp, thuộc nhóm game chơi đơn nổi bật gần đây.',tags:['GOTY','RPG','Offline']},
-      {id:4,appId:1245620,title:'Elden Ring',shortCode:'ER',price:30000,oldPrice:1579000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2022,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg',desc:'Soulslike thế giới mở rất lớn, boss khó, khám phá dày đặc và là một trong những game chơi đơn mạnh nhất nhóm AAA.',tags:['AAA','Soulslike','Offline']},
-      {id:5,appId:2322010,title:'God of War Ragnarök',shortCode:'GOWR',price:40000,oldPrice:1319000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2024,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2322010/header.jpg',desc:'Hành động phiêu lưu đậm điện ảnh, tiếp nối hành trình của Kratos và Atreus qua Chín Cõi.',tags:['AAA','Story','Offline']},
-      {id:6,appId:3240220,title:'Grand Theft Auto V Enhanced',shortCode:'GTAVE',price:40000,oldPrice:789000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3240220/header.jpg',desc:'Bản Enhanced nâng cấp hình ảnh, hiệu năng và tốc độ tải cho GTA V trên PC, vẫn rất mạnh ở mảng chơi đơn.',tags:['AAA','Open World','Offline']},
-      {id:7,appId:990080,title:'Hogwarts Legacy',shortCode:'HL',price:40000,oldPrice:1579000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2023,status:'available',denuvo:true,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/990080/header.jpg',desc:'Action RPG thế giới mở trong vũ trụ Hogwarts, tập trung khám phá, phép thuật và hành trình chơi đơn.',tags:['Magic','Open World','Offline']},
-      {id:8,appId:2680010,title:'The First Berserker: Khazan',shortCode:'TFBK',price:40000,oldPrice:1319000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2680010/header.jpg',desc:'Hardcore action RPG với nhịp độ chiến đấu nặng tay, thiên một người chơi và phong cách rất máu lửa.',tags:['Action RPG','Hardcore','Offline']},
-      {id:9,appId:2651280,title:"Marvel's Spider-Man 2",shortCode:'MSM2',price:40000,oldPrice:1579000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2651280/header.jpg',desc:'Game hành động siêu anh hùng với Peter Parker và Miles Morales, đu tơ nhanh, cinematic và rất hợp bán shop.',tags:['AAA','Superhero','Offline']},
-      {id:10,appId:1091500,title:'Cyberpunk 2077',shortCode:'CP2077',price:30000,oldPrice:1579000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2020,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/header.jpg',desc:'RPG khoa học viễn tưởng thế giới mở với Night City rộng lớn và nhiều nhánh nhiệm vụ.',tags:['AAA','Sci-fi','Offline']},
-      {id:11,appId:292030,title:'The Witcher 3',shortCode:'TW3',price:30000,oldPrice:1059000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2015,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/292030/header.jpg',desc:'RPG kinh điển với thế giới, nhân vật và nhiệm vụ phụ thuộc hàng mạnh nhất dòng fantasy.',tags:['AAA','Fantasy','Offline']},
-      {id:12,appId:1551360,title:'Forza Horizon 5',shortCode:'FH5',price:30000,oldPrice:1579000,genre:'Đua xe',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2021,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1551360/header.jpg',desc:'Đua xe thế giới mở với bản đồ Mexico rộng, đồ họa nổi bật và cảm giác lái rất cuốn.',tags:['Racing','AAA','Offline']},
-      {id:13,appId:601150,title:'Devil May Cry 5',shortCode:'DMC5',price:30000,oldPrice:789000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2019,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/601150/header.jpg',desc:'Chặt chém combo đẹp mắt, nhịp nhanh và rất hợp nhóm khách thích combat đã tay.',tags:['Hack & Slash','AAA','Offline']},
-      {id:14,appId:2358720,title:'Black Myth: Wukong',shortCode:'BMW',price:40000,oldPrice:1579000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2024,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2358720/header.jpg',desc:'Action RPG thần thoại Trung Hoa, boss dày đặc và hình ảnh rất mạnh.',tags:['RPG','AAA','Offline']},
-      {id:15,appId:1971870,title:'Mortal Kombat 1',shortCode:'MK1',price:40000,oldPrice:1579000,genre:'Đối kháng',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2023,status:'available',denuvo:true,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1971870/header.jpg',desc:'Đối kháng bom tấn với campaign, Invasions và nhiều nội dung chơi đơn.',tags:['Fighting','AAA','Offline']},
-      {id:16,appId:2246340,title:'Monster Hunter Wilds',shortCode:'MHW',price:40000,oldPrice:1849000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2026,status:'available',denuvo:true,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2246340/header.jpg',desc:'Monster Hunter mới với thế giới rộng, săn quái và chiến đấu quy mô lớn.',tags:['Action','AAA','Offline']},
-      {id:17,appId:2531310,title:'The Last of Us Part II Remastered',shortCode:'TLOU2R',price:40000,oldPrice:1319000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2531310/header.jpg',desc:'Bản remastered đưa phần II lên PC với nhiều nâng cấp kỹ thuật và nội dung phụ trợ.',tags:['Story','AAA','Offline']},
-      {id:18,appId:2050650,title:'Resident Evil 4 Remake Full DLC',shortCode:'RE4R',price:40000,oldPrice:1319000,genre:'Kinh dị',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2023,status:'available',denuvo:true,image:'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2050650/ss_59d1b19964cc532213df92c8287b75a0bffeb33c.1920x1080.jpg?t=1772502922',desc:'Bản Full DLC gồm Resident Evil 4 Remake cùng các nội dung mở rộng, phù hợp khách thích survival horror, hành động và chơi đơn chất lượng cao.',tags:['AAA','Horror','Offline']},
-      {id:19,appId:'combo-130k',title:'Acc 130k gồm 60+ game bom tấn',shortCode:'ACC130',price:40000,oldPrice:399000,genre:'Tài khoản combo',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2025,status:'available',denuvo:false,image:'./combo_account_130k.png',desc:'Tài khoản combo giá 130k gồm hơn 60 game bom tấn, phù hợp khách muốn chơi nhiều game trong cùng một acc và nhận tài khoản nhanh qua email.',tags:['Combo','60+ game','Offline']},
-      {id:20,appId:1086940,title:"Baldur's Gate 3",shortCode:'BG3',price:40000,oldPrice:799000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2023,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_c73bc54415178c07fef85f54ee26621728c77504.1920x1080.jpg?t=1773079016',desc:"RPG đỉnh cao của Larian Studios với chiến đấu theo lượt, kể chuyện cực mạnh và lượng lựa chọn rất sâu, cực hợp khách thích chơi đơn dài hơi.",tags:['GOTY','Fantasy','Offline']},
-      {id:21,appId:3321460,title:'Crimson Desert',shortCode:'CD',price:40000,oldPrice:1849000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2026,status:'available',denuvo:true,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3321460/a07b0108d37edd373b123fa03c0cf50853800959/ss_a07b0108d37edd373b123fa03c0cf50853800959.1920x1080.jpg?t=1773980522',desc:'Action-adventure thế giới mở của Pearl Abyss với nhịp chiến đấu nhanh, quy mô lớn và hình ảnh rất mạnh, phù hợp nhóm khách mê bom tấn mới.',tags:['2026','Open World','Offline']}
-      ,{id:22,appId:2277560,title:'WUCHANG: Fallen Feathers',shortCode:'WUCHANG',price:40000,oldPrice:1289000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2277560/7dbbe47ac51463eb1627581f5c048b94ef856d5c/header.jpg?t=1770741955',desc:'Soulslike hành động lấy bối cảnh cuối Minh triều, thiên combat khó, khám phá và chơi đơn nặng đô.',tags:['Soulslike','AAA','Offline']}
-      ,{id:23,appId:349040,title:'Naruto Shippuden: Ultimate Ninja Storm 4',shortCode:'NARUTO4',price:30000,oldPrice:499000,genre:'Đối kháng',platform:'Windows',featured:true,hot:false,blockbuster:false,goty:false,year:2016,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/349040/header.jpg?t=1703080866',desc:'Game đối kháng anime tốc độ cao với cốt truyện lớn, roster đông và rất hợp nhóm khách thích Naruto.',tags:['Fighting','Anime','Offline']}
-      ,{id:24,appId:3164500,title:'SCHEDULE I',shortCode:'SCH1',price:40000,oldPrice:310000,genre:'Mô phỏng',platform:'Windows',featured:true,hot:true,blockbuster:false,goty:false,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3164500/header.jpg?t=1773974661',desc:'Game mô phỏng sandbox đang Early Access, thiên xây dựng dây chuyền và quản lý theo phong cách rất cuốn.',tags:['Simulation','Early Access','Offline']}
-      ,{id:25,appId:360430,title:'Mafia III Definitive Edition',shortCode:'M3DE',price:30000,oldPrice:699000,genre:'Hành động',platform:'Windows',featured:true,hot:false,blockbuster:false,goty:false,year:2020,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/360430/header.jpg?t=1756420682',desc:'Bản Definitive gồm game gốc và toàn bộ story DLC, hợp khách thích open world, bắn súng và cốt truyện.',tags:['Story','Open World','Offline']}
-
+      {id:1,appId:3764200,title:'Resident Evil Requiem Deluxe Edition',shortCode:'RER',price:75000,oldPrice:1849000,genre:'Kinh dị',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2026,status:'available',denuvo:true,image:'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3764200/ce5437442768e38eb575f205ab9397d0264017b0/header.jpg?t=1772587704',desc:'Bản Deluxe Edition gồm game gốc và gói Deluxe. Survival horror mới của Resident Evil với tông kinh dị nặng và thiên trải nghiệm chơi đơn.',tags:['2026','Horror','Offline']},
+      {id:2,appId:1174180,title:'Red Dead Redemption 2',shortCode:'RDR2',price:70000,oldPrice:1429000,genre:'Phiêu lưu',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2019,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg',desc:'Siêu phẩm thế giới mở cao bồi với cốt truyện mạnh, bầu không khí xuất sắc và trải nghiệm chơi đơn rất dài.',tags:['AAA','Story','Offline']},
+      {id:3,appId:1903340,title:'Clair Obscur: Expedition 33',shortCode:'E33',price:55000,oldPrice:1319000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1903340/header.jpg',desc:'RPG theo lượt pha thời gian thực, lấy cảm hứng từ Belle Époque Pháp, thuộc nhóm game chơi đơn nổi bật gần đây.',tags:['GOTY','RPG','Offline']},
+      {id:4,appId:1245620,title:'Elden Ring',shortCode:'ER',price:75000,oldPrice:1579000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2022,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg',desc:'Soulslike thế giới mở rất lớn, boss khó, khám phá dày đặc và là một trong những game chơi đơn mạnh nhất nhóm AAA.',tags:['AAA','Soulslike','Offline']},
+      {id:5,appId:2322010,title:'God of War Ragnarök',shortCode:'GOWR',price:50000,oldPrice:1319000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2024,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2322010/header.jpg',desc:'Hành động phiêu lưu đậm điện ảnh, tiếp nối hành trình của Kratos và Atreus qua Chín Cõi.',tags:['AAA','Story','Offline']},
+      {id:6,appId:3240220,title:'Grand Theft Auto V Enhanced',shortCode:'GTAVE',price:60000,oldPrice:789000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3240220/header.jpg',desc:'Bản Enhanced nâng cấp hình ảnh, hiệu năng và tốc độ tải cho GTA V trên PC, vẫn rất mạnh ở mảng chơi đơn.',tags:['AAA','Open World','Offline']},
+      {id:7,appId:990080,title:'Hogwarts Legacy',shortCode:'HL',price:60000,oldPrice:1579000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2023,status:'available',denuvo:true,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/990080/header.jpg',desc:'Action RPG thế giới mở trong vũ trụ Hogwarts, tập trung khám phá, phép thuật và hành trình chơi đơn.',tags:['Magic','Open World','Offline']},
+      {id:8,appId:2680010,title:'The First Berserker: Khazan',shortCode:'TFBK',price:50000,oldPrice:1319000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2680010/header.jpg',desc:'Hardcore action RPG với nhịp độ chiến đấu nặng tay, thiên một người chơi và phong cách rất máu lửa.',tags:['Action RPG','Hardcore','Offline']},
+      {id:9,appId:2651280,title:"Marvel's Spider-Man 2",shortCode:'MSM2',price:60000,oldPrice:1579000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2651280/header.jpg',desc:'Game hành động siêu anh hùng với Peter Parker và Miles Morales, đu tơ nhanh, cinematic và rất hợp bán shop.',tags:['AAA','Superhero','Offline']},
+      {id:10,appId:1091500,title:'Cyberpunk 2077',shortCode:'CP2077',price:65000,oldPrice:1579000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2020,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/header.jpg',desc:'RPG khoa học viễn tưởng thế giới mở với Night City rộng lớn và nhiều nhánh nhiệm vụ.',tags:['AAA','Sci-fi','Offline']},
+      {id:11,appId:292030,title:'The Witcher 3',shortCode:'TW3',price:45000,oldPrice:1059000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2015,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/292030/header.jpg',desc:'RPG kinh điển với thế giới, nhân vật và nhiệm vụ phụ hàng mạnh nhất dòng fantasy.',tags:['AAA','Fantasy','Offline']},
+      {id:12,appId:1551360,title:'Forza Horizon 5',shortCode:'FH5',price:55000,oldPrice:1579000,genre:'Đua xe',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2021,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1551360/header.jpg',desc:'Đua xe thế giới mở với bản đồ Mexico rộng, đồ họa nổi bật và cảm giác lái rất cuốn.',tags:['Racing','AAA','Offline']},
+      {id:13,appId:601150,title:'Devil May Cry 5',shortCode:'DMC5',price:40000,oldPrice:789000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2019,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/601150/header.jpg',desc:'Chặt chém combo đẹp mắt, nhịp nhanh và rất hợp nhóm khách thích combat đã tay.',tags:['Hack & Slash','AAA','Offline']},
+      {id:14,appId:2358720,title:'Black Myth: Wukong',shortCode:'BMW',price:50000,oldPrice:1579000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2024,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2358720/header.jpg',desc:'Action RPG thần thoại Trung Hoa, boss dày đặc và hình ảnh rất mạnh.',tags:['RPG','AAA','Offline']},
+      {id:15,appId:1971870,title:'Mortal Kombat 1',shortCode:'MK1',price:45000,oldPrice:1579000,genre:'Đối kháng',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2023,status:'available',denuvo:true,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1971870/header.jpg',desc:'Đối kháng bom tấn với campaign, Invasions và nhiều nội dung chơi đơn.',tags:['Fighting','AAA','Offline']},
+      {id:16,appId:2246340,title:'Monster Hunter Wilds',shortCode:'MHW',price:80000,oldPrice:1849000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2026,status:'available',denuvo:true,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2246340/header.jpg',desc:'Monster Hunter mới với thế giới rộng, săn quái và chiến đấu quy mô lớn.',tags:['Action','AAA','Offline']},
+      {id:17,appId:2531310,title:'The Last of Us Part II Remastered',shortCode:'TLOU2R',price:60000,oldPrice:1319000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2025,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2531310/header.jpg',desc:'Bản remastered đưa phần II lên PC với nhiều nâng cấp kỹ thuật và nội dung phụ trợ.',tags:['Story','AAA','Offline']},
+      {id:18,appId:2050650,title:'Resident Evil 4 Remake Full DLC',shortCode:'RE4R',price:55000,oldPrice:1319000,genre:'Kinh dị',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2023,status:'available',denuvo:true,image:'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2050650/ss_59d1b19964cc532213df92c8287b75a0bffeb33c.1920x1080.jpg?t=1772502922',desc:'Bản Full DLC gồm Resident Evil 4 Remake cùng các nội dung mở rộng, phù hợp khách thích survival horror, hành động và chơi đơn chất lượng cao.',tags:['AAA','Horror','Offline']},
+      {id:19,appId:'combo-130k',title:'Acc 130k gồm 60+ game bom tấn',shortCode:'ACC130',price:130000,oldPrice:399000,genre:'Tài khoản combo',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2025,status:'available',denuvo:false,image:'./combo_account_130k.png',desc:'Tài khoản combo gồm hơn 60 game bom tấn, phù hợp khách muốn chơi nhiều game trong cùng một acc và nhận tài khoản nhanh qua email.',tags:['Combo','60+ game','Offline']},
+      {id:20,appId:1086940,title:"Baldur's Gate 3",shortCode:'BG3',price:70000,oldPrice:799000,genre:'RPG',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:true,year:2023,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/ss_c73bc54415178c07fef85f54ee26621728c77504.1920x1080.jpg?t=1773079016',desc:"RPG đỉnh cao của Larian Studios với chiến đấu theo lượt, kể chuyện cực mạnh và lượng lựa chọn rất sâu, cực hợp khách thích chơi đơn dài hơi.",tags:['GOTY','Fantasy','Offline']},
+      {id:21,appId:3321460,title:'Crimson Desert',shortCode:'CD',price:50000,oldPrice:1849000,genre:'Hành động',platform:'Windows',featured:true,hot:true,blockbuster:true,goty:false,year:2026,status:'available',denuvo:true,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3321460/a07b0108d37edd373b123fa03c0cf50853800959/ss_a07b0108d37edd373b123fa03c0cf50853800959.1920x1080.jpg?t=1773980522',desc:'Action-adventure thế giới mở của Pearl Abyss với nhịp chiến đấu nhanh, quy mô lớn và hình ảnh rất mạnh, phù hợp nhóm khách mê bom tấn mới.',tags:['2026','Open World','Offline']},
+      {id:22,appId:2456350,title:'The Scourge | Tai Ương',shortCode:'TSG',price:30000,oldPrice:259000,genre:'Kinh dị',platform:'Windows',featured:true,hot:true,blockbuster:false,goty:false,year:2026,status:'available',denuvo:false,image:'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2456350/header.jpg',desc:'Game kinh dị góc nhìn thứ nhất lấy bối cảnh Sài Gòn thập niên 1990, thiên giải đố, khám phá và bầu không khí Việt Nam rất riêng.',tags:['Horror','Vietnam','Offline']}
     ];
 
     const gameSpecs = {
@@ -1002,10 +1059,7 @@
       19:{minCpu:'Đăng nhập Steam bằng tài khoản combo',minGpu:'Không yêu cầu riêng',minRam:'Tùy theo game bạn tải',minStorage:'Dung lượng trống tùy theo game',recCpu:'Ưu tiên CPU 6 nhân trở lên',recGpu:'Tùy theo game bom tấn được chọn',recRam:'16GB để chơi mượt nhiều game mới',recStorage:'SSD/NVMe để tải và mở game nhanh',os:'Windows 10/11 64-bit',directx:'Tùy theo từng game'},
       20:{minCpu:'Intel i5-4690 / AMD FX 8350 / Snapdragon X Elite',minGpu:'NVIDIA GTX 970 / AMD RX 480 / Intel Arc A380 (4GB+ VRAM)',minRam:'8GB',minStorage:'150GB SSD',recCpu:'Intel i7-8700K / AMD Ryzen 5 3600',recGpu:'NVIDIA RTX 2060 Super / AMD RX 5700 XT / Intel Arc A580 (8GB+ VRAM)',recRam:'16GB',recStorage:'150GB SSD',os:'Windows 10 64-bit',directx:'DX11'},
       21:{minCpu:'AMD Ryzen 5 2600X / Intel Core i5-8500',minGpu:'AMD Radeon RX 5500 XT / NVIDIA GeForce GTX 1060',minRam:'16GB',minStorage:'150GB SSD',recCpu:'AMD Ryzen 5 5600 / Intel Core i5-11600K',recGpu:'AMD Radeon RX 6700 XT / NVIDIA GeForce RTX 2080',recRam:'16GB',recStorage:'150GB SSD',os:'Windows 10 64-bit',directx:'DX12'},
-      22:{minCpu:'Intel Core i5-8400 / AMD Ryzen 5 1600',minGpu:'NVIDIA GeForce GTX 1060 6GB / AMD Radeon RX 580 8GB',minRam:'16GB',minStorage:'60GB',recCpu:'Intel Core i7-9700 / AMD Ryzen 5 5500',recGpu:'NVIDIA GeForce RTX 2070 / AMD Radeon RX 5700 XT / Intel Arc A750',recRam:'16GB',recStorage:'60GB SSD',os:'Windows 10/11 64-bit',directx:'DX12'},
-      23:{minCpu:'Intel Core2 Duo 3.0GHz / AMD Athlon 64 X2 Dual Core 6400+ 3.2GHz',minGpu:'1GB VRAM',minRam:'2GB',minStorage:'40GB',recCpu:'Đang cập nhật',recGpu:'Đang cập nhật',recRam:'Đang cập nhật',recStorage:'40GB',os:'Windows 10/11 64-bit',directx:'DX11'},
-      24:{minCpu:'3GHz 4-Core hoặc tương đương',minGpu:'GeForce GTX 1060 / Radeon RX 580',minRam:'8GB',minStorage:'8GB',recCpu:'3.5GHz 6-Core hoặc tương đương',recGpu:'GeForce RTX 3060 / Radeon RX 6700',recRam:'16GB',recStorage:'8GB',os:'Windows 10 64-bit',directx:'Đang cập nhật'},
-      25:{minCpu:'Intel i5-2500K / AMD FX-8120',minGpu:'2GB VRAM, GTX 660 / Radeon HD 7870',minRam:'6GB',minStorage:'50GB',recCpu:'Intel i7-3770 / AMD FX 8350 4.0GHz',recGpu:'4GB VRAM, GTX 780 / Radeon R9 290X',recRam:'8GB',recStorage:'50GB',os:'Windows 10/11 64-bit',directx:'Đang cập nhật'}
+      22:{minCpu:'Core i5 Gen 9 / Ryzen 5 3600 hoặc 5600X',minGpu:'GTX 1050 4GB',minRam:'8GB',minStorage:'20GB',recCpu:'Core i7 Gen 9 / Ryzen 7 3700X',recGpu:'GTX 1660',recRam:'16GB',recStorage:'30GB',os:'Windows 10 x64',directx:'DX11'}
     };
 
 
@@ -1149,9 +1203,9 @@
 
     function inPrice(price){
       switch(state.price){
-        case 'under30': return price < 30000;
-        case '30to40': return price >= 30000 && price <= 40000;
-        case '40plus': return price > 40000;
+        case 'under40': return price < 40000;
+        case '40to60': return price >= 40000 && price <= 60000;
+        case '60to80': return price > 60000 && price <= 80000;
         default: return true;
       }
     }
@@ -1365,16 +1419,20 @@
     function closeCart(){ el('cartDrawer').classList.remove('open'); if(!document.querySelector('.modal.open')) document.body.style.overflow=''; }
     function closeDetail(){ el('detailModal').classList.remove('open'); if(!document.querySelector('.drawer.open, .modal.open')) document.body.style.overflow=''; }
     function closeAuth(){ el('authModal').classList.remove('open'); if(!document.querySelector('.drawer.open, .modal.open')) document.body.style.overflow=''; }
+    function openInfo(){ el('infoModal').classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeInfo(){ el('infoModal').classList.remove('open'); if(!document.querySelector('.drawer.open, .modal.open')) document.body.style.overflow=''; }
     function closeCheckout(){ el('checkoutModal').classList.remove('open'); stopPaymentPolling(); if(!document.querySelector('.drawer.open, .modal.open')) document.body.style.overflow=''; }
 
     function productCard(g, index){
       const fav = state.favorites.includes(g.id);
       const tags = g.tags.concat(g.denuvo ? ['Denuvo'] : []);
       return `
-        <article class="glass product reveal" style="--delay:${(index % 8) * 45}ms">
+        <article class="glass product reveal ${g.id === 19 ? 'combo-highlight' : ''}" style="--delay:${(index % 8) * 45}ms">
           <div class="thumb">
+            ${g.id === 19 ? '<div class="combo-ribbon">COMBO VIP</div>' : ''}
             <img src="${g.cardImage}" alt="${g.title}" onerror="this.onerror=null;this.src='${g.image}'">
             <div class="badges">
+              ${g.id === 19 ? '<span class="badge badge-combo">130K Nổi bật</span>' : ''}
               ${g.hot ? '<span class="badge badge-hot">Hot</span>' : ''}
               ${g.blockbuster ? '<span class="badge badge-aaa">Bom tấn</span>' : ''}
               ${g.denuvo ? '<span class="badge badge-denuvo">Denuvo</span>' : ''}
@@ -1411,14 +1469,15 @@
     function renderFeatured(){
       const list = games.filter(g => g.featured).sort((a,b)=>(b.year-a.year) || Number(b.hot)-Number(a.hot) || Number(b.blockbuster)-Number(a.blockbuster) || (b.price-a.price)).slice(0,6);
       el('featuredGrid').innerHTML = list.map((g, index) => `
-        <div class="glass featured-card reveal" style="--delay:${index * 60}ms">
+        <div class="glass featured-card reveal ${g.id === 19 ? 'combo-highlight' : ''}" style="--delay:${index * 60}ms">
+          ${g.id === 19 ? '<div class="combo-ribbon">COMBO VIP</div>' : ''}
           <div class="cover"><img src="${g.featuredImage}" alt="${g.title}" onerror="this.onerror=null;this.src='${g.image}'" /></div>
           <div style="display:flex;justify-content:space-between;gap:10px;align-items:start;margin-top:12px">
             <div>
               <strong style="font-size:18px">${g.title}</strong>
               <p class="muted" style="margin:8px 0 0;font-size:14px">${g.desc}</p>
             </div>
-            <div class="tiny ${g.denuvo ? 'denuvo' : ''}">${g.denuvo ? 'Denuvo' : g.year}</div>
+            <div class="tiny ${g.id === 19 ? '' : (g.denuvo ? 'denuvo' : '')}">${g.id === 19 ? 'Combo VIP' : (g.denuvo ? 'Denuvo' : g.year)}</div>
           </div>
           <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:14px">
             <div>
@@ -1998,6 +2057,7 @@
     el('checkoutBtn').addEventListener('click', openCheckout);
     el('authBtn').addEventListener('click', openAuth);
     el('heroAuthBtn').addEventListener('click', openAuth);
+    el('infoBtn').addEventListener('click', openInfo);
     el('copyMemoBtn').addEventListener('click', () => copyText(el('transferMemo').value, 'Đã copy nội dung thanh toán.'));
     el('copyOrderBtn').addEventListener('click', () => copyText(el('orderCode').value, 'Đã copy mã đơn.'));
     el('checkPaymentBtn').addEventListener('click', () => checkAutoPayment(false));
